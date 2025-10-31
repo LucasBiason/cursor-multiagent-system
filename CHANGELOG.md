@@ -47,6 +47,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Separation of public framework and private configs
 - Environment variable support for secrets
 
+## [1.1.0] - 2025-10-31
+
+### Added
+- Script de automação para commits e push (commit-and-push.sh)
+- Proteção contra commit de tokens sensíveis
+
+### Changed
+- Removidos arquivos de sessão temporários (ACTIVATION_STATUS, INDICE_MESTRE, etc)
+- Atualizada documentação principal (README, ARCHITECTURE, PROJECT_SUMMARY)
+- Melhorada estrutura de guias (COMO_COMECAR, CONTRIBUTING)
+- Atualizadas configurações de agentes e exemplos
+
+### Security
+- Removidos todos os tokens Notion da documentação
+- Substituídos por placeholders seguros (ntn_YOUR_NOTION_TOKEN_HERE)
+- Histórico git reescrito para remover tokens sensíveis
+
+### Infrastructure
+- Repositório configurado no GitHub: https://github.com/LucasBiason/cursor-multiagent-system
+- Sistema de versionamento e controle configurado
+- Push protection ativado para prevenir vazamento de secrets
+
 ## [Unreleased]
 
 ### Planned

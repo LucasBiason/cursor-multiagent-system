@@ -8,8 +8,8 @@ This project provides a modular architecture for creating and managing multiple 
 
 ## Project Status
 
-**Version:** 1.0.0 (Pilot Phase)  
-**Phase:** November 2024 - Testing & Refinement  
+**Version:** 1.1.0  
+**Repository:** [github.com/LucasBiason/cursor-multiagent-system](https://github.com/LucasBiason/cursor-multiagent-system)  
 **Status:** Active Development
 
 ## Architecture
@@ -97,11 +97,21 @@ ln -s $(pwd)/config/agents ~/.cursor/agents
 
 ## Documentation
 
-- [Architecture Overview](core/docs/ARCHITECTURE.md)
-- [Agent Creation Guide](core/docs/AGENT_CREATION.md)
-- [Notion Integration](core/docs/NOTION_INTEGRATION.md)
-- [Workflows Guide](core/docs/WORKFLOWS.md)
-- [Rules System](core/docs/RULES.md)
+### Getting Started
+- [Quick Start Guide](QUICK_START.md)
+- [Como Começar (PT-BR)](COMO_COMECAR.md)
+- [Architecture Overview](ARCHITECTURE.md)
+- [Project Summary](PROJECT_SUMMARY.md)
+
+### Development
+- [Versioning Guide](docs/VERSIONING_GUIDE.md)
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Changelog](CHANGELOG.md)
+
+### Core Framework
+- [Getting Started](core/docs/GETTING_STARTED.md)
+- [Rules System](core/docs/RULES_SYSTEM.md)
+- [Task Manager Example](core/examples/task-manager/README.md)
 
 ## Agents
 
@@ -165,14 +175,15 @@ Public repository contains only:
 
 ## Development
 
-### Adding a New Agent
+### Workflow
 
 ```bash
-# Generate from template
-python core/utils/generator.py create-agent \
-  --name "my-agent" \
-  --role "specialist" \
-  --output config/agents/
+# 1. Make your changes
+# 2. Test locally
+./scripts/validate.sh
+
+# 3. Commit and push (automated script)
+./scripts/commit-and-push.sh "feat: add new feature"
 ```
 
 ### Testing
@@ -187,7 +198,17 @@ pytest tests/
 
 ## Contributing
 
-This is a personal productivity system, but the core framework is designed to be reusable. Contributions to the public framework are welcome.
+Contributions to improve the framework are welcome! Please read the [Contributing Guidelines](CONTRIBUTING.md) and [Versioning Guide](docs/VERSIONING_GUIDE.md) first.
+
+### Quick Contribution Guide
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## License
 
@@ -206,9 +227,9 @@ GitHub: [@lucasbiason](https://github.com/lucasbiason)
 
 ---
 
-Last Updated: 2024-11-01  
-Version: 1.0.0  
-Status: Pilot Phase
+**Last Updated:** 2025-10-31  
+**Version:** 1.1.0  
+**Repository:** https://github.com/LucasBiason/cursor-multiagent-system
 
 
 
