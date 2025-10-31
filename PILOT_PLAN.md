@@ -1,8 +1,8 @@
-# Pilot Plan - November 2024
+# Pilot Plan - November 2025
 
 ## Objective
 
-Validate the multiagent system effectiveness during November 2024 pilot phase.
+Validate the multiagent system effectiveness during November 2025 pilot phase.
 
 ## Success Metrics
 
@@ -38,34 +38,33 @@ Target: 95% accuracy, zero data corruption
 
 ## Timeline
 
-### Week 1 (Nov 1-3)
+### Week 1 (Nov 1-2)
 
 Focus: Initial setup and testing
 
-- Day 1 (Fri): System setup, first interactions
-- Day 2 (Sat): Heavy usage (recording sprint)
-- Day 3 (Sun): Continue usage, first observations
+- Day 1 (Sat): System setup, first interactions, heavy usage (recording sprint)
+- Day 2 (Sun): Continue usage, first observations, weekly planning
 
 Deliverables:
 - System fully configured
 - All 4 agents tested
 - Initial feedback collected
 
-### Week 2 (Nov 4-10)
+### Week 2 (Nov 3-9)
 
 Focus: Daily workflow integration
 
 - Test morning routines
-- Validate study session support
-- Check work task management
-- Monitor content planning
+- Validate study session support (FIAP Fase 3)
+- Check work maintenance tasks
+- Monitor content planning and recording sessions
 
 Deliverables:
 - Daily usage patterns documented
 - First refinements implemented
 - Workflow optimizations
 
-### Week 3 (Nov 11-17)
+### Week 3 (Nov 10-16)
 
 Focus: Optimization and automation
 
@@ -79,7 +78,7 @@ Deliverables:
 - Background automation working
 - Performance improvements
 
-### Week 4 (Nov 18-24)
+### Week 4 (Nov 17-23)
 
 Focus: Advanced features
 
@@ -93,7 +92,7 @@ Deliverables:
 - Edge cases documented
 - System stability confirmed
 
-### Week 5 (Nov 25-30)
+### Week 5 (Nov 24-30)
 
 Focus: Final evaluation
 
@@ -186,13 +185,13 @@ Mitigation:
 Track daily:
 
 ```markdown
-## Nov 1
-- Agents used: Personal Assistant, Studies Coach
-- Tasks completed: 5
-- Issues: None
-- Notes: System setup completed
+## Nov 1 (Sábado)
+- Agents used: [list]
+- Tasks completed: [count]
+- Issues: [any problems]
+- Notes: [observations]
 
-## Nov 2
+## Nov 2 (Domingo)
 - Agents used: [list]
 - Tasks completed: [count]
 - Issues: [any problems]
@@ -243,8 +242,9 @@ Pilot is successful if:
 
 ---
 
-Version: 1.0  
-Pilot Period: November 2024  
-Start Date: 2024-11-01  
-End Date: 2024-11-30
+Version: 2.0  
+Pilot Period: November 2025  
+Start Date: 2025-11-01  
+End Date: 2025-11-30  
+Updated: 2025-10-31
 
