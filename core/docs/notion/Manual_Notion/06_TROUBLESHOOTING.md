@@ -516,7 +516,7 @@ response = requests.patch(url, headers=headers, json=data)
 ## ❌ ERRO 14: Link do Notion Não Funciona
 
 ### Sintoma
-Link `https://notion.so/288962a7-693c-812e-bb43-d015c7e44971` não abre.
+Link `https://notion.so/EXAMPLE_CARD_ID_1234567890` não abre.
 
 ### Causa
 Formato do link está errado (com hífens).
@@ -525,7 +525,7 @@ Formato do link está errado (com hífens).
 ```python
 # ❌ ERRADO - Link com hífens
 link = f'https://notion.so/{card_id}'  # Com hífens
-# Resultado: https://notion.so/288962a7-693c-812e-bb43-d015c7e44971
+# Resultado: https://notion.so/EXAMPLE_CARD_ID_1234567890
 ```
 
 ### Solução
@@ -730,7 +730,7 @@ def verificar_card(card_id, token):
         return False
 
 # Usar
-verificar_card('288962a7-693c-812e-bb43-d015c7e44971', TOKEN)
+verificar_card('EXAMPLE_CARD_ID_1234567890', TOKEN)
 ```
 
 ---
@@ -771,7 +771,7 @@ def verificar_vinculos(card_id, token):
         print(f'❌ Erro ao buscar card: {response.status_code}')
 
 # Usar
-verificar_vinculos('288962a7-693c-811c-bf97-f060240851d0', TOKEN)
+verificar_vinculos('EXAMPLE_CARD_ID_0987654321', TOKEN)
 ```
 
 ---
