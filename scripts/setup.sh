@@ -84,3 +84,5 @@ echo "3. Set NOTION_API_KEY environment variable"
 echo "4. Run ./scripts/validate.sh to verify setup"
 echo ""
 
+
+

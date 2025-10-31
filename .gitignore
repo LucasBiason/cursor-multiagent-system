@@ -111,8 +111,21 @@ temp/
 **/RECOVERY*.md
 **/SESSION*.md
 **/INTERACTION*.md
+**/REORGANIZACAO*.md
+**/INDICE_MESTRE*.md
+**/ACTIVATION_STATUS*.md
+**/TEST_ACTIVATION*.md
+**/REGRAS_CRITICAS*.md
+**/MIGRACAO_*.md
+**/PRONTO_*.md
+**/SISTEMA_PRONTO*.md
+**/VALIDACAO_*.md
 docs/pilot/daily-logs/**
 logs/**
+
+# CURSOR CONVERSATION FILES (DMD/MD from conversations)
+**/*.dmd
+.cursor/conversations/
 
 # Exceptions (public templates and examples)
 !config/README.md
