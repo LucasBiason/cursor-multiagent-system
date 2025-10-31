@@ -690,7 +690,7 @@ from datetime import datetime, timezone, timedelta
 
 TOKEN = 'ntn_YOUR_NOTION_TOKEN_HERE'
 SAO_PAULO_TZ = timezone(timedelta(hours=-3))
-DATABASE_STUDIES = '1fa962a7-693c-80de-b90b-eaa513dcf9d1'
+DATABASE_STUDIES = 'XXXXXXXX-XXXX-XXXX-XXXX-STUDIES_DB_ID'
 
 headers = {
     'Authorization': f'Bearer {TOKEN}',

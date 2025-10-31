@@ -503,7 +503,7 @@ engine.create_card('WORK', card_data)
 import requests
 
 TOKEN = 'ntn_YOUR_NOTION_TOKEN_HERE'
-DATABASE_ID = '1f9962a7-693c-80a3-b947-c471a975acb0'  # WORK
+DATABASE_ID = 'XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID'  # WORK
 
 url = f'https://api.notion.com/v1/databases/{DATABASE_ID}'
 headers = {

@@ -64,28 +64,28 @@ print(f'Card criado: https://www.notion.so/{card_id}')
 ## 📊 AS 4 BASES DO NOTION
 
 ### 1. BASE TRABALHO (WORK)
-- **ID:** `1f9962a7-693c-80a3-b947-c471a975acb0`
+- **ID:** `XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID`
 - **Campo Título:** `Nome do projeto`
 - **Campo Relação:** `item principal`
 - **Status Padrão:** `Não iniciado`
 - **Uso:** Projetos profissionais da Astracode
 
 ### 2. BASE PESSOAL (PERSONAL)
-- **ID:** `1fa962a7-693c-8032-8996-dd9cd2607dbf`
+- **ID:** `XXXXXXXX-XXXX-XXXX-XXXX-PERSONAL_DB_ID`
 - **Campo Título:** `Nome da tarefa`
 - **Campo Relação:** `tarefa principal`
 - **Status Padrão:** `Não iniciado`
 - **Uso:** Tarefas pessoais e organizacionais
 
 ### 3. BASE CURSOS (STUDIES)
-- **ID:** `1fa962a7-693c-80de-b90b-eaa513dcf9d1`
+- **ID:** `XXXXXXXX-XXXX-XXXX-XXXX-STUDIES_DB_ID`
 - **Campo Título:** `Project name`
 - **Campo Relação:** `Parent item`
 - **Status Padrão:** `Para Fazer`
 - **Uso:** Cursos, formações e estudos
 
 ### 4. BASE YOUTUBE (YOUTUBER)
-- **ID:** `1fa962a7-693c-80ce-9f1d-ff86223d6bda`
+- **ID:** `XXXXXXXX-XXXX-XXXX-XXXX-YOUTUBER_DB_ID`
 - **Campo Título:** `Nome do projeto`
 - **Campo Relação:** `item principal`
 - **Status Padrão:** `Não iniciado`
@@ -193,10 +193,10 @@ ntn_YOUR_NOTION_TOKEN_HERE
 ### Database IDs
 ```python
 BASES = {
-    'WORK': '1f9962a7-693c-80a3-b947-c471a975acb0',
-    'PERSONAL': '1fa962a7-693c-8032-8996-dd9cd2607dbf',
-    'STUDIES': '1fa962a7-693c-80de-b90b-eaa513dcf9d1',
-    'YOUTUBER': '1fa962a7-693c-80ce-9f1d-ff86223d6bda'
+    'WORK': 'XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID',
+    'PERSONAL': 'XXXXXXXX-XXXX-XXXX-XXXX-PERSONAL_DB_ID',
+    'STUDIES': 'XXXXXXXX-XXXX-XXXX-XXXX-STUDIES_DB_ID',
+    'YOUTUBER': 'XXXXXXXX-XXXX-XXXX-XXXX-YOUTUBER_DB_ID'
 }
 ```
 

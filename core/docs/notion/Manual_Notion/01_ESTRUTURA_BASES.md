@@ -15,7 +15,7 @@ O sistema Notion do Lucas é organizado em **4 bases principais**, cada uma com 
 ## 1️⃣ BASE TRABALHO (WORK)
 
 ### Informações Gerais
-- **ID da Database:** `1f9962a7-693c-80a3-b947-c471a975acb0`
+- **ID da Database:** `XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID`
 - **Campo de Título:** `Nome do projeto`
 - **Campo de Relação:** `item principal`
 - **Uso:** Projetos profissionais da Astracode (ExpenseIQ, HubTravel, etc.)
@@ -72,7 +72,7 @@ O sistema Notion do Lucas é organizado em **4 bases principais**, cada uma com 
 ## 2️⃣ BASE PESSOAL (PERSONAL)
 
 ### Informações Gerais
-- **ID da Database:** `1fa962a7-693c-8032-8996-dd9cd2607dbf`
+- **ID da Database:** `XXXXXXXX-XXXX-XXXX-XXXX-PERSONAL_DB_ID`
 - **Campo de Título:** `Nome da tarefa`
 - **Campo de Relação:** `tarefa principal`
 - **Uso:** Tarefas pessoais, organização, hábitos
@@ -113,7 +113,7 @@ O sistema Notion do Lucas é organizado em **4 bases principais**, cada uma com 
 ## 3️⃣ BASE CURSOS (STUDIES)
 
 ### Informações Gerais
-- **ID da Database:** `1fa962a7-693c-80de-b90b-eaa513dcf9d1`
+- **ID da Database:** `XXXXXXXX-XXXX-XXXX-XXXX-STUDIES_DB_ID`
 - **Campo de Título:** `Project name`
 - **Campo de Relação:** `Parent item`
 - **Uso:** Cursos, formações, aulas, estudos
@@ -175,7 +175,7 @@ Formação/Curso (sem horário)
 ## 4️⃣ BASE YOUTUBE (YOUTUBER)
 
 ### Informações Gerais
-- **ID da Database:** `1fa962a7-693c-80ce-9f1d-ff86223d6bda`
+- **ID da Database:** `XXXXXXXX-XXXX-XXXX-XXXX-YOUTUBER_DB_ID`
 - **Campo de Título:** `Nome do projeto`
 - **Campo de Relação:** `item principal`
 - **Uso:** Séries de jogos e episódios do canal

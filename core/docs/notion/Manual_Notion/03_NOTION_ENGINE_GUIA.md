@@ -511,7 +511,7 @@ Este método é **interno** e adapta seus dados simples para o formato complexo 
 
 # NotionEngine transforma em:
 {
-    "parent": {"database_id": "1f9962a7-693c-80a3-b947-c471a975acb0"},
+    "parent": {"database_id": "XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID"},
     "icon": {"emoji": "..."},
     "properties": {
         "Nome do projeto": {
@@ -538,22 +538,22 @@ Este método é **interno** e adapta seus dados simples para o formato complexo 
 ```python
 BASES = {
     'WORK': {
-        'id': '1f9962a7-693c-80a3-b947-c471a975acb0',
+        'id': 'XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID',
         'title_field': 'Nome do projeto',
         'relation_field': 'Sprint'
     },
     'PERSONAL': {
-        'id': '1fa962a7-693c-8032-8996-dd9cd2607dbf',
+        'id': 'XXXXXXXX-XXXX-XXXX-XXXX-PERSONAL_DB_ID',
         'title_field': 'Nome da tarefa',
         'relation_field': 'Subtarefa'
     },
     'STUDIES': {
-        'id': '1fa962a7-693c-80de-b90b-eaa513dcf9d1',
+        'id': 'XXXXXXXX-XXXX-XXXX-XXXX-STUDIES_DB_ID',
         'title_field': 'Project name',
         'relation_field': 'Parent item'
     },
     'YOUTUBER': {
-        'id': '1fa962a7-693c-80ce-9f1d-ff86223d6bda',
+        'id': 'XXXXXXXX-XXXX-XXXX-XXXX-YOUTUBER_DB_ID',
         'title_field': 'Nome do projeto',
         'relation_field': 'item principal'
     }

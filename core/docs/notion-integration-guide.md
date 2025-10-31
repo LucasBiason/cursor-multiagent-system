@@ -27,10 +27,10 @@ Sistema completo de gerenciamento de 4 bases do Notion com:
 
 | Base | ID | Título | Relação | Status Padrão |
 |------|----|---------| --------|---------------|
-| WORK | `1f9962a7-693c-80a3-b947-c471a975acb0` | Nome do projeto | item principal | Não iniciado |
-| PERSONAL | `1fa962a7-693c-8032-8996-dd9cd2607dbf` | Nome da tarefa | tarefa principal | Não iniciado |
-| STUDIES | `1fa962a7-693c-80de-b90b-eaa513dcf9d1` | Project name | Parent item | Para Fazer |
-| YOUTUBER | `1fa962a7-693c-80ce-9f1d-ff86223d6bda` | Nome do projeto | item principal | Não iniciado |
+| WORK | `XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID` | Nome do projeto | item principal | Não iniciado |
+| PERSONAL | `XXXXXXXX-XXXX-XXXX-XXXX-PERSONAL_DB_ID` | Nome da tarefa | tarefa principal | Não iniciado |
+| STUDIES | `XXXXXXXX-XXXX-XXXX-XXXX-STUDIES_DB_ID` | Project name | Parent item | Para Fazer |
+| YOUTUBER | `XXXXXXXX-XXXX-XXXX-XXXX-YOUTUBER_DB_ID` | Nome do projeto | item principal | Não iniciado |
 
 ---
 

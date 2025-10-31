@@ -583,7 +583,7 @@ from datetime import datetime, timezone, timedelta
 
 TOKEN = 'ntn_YOUR_NOTION_TOKEN_HERE'
 SAO_PAULO_TZ = timezone(timedelta(hours=-3))
-DATABASE_STUDIES = '1fa962a7-693c-80de-b90b-eaa513dcf9d1'
+DATABASE_STUDIES = 'XXXXXXXX-XXXX-XXXX-XXXX-STUDIES_DB_ID'
 
 # 1. Buscar todas as aulas de um curso específico
 headers = {
@@ -681,10 +681,10 @@ TOKEN = 'ntn_YOUR_NOTION_TOKEN_HERE'
 SAO_PAULO_TZ = timezone(timedelta(hours=-3))
 
 DATABASES = {
-    'WORK': '1f9962a7-693c-80a3-b947-c471a975acb0',
-    'PERSONAL': '1fa962a7-693c-8032-8996-dd9cd2607dbf',
-    'STUDIES': '1fa962a7-693c-80de-b90b-eaa513dcf9d1',
-    'YOUTUBER': '1fa962a7-693c-80ce-9f1d-ff86223d6bda'
+    'WORK': 'XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID',
+    'PERSONAL': 'XXXXXXXX-XXXX-XXXX-XXXX-PERSONAL_DB_ID',
+    'STUDIES': 'XXXXXXXX-XXXX-XXXX-XXXX-STUDIES_DB_ID',
+    'YOUTUBER': 'XXXXXXXX-XXXX-XXXX-XXXX-YOUTUBER_DB_ID'
 }
 
 headers = {
@@ -960,7 +960,7 @@ Buscar e atualizar cards no Notion
 import requests
 
 TOKEN = 'ntn_YOUR_NOTION_TOKEN_HERE'
-DATABASE_WORK = '1f9962a7-693c-80a3-b947-c471a975acb0'
+DATABASE_WORK = 'XXXXXXXX-XXXX-XXXX-XXXX-WORK_DB_ID'
 
 headers = {
     'Authorization': f'Bearer {TOKEN}',
