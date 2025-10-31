@@ -43,6 +43,46 @@ Only use emojis in:
 Format: 2025-11-01T19:00:00-03:00
 NEVER use UTC
 
+### 4. FILE ORGANIZATION - ANTI-BAGUNÇA RULES
+
+**NEVER create .md or .py files outside these locations:**
+
+#### Markdown Files (.md)
+- `config/private/[frente]/` - Context for specific domain (youtube, social, studies, work, personal)
+- `core/docs/rules/` - Only general/reusable rules
+- Project-specific repository - Documentation for that project only
+
+#### Python Scripts (.py)
+- `config/private/[frente]/scripts/` - Temporary scripts (DELETE after use if not frequently used)
+- `/home/lucas-biason/Projetos/Trabalho/Astracode/Scripts/` - Temporary work scripts
+- `/home/lucas-biason/Projetos/Automações/notion-automation-scripts/scripts/[base]/` - Notion automation scripts by base
+- Project repository - Scripts specific to that project
+
+#### Temporary Files
+- Feedbacks/quick reports → Provide in CHAT, do NOT create file unless explicitly requested
+- If requested → `config/private/[frente]/temp/` then DELETE after user reads
+- NEVER accumulate temporary files
+
+#### ALWAYS ask user before:
+- Creating file in non-standard location
+- Saving report/feedback/analysis to file
+- Creating automation script
+- Placing files outside the approved structure
+
+#### Approved Structure:
+```
+config/private/
+├── youtube/          # The Crazy Fox (Base YOUTUBER)
+│   ├── scripts/      # Temporary scripts
+│   └── *.md          # Context files
+├── social/           # StuffsCode (Instagram)
+│   └── stuffscode/   # Project folder
+├── studies/          # Study projects (Base STUDIES)
+├── work/             # Work projects (Base WORK)
+├── personal/         # Personal tasks (Base PERSONAL)
+└── system/           # System automations
+```
+
 See: core/docs/RULES_SYSTEM.md for all rules
 
 ## Agent Loading
@@ -94,15 +134,19 @@ Additional context to load:
 ### Social Media Coach
 Load: `config/agents/social-media-coach.mdc`
 
-Triggers: gravar, episodio, youtube, lancamento, stuffscode, instagram, serie, o que gravar
-- Content strategy for StuffsCode
-- YouTube production management
+Triggers: gravar, episodio, youtube, lancamento, stuffscode, instagram, serie, crazy fox, o que gravar
+- **The Crazy Fox** (YouTube) - Gaming channel production
+- **StuffsCode** (Instagram) - Programming content
 - Recording schedule optimization
 - Content calendar planning
 
+**IMPORTANT:** These are TWO SEPARATE projects!
+- The Crazy Fox → Base YOUTUBER (exclusive)
+- StuffsCode → Base STUDIES (temporary, future dedicated base)
+
 Additional context to load:
-- core/docs/workflows/youtube-production.md
-- config/private/social/stuffscode/ (all docs)
+- config/private/youtube/ (The Crazy Fox - all docs)
+- config/private/social/stuffscode/ (StuffsCode - all docs)
 - config/private/schedule.md
 - core/docs/RULES_SYSTEM.md
 

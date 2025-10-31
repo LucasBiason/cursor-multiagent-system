@@ -145,11 +145,19 @@ Professional development support:
 
 ### 4. Social Media Coach
 
-Content strategy and management:
-- StuffsCode Instagram content
-- YouTube channel planning
-- Content calendar
-- Episode planning and tracking
+Content strategy and management for TWO channels:
+
+**The Crazy Fox** (YouTube):
+- Gaming channel with daily uploads
+- Series management and production
+- Recording schedule optimization
+- Base YOUTUBER (exclusive)
+
+**StuffsCode** (Instagram):
+- Programming content and tutorials
+- AI-generated post images
+- Content calendar and automation
+- Base STUDIES (temporary)
 
 ## Pilot Phase (November 2024)
 
