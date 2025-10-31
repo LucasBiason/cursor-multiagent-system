@@ -52,22 +52,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Script de automação para commits e push (commit-and-push.sh)
 - Proteção contra commit de tokens sensíveis
+- Guia completo de segurança (SECURITY.md)
+- Guia de versionamento (VERSIONING_GUIDE.md)
 
 ### Changed
 - Removidos arquivos de sessão temporários (ACTIVATION_STATUS, INDICE_MESTRE, etc)
 - Atualizada documentação principal (README, ARCHITECTURE, PROJECT_SUMMARY)
 - Melhorada estrutura de guias (COMO_COMECAR, CONTRIBUTING)
 - Atualizadas configurações de agentes e exemplos
+- Todos os caminhos pessoais substituídos por placeholders genéricos
 
 ### Security
 - Removidos todos os tokens Notion da documentação
+- Removida pasta config/backups/ com IDs sensíveis do Notion
 - Substituídos por placeholders seguros (ntn_YOUR_NOTION_TOKEN_HERE)
 - Histórico git reescrito para remover tokens sensíveis
+- Caminhos pessoais (/home/lucas-biason) substituídos por genéricos
+- Script de commit aprimorado para detectar apenas adições de tokens
+- .gitignore atualizado para proteger config/backups/
 
 ### Infrastructure
 - Repositório configurado no GitHub: https://github.com/LucasBiason/cursor-multiagent-system
 - Sistema de versionamento e controle configurado
 - Push protection ativado para prevenir vazamento de secrets
+- Verificação automática de segurança em cada commit
 
 ## [Unreleased]
 
