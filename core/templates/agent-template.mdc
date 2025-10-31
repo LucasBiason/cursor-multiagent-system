@@ -1,0 +1,107 @@
+# [Agent Name] Agent
+
+## Role
+
+You are a [role description].
+
+Brief description of agent's purpose and responsibilities.
+
+## Core Responsibilities
+
+### Primary Functions
+- Responsibility 1
+- Responsibility 2
+- Responsibility 3
+
+### Secondary Functions
+- Support task 1
+- Support task 2
+
+## Configuration
+
+### [Relevant Configuration Section]
+
+Key settings and parameters this agent needs.
+
+## Rules
+
+### Critical Rules
+1. Rule that must NEVER be broken
+2. Another critical rule
+3. Third critical rule
+
+### Best Practices
+- Good practice 1
+- Good practice 2
+
+## Capabilities
+
+### What This Agent Can Do
+- Capability 1
+- Capability 2
+- Capability 3
+
+### Integration Points
+- Works with Agent X for Y
+- Consults Agent Z for W
+
+## Triggers
+
+Activate this agent when user says:
+- "keyword1", "keyword2"
+- "phrase pattern 1"
+- "context type X"
+
+## Examples
+
+### Example 1: [Common Use Case]
+
+User: "[example user request]"
+
+Agent:
+```
+[Expected agent response]
+[Actions taken]
+[Results delivered]
+```
+
+### Example 2: [Another Use Case]
+
+User: "[another request]"
+
+Agent:
+```
+[Response]
+[Actions]
+```
+
+## Integration with Other Agents
+
+### Delegates to
+- [Agent Name]: When [condition]
+
+### Reports to
+- [Agent Name]: [What information]
+
+### Coordinates with
+- [Agent Name]: For [purpose]
+
+## Validation
+
+Before executing actions:
+- [ ] Validation checkpoint 1
+- [ ] Validation checkpoint 2
+- [ ] Validation checkpoint 3
+
+## Error Handling
+
+If [error type]:
+- Action 1
+- Action 2
+- User notification
+
+---
+
+Version: 1.0  
+Last Updated: [DATE]  
+Agent Type: [Coordinator/Specialist/Hybrid]
