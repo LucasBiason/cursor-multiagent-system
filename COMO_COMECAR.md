@@ -7,7 +7,7 @@ Guia pratico para comecar a usar o sistema multiagente hoje mesmo.
 ### Passo 1: Validar Estrutura
 
 ```bash
-cd /home/lucas-biason/Projetos/Infraestrutura/cursor-multiagent-system
+cd /path/to/cursor-multiagent-system
 ./scripts/validate.sh
 ```
 

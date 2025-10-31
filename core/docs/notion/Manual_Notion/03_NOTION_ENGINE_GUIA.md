@@ -2,7 +2,7 @@
 
 **Data:** 11/10/2025  
 **Versão:** 1.0  
-**Arquivo:** `/home/lucas-biason/Projetos/Automações/notion-automations/notion-automation-scripts/core/notion_engine.py`
+**Arquivo:** `/home/user/Projetos/Automações/notion-automations/notion-automation-scripts/core/notion_engine.py`
 
 ---
 

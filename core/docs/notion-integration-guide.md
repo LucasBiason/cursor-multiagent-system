@@ -475,7 +475,7 @@ print(f"✅ {len(card_ids)} cards criados!")
 
 ### 3. Verificar Tarefas Atrasadas
 ```bash
-cd /home/lucas-biason/Projetos/Automações/notion-automations/notion-automation-scripts
+cd /home/user/Projetos/Automações/notion-automations/notion-automation-scripts
 python3 check_overdue_tasks.py
 ```
 

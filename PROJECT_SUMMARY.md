@@ -6,7 +6,7 @@
 **Version:** 1.0.0  
 **Status:** Pilot Phase Started  
 **Created:** November 1, 2024  
-**Location:** `/home/lucas-biason/Projetos/Infraestrutura/cursor-multiagent-system`
+**Location:** `/path/to/cursor-multiagent-system`
 
 ---
 

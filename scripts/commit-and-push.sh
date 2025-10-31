@@ -35,9 +35,10 @@ echo "   ✓ Arquivos adicionados"
 
 echo ""
 echo "3. Verificando por tokens sensíveis..."
-# Procura por tokens Notion reais (excluindo placeholders conhecidos)
-if git diff --cached | grep -E "ntn_[0-9]{10,}[a-zA-Z0-9]{20,}" > /dev/null 2>&1; then
+# Procura por tokens Notion reais sendo ADICIONADOS (ignora linhas removidas com -)
+if git diff --cached | grep "^+" | grep -E "ntn_[0-9]{10,}[a-zA-Z0-9]{20,}" > /dev/null 2>&1; then
     echo "   ✗ AVISO: Token Notion real detectado! Remova antes de commitar."
+    echo "   (Linhas adicionadas contêm tokens sensíveis)"
     exit 1
 fi
 echo "   ✓ Nenhum token sensível detectado"

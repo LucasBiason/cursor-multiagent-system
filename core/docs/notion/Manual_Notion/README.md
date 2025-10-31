@@ -142,14 +142,14 @@ print(f'Card criado: https://www.notion.so/{card_id}')
 ## 🛠️ FERRAMENTAS DISPONÍVEIS
 
 ### NotionEngine
-**Localização:** `/home/lucas-biason/Projetos/Automações/notion-automations/notion-automation-scripts/core/notion_engine.py`
+**Localização:** `/home/user/Projetos/Automações/notion-automations/notion-automation-scripts/core/notion_engine.py`
 
 **Métodos principais:**
 - `create_card(base, data)` - Cria um card
 - `create_subitems_only(base, parent_id, subitems)` - Cria múltiplos sub-itens
 
 ### Scripts Úteis
-**Localização:** `/home/lucas-biason/Projetos/Automações/notion-automations/notion-automation-scripts/scripts/`
+**Localização:** `/home/user/Projetos/Automações/notion-automations/notion-automation-scripts/scripts/`
 
 - `Personal/` - Scripts para base pessoal
 - `Work/` - Scripts para base de trabalho

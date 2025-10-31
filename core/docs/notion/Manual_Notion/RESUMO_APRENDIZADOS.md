@@ -373,7 +373,7 @@ DATABASES = {
 
 ### Motor
 ```
-Localização: /home/lucas-biason/Projetos/Automações/notion-automations/notion-automation-scripts/core/notion_engine.py
+Localização: /home/user/Projetos/Automações/notion-automations/notion-automation-scripts/core/notion_engine.py
 ```
 
 ---

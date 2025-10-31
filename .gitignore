@@ -1,5 +1,6 @@
 # PRIVATE CONFIGURATIONS AND DATA
 config/private/**
+config/backups/**
 config/agents/*-personal.mdc
 config/agents/*-work.mdc
 config/workflows/personal-*.yml

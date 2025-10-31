@@ -12,7 +12,7 @@
 ### **TODO DIA ÀS 23:00:**
 
 ```bash
-cd /home/lucas-biason/Projetos/Automações/notion-automations/notion-automation-scripts
+cd /home/user/Projetos/Automações/notion-automations/notion-automation-scripts
 python3 gaming_auto.py
 ```
 

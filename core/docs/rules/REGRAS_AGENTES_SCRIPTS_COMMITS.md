@@ -120,7 +120,7 @@ python3 scripts/[Base]/meu_script.py
 
 #### **Passo 3: Git Add**
 ```bash
-cd /home/lucas-biason/Projetos/Automações/notion-automations/notion-automation-scripts
+cd /home/user/Projetos/Automações/notion-automations/notion-automation-scripts
 git add .
 ```
 

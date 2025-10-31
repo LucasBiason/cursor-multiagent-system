@@ -5,7 +5,7 @@ Get up and running with the Cursor Multiagent System in 10 minutes.
 ## Step 1: Setup (2 min)
 
 ```bash
-cd /home/lucas-biason/Projetos/Infraestrutura/cursor-multiagent-system
+cd /path/to/cursor-multiagent-system
 ./scripts/setup.sh
 ```
 

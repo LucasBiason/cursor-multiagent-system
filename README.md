@@ -68,8 +68,9 @@ cursor-multiagent-system/
 ### Installation
 
 ```bash
-# Clone or navigate to project
-cd /home/lucas-biason/Projetos/Infraestrutura/cursor-multiagent-system
+# Clone the repository
+git clone https://github.com/LucasBiason/cursor-multiagent-system.git
+cd cursor-multiagent-system
 
 # Install dependencies
 pip install -r requirements.txt
