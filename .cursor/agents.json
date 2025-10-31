@@ -1,0 +1,82 @@
+{
+  "version": "2.0",
+  "enabled": true,
+  "agentSystem": "multiagent",
+  "coordinator": "personal-assistant",
+  "agents": [
+    {
+      "id": "personal-assistant",
+      "name": "Personal Assistant",
+      "path": "../config/agents/personal-assistant.mdc",
+      "role": "coordinator",
+      "priority": "critical",
+      "alwaysActive": true,
+      "triggers": [
+        "agenda",
+        "status",
+        "tarefas",
+        "criar card",
+        "verificar",
+        "relatorio",
+        "bom dia",
+        "prepare",
+        "organize"
+      ]
+    },
+    {
+      "id": "studies-coach",
+      "name": "Studies Coach",
+      "path": "../config/agents/studies-coach.mdc",
+      "role": "specialist",
+      "priority": "high",
+      "triggers": [
+        "retomar",
+        "estudar",
+        "aula",
+        "projeto",
+        "como funciona",
+        "explica",
+        "criar revisao"
+      ]
+    },
+    {
+      "id": "work-coach",
+      "name": "Work Coach",
+      "path": "../config/agents/work-coach.mdc",
+      "role": "specialist",
+      "priority": "high",
+      "triggers": [
+        "bug",
+        "erro",
+        "expenseiq",
+        "trabalho",
+        "implementar",
+        "feature",
+        "deploy",
+        "code review"
+      ]
+    },
+    {
+      "id": "social-media-coach",
+      "name": "Social Media Coach",
+      "path": "../config/agents/social-media-coach.mdc",
+      "role": "specialist",
+      "priority": "medium",
+      "triggers": [
+        "gravar",
+        "episodio",
+        "youtube",
+        "lancamento",
+        "stuffscode",
+        "instagram",
+        "serie",
+        "o que gravar"
+      ]
+    }
+  ],
+  "contextSharing": true,
+  "unifiedHistory": true,
+  "autoDelegation": true,
+  "maxParallel": 3
+}
+

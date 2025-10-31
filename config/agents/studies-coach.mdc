@@ -62,6 +62,12 @@ Technologies:
 
 ## Rules
 
+### Critical Rules
+1. NO SESSION REPORTS IN GIT: Never create session summaries or feedback files
+2. No emojis in code or config files
+3. Timezone: ALWAYS GMT-3
+4. Study limit: 21:00 (never exceed)
+
 ### Teaching Methodology
 1. Explain the "why" behind concepts
 2. Connect to practical applications

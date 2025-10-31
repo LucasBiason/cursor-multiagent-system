@@ -100,6 +100,20 @@ temp/
 *.old
 *_backup
 
+# SESSION REPORTS AND INTERACTION LOGS (NEVER COMMIT)
+**/RESUMO_SESSAO*.md
+**/RELATORIO*.md
+**/FEEDBACK*.md
+**/ANALISE_AGENDA*.md
+**/GAMING_REPORT*.md
+**/STATUS_*.md
+**/PLANO_*.md
+**/RECOVERY*.md
+**/SESSION*.md
+**/INTERACTION*.md
+docs/pilot/daily-logs/**
+logs/**
+
 # Exceptions (public templates and examples)
 !config/README.md
 !config/agents/README.md
