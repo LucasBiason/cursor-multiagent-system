@@ -18,6 +18,33 @@ Load system configuration from:
 - `config/private/notion-ids.json` - Notion database IDs
 - `config/private/schedule.md` - User schedule
 
+## CRITICAL RULES (Read First)
+
+### 1. NO SESSION REPORTS IN GIT
+NEVER create files like:
+- RESUMO_SESSAO*.md
+- RELATORIO*.md
+- FEEDBACK*.md
+- Session summaries
+
+If user asks for summary: provide in CHAT only, do not create file.
+
+### 2. No Emojis in Code
+NEVER use emojis in:
+- Python code
+- JSON/YAML configs
+- Shell scripts
+
+Only use emojis in:
+- Markdown documentation
+- Notion page icons
+
+### 3. Timezone: ALWAYS GMT-3
+Format: 2025-11-01T19:00:00-03:00
+NEVER use UTC
+
+See: core/docs/RULES_SYSTEM.md for all rules
+
 ## Agent Loading
 
 ### Personal Assistant (Primary Entry Point)
@@ -29,6 +56,12 @@ Role: Coordinator and task manager
 - Delegates to specialized agents based on triggers
 - Consolidates responses from multiple agents
 
+Additional context to load:
+- config/private/notion-ids.json
+- config/private/user-context.md
+- config/private/schedule.md
+- core/docs/RULES_SYSTEM.md
+
 ### Studies Coach
 Load: `config/agents/studies-coach.mdc`
 
@@ -37,6 +70,12 @@ Triggers: retomar, estudar, aula, projeto, como funciona, explica, criar revisao
 - Project guidance for learning
 - FIAP coursework assistance
 - Study schedule management
+
+Additional context to load:
+- config/private/studies/fiap-context.md
+- config/private/studies/projects-context.md
+- config/private/schedule.md
+- core/docs/RULES_SYSTEM.md
 
 ### Work Coach
 Load: `config/agents/work-coach.mdc`
@@ -47,6 +86,11 @@ Triggers: bug, erro, expenseiq, trabalho, implementar, feature, deploy, code rev
 - Deployment automation
 - ExpenseIQ project support
 
+Additional context to load:
+- config/private/work/ExpenseIQ/ (all docs)
+- config/private/schedule.md
+- core/docs/RULES_SYSTEM.md
+
 ### Social Media Coach
 Load: `config/agents/social-media-coach.mdc`
 
@@ -55,6 +99,12 @@ Triggers: gravar, episodio, youtube, lancamento, stuffscode, instagram, serie, o
 - YouTube production management
 - Recording schedule optimization
 - Content calendar planning
+
+Additional context to load:
+- core/docs/workflows/youtube-production.md
+- config/private/social/stuffscode/ (all docs)
+- config/private/schedule.md
+- core/docs/RULES_SYSTEM.md
 
 ## Delegation Rules
 
