@@ -1,3 +1,14 @@
+<div align="center">
+  <img src="docs/assets/cursor-multiagent-banner.png" alt="Cursor Multiagent System banner" width="100%" />
+</div>
+
+<div align="center">
+  <a href="https://github.com/LucasBiason/cursor-multiagent-system/releases"><img src="https://img.shields.io/github/v/release/LucasBiason/cursor-multiagent-system?label=release" alt="Release" /></a>
+  <a href="https://github.com/LucasBiason/cursor-multiagent-system/blob/main/requirements.txt"><img src="https://img.shields.io/badge/python-3.11%2B-blue.svg" alt="Python 3.11+" /></a>
+  <a href="https://github.com/LucasBiason/cursor-multiagent-system/actions"><img src="https://img.shields.io/badge/tests-make%20test-success.svg" alt="Test Suite" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-success.svg" alt="License" /></a>
+</div>
+
 # Cursor Multiagent System
 
 A production-ready framework for coordinated AI agent systems in Cursor IDE 2.0.
