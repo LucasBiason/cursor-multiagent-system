@@ -97,7 +97,3 @@ else
     echo "Please fix the issues above"
     exit 1
 fi
-
-
-
-

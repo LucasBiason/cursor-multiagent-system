@@ -88,7 +88,3 @@ See integration examples in each agent file.
 ---
 
 Version: 1.0
-
-
-
-

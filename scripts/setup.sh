@@ -83,7 +83,3 @@ echo "2. Edit config/private/notion-ids.json with your Notion IDs"
 echo "3. Set NOTION_API_KEY environment variable"
 echo "4. Run ./scripts/validate.sh to verify setup"
 echo ""
-
-
-
-

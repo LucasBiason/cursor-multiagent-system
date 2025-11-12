@@ -185,4 +185,3 @@ config/private/social/stuffscode/
 **Última Atualização:** 2025-10-31  
 **Versão:** 1.0  
 **Gerenciado por:** Social Media Coach Agent
-

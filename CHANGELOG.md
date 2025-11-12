@@ -77,6 +77,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push protection ativado para prevenir vazamento de secrets
 - Verificação automática de segurança em cada commit
 
+## [1.1.1] - 2025-11-12
+
+### Changed
+- Normalizados finais de arquivo em documentação, scripts e configurações para remover linhas em branco duplicadas e manter diffs limpos.
+
 ## [Unreleased]
 
 ### Planned
