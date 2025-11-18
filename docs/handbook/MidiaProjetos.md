@@ -26,7 +26,7 @@ Este documento diferencia claramente os dois projetos de mídia social gerenciad
 - **Gravação:** Noturna (21:00-00:00) + Sprint fim de semana
 
 ### Documentação
-**Localização:** `config/private/youtube/`
+**Localização:** `config/youtube/`
 
 Arquivos principais:
 - `README.md` - Visão geral do canal
@@ -72,7 +72,7 @@ Arquivos principais:
 - **Criação:** IA generativa para imagens
 
 ### Documentação
-**Localização:** `config/private/social/stuffscode/`
+**Localização:** `config/social/stuffscode/`
 
 Estrutura completa (28 documentos):
 - `01_Planejamento/` - Análises e estratégias
@@ -146,7 +146,7 @@ Estrutura completa (28 documentos):
 
 ### The Crazy Fox
 ```
-config/private/youtube/
+config/youtube/
 ├── README.md
 ├── LOGICA_PRODUCAO.md
 ├── SERIES_TEMPLATE.md
@@ -156,7 +156,7 @@ config/private/youtube/
 
 ### StuffsCode
 ```
-config/private/social/stuffscode/
+config/social/stuffscode/
 ├── README.md
 ├── 01_Planejamento/
 ├── 02_Identidade_Visual/
@@ -185,3 +185,5 @@ config/private/social/stuffscode/
 **Última Atualização:** 2025-10-31  
 **Versão:** 1.0  
 **Gerenciado por:** Social Media Coach Agent
+
+

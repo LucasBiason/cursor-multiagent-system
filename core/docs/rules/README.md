@@ -55,6 +55,25 @@ Esta pasta contém **todas as regras obrigatórias** do sistema de automação N
 
 ---
 
+### 5. REACT_BEST_PRACTICES.md ⚛️
+**Conteúdo:** Regras e boas práticas para desenvolvimento React.js  
+**Quando ler:** Ao trabalhar com projetos React.js, Next.js ou frontend
+
+**Regras Principais:**
+- Absolute imports obrigatórios (`@/components`, `@/hooks`, etc.)
+- React.memo para performance
+- useCallback em hooks e handlers
+- Error Boundaries obrigatórios
+- TypeScript com types completos
+- Tailwind CSS exclusivo (sem CSS inline)
+- Acessibilidade (a11y) obrigatória
+
+**Referências Base:**
+- [React Architecture Pattern and Best Practices (GeeksforGeeks)](https://www.geeksforgeeks.org/reactjs/react-architecture-pattern-and-best-practices/)
+- [React Design Patterns and Best Practices for 2025 (Telerik)](https://www.telerik.com/blogs/react-design-patterns-best-practices)
+
+---
+
 ## 🚀 INÍCIO RÁPIDO
 
 ### Para Criar Cards:
@@ -67,10 +86,16 @@ Esta pasta contém **todas as regras obrigatórias** do sistema de automação N
 2. Leia: `REGRAS_STATUS_IGNORADOS.md`
 3. Se for YouTube: `REGRAS_YOUTUBE_LOGICA_ESPECIAL.md`
 
+### Para Desenvolvimento React.js:
+1. Leia: `REACT_BEST_PRACTICES.md` **ANTES** de começar
+2. Use o checklist de implementação
+3. Siga os padrões de código documentados
+
 ---
 
 ## 📊 HIERARQUIA DE REGRAS
 
+### Regras Notion
 ```
 1. REGRAS_TIMEZONE.md (base de tudo)
    ↓
@@ -81,6 +106,16 @@ Esta pasta contém **todas as regras obrigatórias** do sistema de automação N
 4. REGRAS_YOUTUBE_LOGICA_ESPECIAL.md (caso especial)
    ↓
 5. REGRAS_VERIFICACAO_TAREFAS.md (sistema completo)
+```
+
+### Regras Desenvolvimento
+```
+1. REACT_BEST_PRACTICES.md (React.js/Next.js)
+   - Absolute imports
+   - Performance (memo, useCallback, useMemo)
+   - Error Boundaries
+   - TypeScript
+   - Acessibilidade
 ```
 
 ---
@@ -122,6 +157,7 @@ Esta pasta contém **todas as regras obrigatórias** do sistema de automação N
 2. Agent 3 - Finalizador Semanal
 3. Agent 4 - Organizador YouTube
 4. Agent 7-8-9 - Monitor Integrado
+5. **TODOS OS AGENTES** - REACT_BEST_PRACTICES.md (ao trabalhar com React.js)
 
 ---
 
@@ -135,11 +171,16 @@ Esta pasta contém **todas as regras obrigatórias** do sistema de automação N
 - Limite 21:00 para estudos
 - Hierarquias por base
 
-### Versão 2.0 (22/10/2025 - ATUAL)
+### Versão 2.0 (22/10/2025)
 - Status ignorados
 - Lógica especial YouTube
 - Templates pessoais
 - Sistema de verificação inteligente
+
+### Versão 2.1 (17/11/2025 - ATUAL)
+- Adicionado REACT_BEST_PRACTICES.md
+- Regras de desenvolvimento React.js/Next.js
+- Baseado em artigos GeeksforGeeks e Telerik
 
 ---
 
@@ -156,8 +197,8 @@ Esta pasta contém **todas as regras obrigatórias** do sistema de automação N
 
 ---
 
-**Última Atualização:** 22/10/2025  
-**Total de Regras:** 4 documentos  
+**Última Atualização:** 17/11/2025  
+**Total de Regras:** 5 documentos  
 **Status:** ✅ Completo e Validado
 
 

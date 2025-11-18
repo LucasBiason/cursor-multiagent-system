@@ -1,0 +1,176 @@
+{
+  "system": {
+    "version": "1.0.0",
+    "pilot_phase": true,
+    "pilot_month": "2025-11",
+    "timezone": "GMT-3",
+    "user": "Lucas Biason"
+  },
+  "agents": {
+    "enabled": true,
+    "max_parallel": 8,
+    "default_agent": "personal-assistant",
+    "context_sharing": true,
+    "unified_history": true,
+    "agents_list": [
+      {
+        "id": "personal-assistant",
+        "name": "Personal Assistant",
+        "file": "core/agents/personal-assistant.mdc",
+        "role": "coordinator",
+        "priority": "critical",
+        "capabilities": [
+          "notion_management",
+          "agenda_coordination",
+          "task_delegation",
+          "report_generation"
+        ],
+        "triggers": [
+          "agenda",
+          "status",
+          "tarefas",
+          "criar card",
+          "verificar",
+          "relatorio",
+          "bom dia",
+          "prepare",
+          "organize"
+        ],
+        "always_active": true
+      },
+      {
+        "id": "studies-coach",
+        "name": "Studies Coach",
+        "file": "core/agents/studies-coach.mdc",
+        "role": "specialist",
+        "priority": "high",
+        "capabilities": [
+          "teaching",
+          "project_guidance",
+          "code_review_educational",
+          "schedule_management"
+        ],
+        "triggers": [
+          "retomar",
+          "estudar",
+          "aula",
+          "projeto",
+          "como funciona",
+          "explica",
+          "criar revisao"
+        ],
+        "context_requirements": [
+          "config/user-context.md",
+          "core/docs/RULES_SYSTEM.md"
+        ]
+      },
+      {
+        "id": "work-coach",
+        "name": "Work Coach",
+        "file": "core/agents/work-coach.mdc",
+        "role": "specialist",
+        "priority": "high",
+        "capabilities": [
+          "coprogramming",
+          "code_review",
+          "testing",
+          "deployment",
+          "git_workflow"
+        ],
+        "triggers": [
+          "bug",
+          "erro",
+          "expenseiq",
+          "trabalho",
+          "implementar",
+          "feature",
+          "deploy",
+          "code review"
+        ],
+        "context_requirements": [
+          "config/work-context.md",
+          "core/docs/RULES_SYSTEM.md"
+        ]
+      },
+      {
+        "id": "social-media-coach",
+        "name": "Social Media Coach",
+        "file": "core/agents/social-media-coach.mdc",
+        "role": "specialist",
+        "priority": "medium",
+        "capabilities": [
+          "content_planning",
+          "production_management",
+          "schedule_optimization",
+          "youtube_workflows"
+        ],
+        "triggers": [
+          "gravar",
+          "episodio",
+          "youtube",
+          "lancamento",
+          "stuffscode",
+          "instagram",
+          "serie",
+          "o que gravar"
+        ],
+        "context_requirements": [
+          "config/youtube-context.md",
+          "core/docs/RULES_SYSTEM.md"
+        ]
+      }
+    ]
+  },
+  "notion": {
+    "api_key_env": "NOTION_API_KEY",
+    "databases_file": "config/notion-ids.json",
+    "timezone": "GMT-3",
+    "retry_attempts": 3,
+    "rate_limit": {
+      "requests_per_second": 3,
+      "backoff_factor": 2
+    }
+  },
+  "composer": {
+    "enabled": true,
+    "auto_delegate": true,
+    "parallel_execution": true,
+    "max_concurrent": 3,
+    "context_persistence": true
+  },
+  "background_agents": {
+    "enabled": true,
+    "schedule": {
+      "personal-assistant": {
+        "check_delays": "0 8 * * *",
+        "weekly_report": "0 7 * * 1",
+        "create_weekly_cards": "0 23 * * 0"
+      },
+      "social-media-coach": {
+        "check_recordings": "0 20 * * *",
+        "production_report": "0 9 * * 6"
+      }
+    }
+  },
+  "logging": {
+    "enabled": true,
+    "level": "INFO",
+    "file": "logs/multiagent.log",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  },
+  "validation": {
+    "timezone_check": true,
+    "duplicate_check": true,
+    "property_validation": true,
+    "schedule_conflict_check": true
+  }
+}
+
+
+
+
+
+
+
+
+

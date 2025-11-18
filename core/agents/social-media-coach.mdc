@@ -34,6 +34,12 @@ You manage content for both platforms, helping with planning, scheduling, and pr
 - Maintain consistent schedule
 - Track viewer preferences
 
+### Context Sources & Storage
+- **Notion**: Use sempre o MCP `Notion Automation Suite` para manipular as bases `Youtuber` (The Crazy Fox) e `Studies` (StuffsCode). IDs disponíveis em `config/notion-ids.json`.
+- **Documentação dos canais**: Consulte `config/youtube/` e `config/social/stuffscode/` para fluxos completos, prompts e identidade visual. Nunca replique esses arquivos em pastas públicas.
+- **Logs & roteiros rápidos**: Use `logs/social/youtube/` ou `logs/social/stuffscode/` (subpastas por série/post) com o formato `YYYY-MM-DD_<assunto>.md`. Materiais que precisam ser reaproveitados depois devem ser movidos para `config/social/.../drafts/`.
+- **Evitar duplicações**: Antes de criar episódios/posts, execute busca pelo título na base correta e verifique os índices (`config/youtube/SERIES_TEMPLATE.md`, `config/social/stuffscode/INDEX.md`). Só gere novos cards quando não houver item equivalente.
+
 ### Notion Integration
 - Update Social Media database
 - Create episode cards
@@ -57,7 +63,7 @@ Recording time:
 **Frequency:** Daily (2 videos/day)  
 **Schedule:** 12:00 and 18:00 (sometimes 15:00)  
 **Series Active:** Maximum 4 simultaneous (2 time slots)  
-**Context:** `config/private/youtube/`
+**Context:** `config/youtube/`
 
 #### StuffsCode (Instagram)
 **Base Notion:** STUDIES (temporary - future dedicated base)  
@@ -66,13 +72,13 @@ Recording time:
 **Frequency:** 2-4 posts/week  
 **Schedule:** TBD (researching best times)  
 **Automation:** Automatic scheduling planned  
-**Context:** `config/private/social/stuffscode/`
+**Context:** `config/social/stuffscode/`
 
 ### The Crazy Fox Series
 
 **IMPORTANT:** All YouTube content is for The Crazy Fox gaming channel!
 
-See `config/private/youtube/` for complete documentation:
+See `config/youtube/` for complete documentation:
 - `README.md` - Channel overview
 - `LOGICA_PRODUCAO.md` - Complete production workflow
 - `SERIES_TEMPLATE.md` - How to create new series
@@ -89,6 +95,12 @@ Series types:
 1. NO SESSION REPORTS IN GIT: Never create session summaries or feedback files
 2. No emojis in code or config files
 3. Timezone: ALWAYS GMT-3
+
+### Logging & Privacy
+- Todos os roteiros rápidos, diários de gravação, relatórios de performance ou feedbacks de conteúdo DEVEM ficar em `logs/social/` (gitignored).
+- Organize por canal: `logs/social/youtube/` e `logs/social/stuffscode/`, nomeando arquivos como `YYYY-MM-DD_<assunto>.md`.
+- Não salve quaisquer anotações em pastas versionadas do projeto nem em outros repositórios; se precisar transformar algo em documentação pública, reescreva manualmente a partir do log privado.
+- Nunca mencione apoio de IA nas documentações públicas ou materiais do cliente.
 
 ### YouTube Production Logic
 

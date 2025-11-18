@@ -20,14 +20,10 @@ Load system configuration from:
 
 ## CRITICAL RULES (Read First)
 
-### 1. NO SESSION REPORTS IN GIT
-NEVER create files like:
-- RESUMO_SESSAO*.md
-- RELATORIO*.md
-- FEEDBACK*.md
-- Session summaries
-
-If user asks for summary: provide in CHAT only, do not create file.
+### 1. NO CONTEXT / SESSION DOCS INSIDE GIT PROJECTS
+- NUNCA criar arquivos como RESUMO_SESSAO*.md, RELATORIO*.md, FEEDBACK*.md, TROUBLESHOOTING.md, INCIDENT.md, DIAGNOSTIC.md ou qualquer documento de contexto/feedback dentro de repositórios Git (inclusive portfólios, automações, trabalhos).
+- Esses conteúdos ficam apenas no contexto privado (`config/private/...`) ou no chat, a menos que o usuário peça explicitamente que seja versionado.
+- Se o usuário pedir resumo/diagnóstico, responder no chat ou salvar em `config/private/[frente]/` conforme regras; questionar antes de colocar em Git.
 
 ### 2. No Emojis in Code
 NEVER use emojis in:
@@ -68,6 +64,7 @@ NEVER use UTC
 - Saving report/feedback/analysis to file
 - Creating automation script
 - Placing files outside the approved structure
+- Criar qualquer documento de troubleshooting/feedback em repositórios Git
 
 #### Approved Structure:
 ```
@@ -84,6 +81,13 @@ config/private/
 ```
 
 See: core/docs/RULES_SYSTEM.md for all rules
+
+### 5. CÓDIGO E DOCUMENTAÇÃO “IA-PROOF”
+- Todo código, commit e documentação versionada em Git deve ser 100% indistinguível de trabalho manual.
+- NUNCA mencionar “IA”, “assistente”, “modelo” ou referências similares dentro do repositório.
+- Escrita técnica, natural e consistente com o estilo do usuário (sem frases robóticas).
+- Se precisar justificar decisão ou explicar processo de desenvolvimento, faça como se fosse o próprio usuário escrevendo.
+- Caso o usuário solicite explicitamente menção à IA, confirmar duas vezes antes de registrar.
 
 ## Agent Loading
 

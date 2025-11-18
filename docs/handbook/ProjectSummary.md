@@ -186,7 +186,7 @@ All rules from existing contexts consolidated:
 ### Protected via .gitignore
 
 All these are NOT in git:
-- config/private/**
+- config/** (submódulo privado)
 - config/agents/*-personal.mdc
 - config/agents/*-work.mdc
 - config/config.json
@@ -334,11 +334,11 @@ cursor-multiagent-system/
 │   ├── examples/            # Usage examples
 │   └── utils/              # Utility scripts
 │
-├── config/                   # Configuration
-│   ├── agents/              # Agent definitions
-│   ├── private/            # Private data (gitignored)
-│   ├── rules/              # Business rules
-│   └── workflows/          # Workflow definitions
+├── config/                   # Submódulo privado (contextos, índices, logs)
+│   ├── work/               # Clientes/projetos profissionais
+│   ├── studies/            # Materiais de estudo / apostilas
+│   ├── social/             # Estratégias para conteúdo
+│   └── ...                 # Demais frentes (personal, system, etc.)
 │
 ├── scripts/                  # Setup and validation
 ├── tests/                   # Test suite
@@ -354,7 +354,7 @@ cursor-multiagent-system/
 3. `230846c` - docs: add practical usage guide (1 file, 392 lines)
 
 **Total:** 22 files, 3,405 lines in git  
-**Protected:** 2 files gitignored (private data)
+**Protected:** submódulo `config/` + logs gitignored
 
 ---
 
@@ -426,3 +426,5 @@ Created: 2024-11-01
 By: Notion AI Manager  
 Version: 1.0.0  
 Status: PILOT PHASE ACTIVE
+
+

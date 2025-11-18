@@ -28,14 +28,17 @@ chmod +x scripts/*.sh
 
 ### 3. Configure
 
-Edit configuration files in `config/`:
+Inicialize o submódulo privado e edite os arquivos em `config/`:
 
 ```bash
+# Bring private data (if not already pulled)
+git submodule update --init config
+
 # Edit your user context
-nano config/private/user-context.md
+nano config/user-context.md
 
 # Edit your Notion IDs (if using Notion)
-nano config/private/notion-ids.json
+nano config/notion-ids.json
 
 # Set environment variables
 export NOTION_API_KEY="your_notion_api_key"
@@ -52,6 +55,7 @@ export NOTION_API_KEY="your_notion_api_key"
 ### Step 1: Generate from Template
 
 ```bash
+mkdir -p config/agents
 cp core/templates/agent-template.mdc config/agents/my-agent.mdc
 ```
 
@@ -228,3 +232,5 @@ For issues or questions:
 
 Version: 1.0  
 Last Updated: 2024-11-01
+
+

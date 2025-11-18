@@ -167,7 +167,7 @@ For editing statuses (Para Edicao, Editando, Revisao):
 ### .gitignore Strategy
 
 All private configurations in:
-- `config/private/`
+- `config/`
 - `config/agents/*-personal.mdc`
 - `config/agents/*-work.mdc`
 - `config/config.json`
@@ -225,3 +225,5 @@ All private configurations in:
 
 Last Updated: 2024-11-01  
 Version: 1.0
+
+

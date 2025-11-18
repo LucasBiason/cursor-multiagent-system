@@ -14,7 +14,8 @@ cd /path/to/cursor-multiagent-system
 ### Edit User Context
 
 ```bash
-nano config/private/user-context.md
+git submodule update --init config
+nano config/user-context.md
 ```
 
 Add your:
@@ -26,7 +27,7 @@ Add your:
 ### Configure Notion IDs
 
 ```bash
-nano config/private/notion-ids.json
+nano config/notion-ids.json
 ```
 
 Add your Notion database IDs.

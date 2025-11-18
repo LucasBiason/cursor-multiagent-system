@@ -182,7 +182,7 @@ Goals:
 ## Privacy & Security
 
 All sensitive data is:
-- Stored in `config/private/`
+- Stored in `config/` (private submodule)
 - Ignored by git (see `.gitignore`)
 - Never committed to repository
 - Backed up separately

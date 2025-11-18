@@ -1,13 +1,3 @@
-# PRIVATE CONFIGURATIONS AND DATA
-config/private/**
-config/backups/**
-config/agents/*-personal.mdc
-config/agents/*-work.mdc
-config/workflows/personal-*.yml
-config/workflows/work-*.yml
-config/config.json
-config/credentials.json
-
 # SENSITIVE INFORMATION
 *.env
 .env.local
@@ -19,22 +9,6 @@ tokens/
 # NOTION IDS AND KEYS
 **/notion-ids.json
 **/api-keys.json
-
-# PERSONAL DATA
-config/private/
-config/agents/notion-manager.mdc
-config/agents/personal-*.mdc
-config/rules/personal-*.md
-
-# WORK RELATED (ExpenseIQ, Astracode)
-config/agents/work-coach.mdc
-config/agents/expenseiq-*.mdc
-config/workflows/work-*.yml
-config/rules/work-*.md
-
-# MEDICAL AND HEALTH
-config/rules/medical-*.md
-config/workflows/health-*.yml
 
 # PYTHON
 __pycache__/
@@ -127,13 +101,4 @@ logs/**
 # CURSOR CONVERSATION FILES (DMD/MD from conversations)
 **/*.dmd
 .cursor/conversations/
-
-# Exceptions (public templates and examples)
-!config/README.md
-!config/agents/README.md
-!config/agents/template-*.mdc
-!config/workflows/README.md
-!config/workflows/example-*.yml
-!config/rules/README.md
-!config/rules/public-*.md
 

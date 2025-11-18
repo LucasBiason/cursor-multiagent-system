@@ -9,11 +9,21 @@ if [ ! -f "README.md" ]; then
     exit 1
 fi
 
-# Create necessary directories
-echo "Creating directories..."
-mkdir -p config/private
+# Ensure private submodule exists
+if [ ! -d "config/.git" ]; then
+    echo "Initializing config submodule..."
+    git submodule update --init config
+    if [ $? -ne 0 ]; then
+        echo "Error: could not initialize config submodule. Run 'git submodule update --init config' manually."
+        exit 1
+    fi
+fi
+
+# Create logs directory
 mkdir -p logs
-mkdir -p .cursor/agents
+
+# Ensure Cursor agents link exists
+mkdir -p .cursor
 
 # Check Python version
 echo "Checking Python version..."
@@ -34,9 +44,9 @@ fi
 # Copy example configs if private configs don't exist
 echo "Checking configuration files..."
 
-if [ ! -f "config/private/user-context.md" ]; then
+if [ ! -f "config/user-context.md" ]; then
     echo "Creating user-context.md from template..."
-    cat > config/private/user-context.md << 'EOF'
+    cat > config/user-context.md << 'EOF'
 # Private User Context
 
 This file contains sensitive information and is gitignored.
@@ -62,7 +72,8 @@ if [ ! -f "config/config.json" ]; then
 fi
 
 # Create symlink for Cursor
-if [ ! -L ".cursor/agents" ]; then
+# Link Cursor agents directory to private config (allows per-user overrides)
+if [ -d "config/agents" ] && [ ! -L ".cursor/agents" ]; then
     echo "Creating symlink for Cursor agents..."
     ln -sf ../../config/agents .cursor/agents
 fi
@@ -78,8 +89,10 @@ echo ""
 echo "Setup complete!"
 echo ""
 echo "Next steps:"
-echo "1. Edit config/private/user-context.md with your information"
-echo "2. Edit config/private/notion-ids.json with your Notion IDs"
+echo "1. Edit config/user-context.md with your information"
+echo "2. Edit config/notion-ids.json with your Notion IDs"
 echo "3. Set NOTION_API_KEY environment variable"
 echo "4. Run ./scripts/validate.sh to verify setup"
 echo ""
+
+

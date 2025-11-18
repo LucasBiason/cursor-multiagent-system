@@ -45,7 +45,7 @@ Public template files:
 
 1. Copy template:
 ```bash
-cp ../core/templates/agent-template.mdc new-agent.mdc
+cp ../templates/agent-template.mdc new-agent.mdc
 ```
 
 2. Edit with your agent's specifics
@@ -76,3 +76,5 @@ Agent should activate and respond appropriately.
 ---
 
 Last Updated: 2024-11-01
+
+

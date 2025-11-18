@@ -10,10 +10,10 @@ echo "Checking required files..."
 
 FILES=(
     "config/config.json"
-    "config/agents/personal-assistant.mdc"
-    "config/agents/studies-coach.mdc"
-    "config/agents/work-coach.mdc"
-    "config/agents/social-media-coach.mdc"
+    "core/agents/personal-assistant.mdc"
+    "core/agents/studies-coach.mdc"
+    "core/agents/work-coach.mdc"
+    "core/agents/social-media-coach.mdc"
 )
 
 for file in "${FILES[@]}"; do
@@ -30,14 +30,14 @@ echo ""
 # Check private configuration
 echo "Checking private configuration..."
 
-if [ ! -f "config/private/notion-ids.json" ]; then
-    echo "WARNING: Missing config/private/notion-ids.json"
+if [ ! -f "config/notion-ids.json" ]; then
+    echo "WARNING: Missing config/notion-ids.json"
     echo "  Create this file with your Notion database IDs"
     ERRORS=$((ERRORS + 1))
 fi
 
-if [ ! -f "config/private/user-context.md" ]; then
-    echo "WARNING: Missing config/private/user-context.md"
+if [ ! -f "config/user-context.md" ]; then
+    echo "WARNING: Missing config/user-context.md"
     echo "  Create this file with your personal context"
     ERRORS=$((ERRORS + 1))
 fi
@@ -70,8 +70,8 @@ if command -v jq &> /dev/null; then
         fi
     fi
     
-    if [ -f "config/private/notion-ids.json" ]; then
-        jq empty config/private/notion-ids.json 2>/dev/null
+    if [ -f "config/notion-ids.json" ]; then
+        jq empty config/notion-ids.json 2>/dev/null
         if [ $? -eq 0 ]; then
             echo "OK: notion-ids.json syntax valid"
         else
@@ -97,3 +97,5 @@ else
     echo "Please fix the issues above"
     exit 1
 fi
+
+

@@ -26,10 +26,10 @@ export NOTION_DATABASE_ID="your_database_id"
 
 ### 3. Private Configuration
 
-All personal data should be stored in `config/private/` which is:
-- Ignored by git (see `.gitignore`)
-- Never committed to the repository
-- Your responsibility to backup separately
+All personal data should be stored in `config/` (submódulo Git privado), which is:
+- Ignored by the public repo
+- Never committed to GitHub
+- Your responsibility to backup separately (git push no repositório privado + mirror para `big_files` quando necessário)
 
 ### 4. What's Safe to Share
 
@@ -67,15 +67,21 @@ git diff | grep -iE "(api_key|secret|password)" | grep -v "placeholder"
 git diff | grep -E "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
 ```
 
+### 7. Private Logs
+
+- Todos os registros de contexto/feedback devem ficar exclusivamente em `logs/` (gitignored).
+- Padrão de subpastas: `logs/system`, `logs/work`, `logs/studies`, `logs/social`, `logs/personal`, `logs/gaming`.
+- Nomeie arquivos como `logs/<frente>/<projeto>/<YYYY-MM-DD>_<assunto>.md`.
+- Nunca mova esses arquivos para diretórios versionados nem cite apoio de IA em documentos públicos.
+
 ## Protected Directories
 
 The following directories are **automatically excluded** from git:
 
 ```
-config/private/          # All private configurations
-config/backups/          # Backup files
-config/credentials.json  # Credentials file
-config/config.json       # Personal config
+config/                  # Submódulo privado (dados sensíveis)
+logs/**                  # Logs internos dos agentes
+docs/archive/backups/    # Referências históricas (mantidas fora de config/)
 *.env                    # Environment files
 secrets/                 # Secrets directory
 tokens/                  # Tokens directory

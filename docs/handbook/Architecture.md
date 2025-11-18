@@ -251,23 +251,36 @@ Contains:
 - Local state: Temporary (session-based)
 - Cursor context: Automatic (IDE-managed)
 
+### Logging Directories
+
+- Todos os logs/feedbacks diários vivem em `logs/` (gitignored).
+- Subpastas oficiais:
+  - `logs/system/` – coordenação geral (Personal Assistant)
+  - `logs/work/` – tarefas profissionais (ExpenseIQ, MyLocalPlace, etc.)
+  - `logs/studies/` – estudos, revisões e projetos educacionais
+  - `logs/social/` – produção de conteúdo (YouTube/Instagram)
+  - `logs/personal/` – rotinas pessoais
+  - `logs/gaming/` – gamificação/streaks
+- Formato recomendado: `logs/<frente>/<projeto>/<YYYY-MM-DD>_<assunto>.md`
+- É proibido gravar logs em outros repositórios/pastas versionadas.
+
 ## Scalability
 
 ### Adding New Agents
 
-1. Create agent file: `config/agents/new-agent.mdc`
+1. Create agent file inside `core/agents/` (use `core/templates/agent-template.mdc`)
 2. Define role and capabilities
 3. Set triggers
-4. Add to `config.json`
-5. Test integration
+4. Register path in `config/config.json`
+5. Test activation/delegation flows
 
 ### Adding New Workflows
 
-1. Define workflow in `config/workflows/`
-2. Specify agent sequence
-3. Define success criteria
-4. Test execution
-5. Document
+1. Document workflow em `core/docs/workflows/` (público) ou `config/workflows/` (sensível)
+2. Especifique sequência de agentes e condicionais
+3. Defina critérios de sucesso e métricas
+4. Teste execução ponta a ponta
+5. Atualize instruções dos agentes envolvidos
 
 ## Security
 
@@ -282,7 +295,7 @@ Never commit:
 
 Protected via:
 - `.gitignore` rules
-- `config/private/` directory
+- `config/` (submódulo privado)
 - Environment variables
 
 ### Public Repository
@@ -329,3 +342,5 @@ Track:
 Version: 1.0  
 Last Updated: 2024-11-01  
 Status: Pilot Phase
+
+
