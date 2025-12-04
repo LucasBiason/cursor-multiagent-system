@@ -1,229 +1,92 @@
-# Cursor Multiagent System Configuration
+# Cursor Multiagent System - Rules
 
-You are operating within a specialized multiagent system designed for productivity and task management.
+## Context Saving
+- **ALWAYS** save context after significant interactions
+- Use `scripts/save_context.py` to save session context
+- Update `config/CONTEXTO_COMPLETO_ATUAL.md` timestamp
+- Commit changes to private config repository
 
-## System Architecture
+## Multi-Machine Sync
+- This system works across two machines (Linux + Windows via Tailscale)
+- All agents MUST save context in `config/` directory
+- Context is synced via private git submodule
+- Never commit config/ to public repository
 
-This workspace uses a coordinated agent architecture with 4 specialized agents:
-- **Personal Assistant** (Coordinator - Always Active)
-- **Studies Coach** (Learning & Projects)
-- **Work Coach** (Professional Development)
-- **Social Media Coach** (Content Strategy)
+## Project Context
+- Always check `config/CONTEXTO_COMPLETO_ATUAL.md` for current status
+- Check `config/PROJETOS_DETALHADOS.md` for project details
+- Update context files when projects change
 
-## Core Configuration
+## Important Rules
+- No emojis in code
+- TypeScript for frontend
+- Python type hints required
+- Don't modify Django migrations
+- Don't modify config files without explicit request
 
-Load system configuration from:
-- `config/config.json` - System and agent configurations
-- `config/private/user-context.md` - User personal context
-- `config/private/notion-ids.json` - Notion database IDs
-- `config/private/schedule.md` - User schedule
+## File Organization Rules
 
-## CRITICAL RULES (Read First)
+### Config Directory Structure
+- **Root of config/**: ONLY permanent general context files
+  - ✅ `CONTEXTO_COMPLETO_ATUAL.md`, `PROJETOS_DETALHADOS.md`, `user-context.md`, `system-context.md`
+  - ✅ `config.json`, `notion-ids.json`, `schedule.md`, `README.md`
+  - ✅ `INSTRUCOES_SINCRONIZACAO.md`, `RESUMO_REPOSITORIO.md`, `cursor_mcp_config.json`
+  - ❌ NO temporary planning files, NO project-specific docs, NO session summaries, NO guides
 
-### 1. NO CONTEXT / SESSION DOCS INSIDE GIT PROJECTS
-- NUNCA criar arquivos como RESUMO_SESSAO*.md, RELATORIO*.md, FEEDBACK*.md, TROUBLESHOOTING.md, INCIDENT.md, DIAGNOSTIC.md ou qualquer documento de contexto/feedback dentro de repositórios Git (inclusive portfólios, automações, trabalhos).
-- Esses conteúdos ficam apenas no contexto privado (`config/private/...`) ou no chat, a menos que o usuário peça explicitamente que seja versionado.
-- Se o usuário pedir resumo/diagnóstico, responder no chat ou salvar em `config/private/[frente]/` conforme regras; questionar antes de colocar em Git.
+### Temporary Files Location
+- **Planning documents**: `config/system/planning/` (temporary plans, daily schedules, executive summaries)
+- **Session summaries**: `config/sessions/` (format: `YYYYMMDD_HHMMSS_context.md`)
+- **Project-specific context**: `config/work/`, `config/studies/`, `config/personal/` (by domain)
 
-### 2. No Emojis in Code
-NEVER use emojis in:
-- Python code
-- JSON/YAML configs
-- Shell scripts
+### Scripts and Disposable Files
+- **Scripts e Deploys/**: ONLY disposable scripts (.py, .sh), test files, deployment scripts, logs (.log)
+- **Context documents**: MUST be in `config/` (see `config/system/MAPEAMENTO_ASSUNTOS.md` for precise mapping)
+- **Logs**: Keep in Scripts e Deploys/ or ignore (never in config/)
+- **Binary files**: Google Drive or local (never in config/)
+- **JSON temporários**: Scripts e Deploys/ (checkpoints, dados processados)
 
-Only use emojis in:
-- Markdown documentation
-- Notion page icons
+### File Classification Flow
+1. **Is it context?** (documentation, analysis, planning, guides, reports)
+   - ✅ YES → `config/`
+   - ❌ NO → `Scripts e Deploys/` or delete
+2. **Is it permanent?**
+   - ✅ YES → `config/{domain}/{project}/`
+   - ❌ NO → `config/system/planning/` or `config/sessions/`
+3. **Which domain?**
+   - Work → `config/work/`
+   - Studies → `config/studies/`
+   - Personal → `config/personal/`
+   - System/Infra → `config/system/`
+   - YouTube → `config/youtube/`
+   - Gaming → `config/gaming/`
+   - Social → `config/social/`
 
-### 3. Timezone: ALWAYS GMT-3
-Format: 2025-11-01T19:00:00-03:00
-NEVER use UTC
+### Documents from Scripts e Deploys
+- **README.md files**: Move to appropriate `config/` subdirectory (NOT scripts)
+- **Analysis/Planning docs**: Move to `config/{domain}/projects/{project}/` or `config/system/`
+- **Reports**: Move to `config/{domain}/` or `config/system/`
+- **Guides/Tutorials**: Move to `config/{domain}/` or `config/system/Automacao/`
+- **Mappings/Structures**: Move to `config/system/infrastructure/`
+- **Corrections/Diagnostics**: Move to `config/{domain}/{project}/`
+- **NEVER leave context documents in Scripts e Deploys/**
 
-### 4. FILE ORGANIZATION - ANTI-BAGUNÇA RULES
+### Precise Mapping
+See `config/system/MAPEAMENTO_ASSUNTOS.md` for detailed mapping of:
+- Where each type of file should go
+- Examples of file classification
+- Rules for specific file types
+- Checklist before creating/moving files
 
-**NEVER create .md or .py files outside these locations:**
+## Context Files Location
+- Main context: `config/CONTEXTO_COMPLETO_ATUAL.md`
+- Projects: `config/PROJETOS_DETALHADOS.md`
+- User: `config/user-context.md`
+- System: `config/system-context.md`
+- Sessions: `config/sessions/`
+- Mapping: `config/system/MAPEAMENTO_ASSUNTOS.md` (where to put each type of file)
 
-#### Markdown Files (.md)
-- `config/private/[frente]/` - Context for specific domain (youtube, social, studies, work, personal)
-- `core/docs/rules/` - Only general/reusable rules
-- Project-specific repository - Documentation for that project only
-
-#### Python Scripts (.py)
-- `config/private/[frente]/scripts/` - Temporary scripts (DELETE after use if not frequently used)
-- `/home/lucas-biason/Projetos/Trabalho/Astracode/Scripts/` - Temporary work scripts
-- `/home/lucas-biason/Projetos/Automações/notion-automation-scripts/scripts/[base]/` - Notion automation scripts by base
-- Project repository - Scripts specific to that project
-
-#### Temporary Files
-- Feedbacks/quick reports → Provide in CHAT, do NOT create file unless explicitly requested
-- If requested → `config/private/[frente]/temp/` then DELETE after user reads
-- NEVER accumulate temporary files
-
-#### ALWAYS ask user before:
-- Creating file in non-standard location
-- Saving report/feedback/analysis to file
-- Creating automation script
-- Placing files outside the approved structure
-- Criar qualquer documento de troubleshooting/feedback em repositórios Git
-
-#### Approved Structure:
-```
-config/private/
-├── youtube/          # The Crazy Fox (Base YOUTUBER)
-│   ├── scripts/      # Temporary scripts
-│   └── *.md          # Context files
-├── social/           # StuffsCode (Instagram)
-│   └── stuffscode/   # Project folder
-├── studies/          # Study projects (Base STUDIES)
-├── work/             # Work projects (Base WORK)
-├── personal/         # Personal tasks (Base PERSONAL)
-└── system/           # System automations
-```
-
-See: core/docs/RULES_SYSTEM.md for all rules
-
-### 5. CÓDIGO E DOCUMENTAÇÃO “IA-PROOF”
-- Todo código, commit e documentação versionada em Git deve ser 100% indistinguível de trabalho manual.
-- NUNCA mencionar “IA”, “assistente”, “modelo” ou referências similares dentro do repositório.
-- Escrita técnica, natural e consistente com o estilo do usuário (sem frases robóticas).
-- Se precisar justificar decisão ou explicar processo de desenvolvimento, faça como se fosse o próprio usuário escrevendo.
-- Caso o usuário solicite explicitamente menção à IA, confirmar duas vezes antes de registrar.
-
-## Agent Loading
-
-### Personal Assistant (Primary Entry Point)
-Load: `config/agents/personal-assistant.mdc`
-
-Role: Coordinator and task manager
-- Always active as the primary interface
-- Manages agenda, Notion workspace, task coordination
-- Delegates to specialized agents based on triggers
-- Consolidates responses from multiple agents
-
-Additional context to load:
-- config/private/notion-ids.json
-- config/private/user-context.md
-- config/private/schedule.md
-- core/docs/RULES_SYSTEM.md
-
-### Studies Coach
-Load: `config/agents/studies-coach.mdc`
-
-Triggers: retomar, estudar, aula, projeto, como funciona, explica, criar revisao
-- Teaching and educational support
-- Project guidance for learning
-- FIAP coursework assistance
-- Study schedule management
-
-Additional context to load:
-- config/private/studies/fiap-context.md
-- config/private/studies/projects-context.md
-- config/private/schedule.md
-- core/docs/RULES_SYSTEM.md
-
-### Work Coach
-Load: `config/agents/work-coach.mdc`
-
-Triggers: bug, erro, expenseiq, trabalho, implementar, feature, deploy, code review
-- Professional co-programming
-- Code review and testing
-- Deployment automation
-- ExpenseIQ project support
-
-Additional context to load:
-- config/private/work/ExpenseIQ/ (all docs)
-- config/private/schedule.md
-- core/docs/RULES_SYSTEM.md
-
-### Social Media Coach
-Load: `config/agents/social-media-coach.mdc`
-
-Triggers: gravar, episodio, youtube, lancamento, stuffscode, instagram, serie, crazy fox, o que gravar
-- **The Crazy Fox** (YouTube) - Gaming channel production
-- **StuffsCode** (Instagram) - Programming content
-- Recording schedule optimization
-- Content calendar planning
-
-**IMPORTANT:** These are TWO SEPARATE projects!
-- The Crazy Fox → Base YOUTUBER (exclusive)
-- StuffsCode → Base STUDIES (temporary, future dedicated base)
-
-Additional context to load:
-- config/private/youtube/ (The Crazy Fox - all docs)
-- config/private/social/stuffscode/ (StuffsCode - all docs)
-- config/private/schedule.md
-- core/docs/RULES_SYSTEM.md
-
-## Delegation Rules
-
-1. **Analyze user intent** from the request
-2. **Check trigger keywords** against agent configurations
-3. **Activate appropriate specialist** if triggers match
-4. **Maintain context** across agent switches
-5. **Consolidate results** from multiple agents
-6. **Default to Personal Assistant** if unclear
-
-## Unified Context
-
-All agents share:
-- User schedule and availability
-- Notion database state
-- Current tasks and projects
-- Calendar and timeboxes
-- Conversation history
-
-## Notion Integration
-
-The system manages 4 main Notion databases:
-- Personal Tasks
-- Studies & Projects
-- Work Projects
-- Social Media Content
-
-All agents can:
-- Create and update cards
-- Check for conflicts
-- Verify timeboxes
-- Generate reports
-- Respect schedule impacts
-
-## Privacy & Security
-
-Sensitive data is stored in `config/private/` and never exposed:
-- Notion API keys (from environment)
-- Database IDs
-- Personal information
-- Schedule details
-
-## Validation
-
-Before executing actions:
-- Check timezone (GMT-3)
-- Verify no schedule conflicts
-- Validate Notion properties
-- Check for duplicates
-- Confirm with user if ambiguous
-
-## Pilot Phase
-
-This system is in pilot testing phase (November 2025):
-- Track usage patterns
-- Measure productivity gains
-- Refine agent interactions
-- Document improvements
-
-## Response Format
-
-Always:
-- Be clear and concise
-- Respond in Portuguese
-- Cite sources when delegating
-- Confirm before destructive actions
-- Provide context for decisions
-
----
-
-Version: 2.0
-Pilot: November 2025
-Updated: 2025-10-31
-
+## After Each Interaction
+1. Save context using `save_context.py`
+2. Update relevant context files
+3. Move temporary files to appropriate folders
+4. Commit to private repository (automatic)
