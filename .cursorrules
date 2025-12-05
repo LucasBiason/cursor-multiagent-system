@@ -18,11 +18,30 @@
 - Update context files when projects change
 
 ## Important Rules
-- No emojis in code
+- **NO EMOJIS IN CODE** (Python, JavaScript, CSS, HTML, configs) - Only in Jupyter notebooks when explicitly teaching
+- All code comments and docstrings in ENGLISH (except Jupyter tutorials)
 - TypeScript for frontend
 - Python type hints required
-- Don't modify Django migrations
+- Don't modify Django migrations manually
 - Don't modify config files without explicit request
+- **NEVER create status/feedback/summary files in client projects** (use chat or config/)
+- Minimize documentation files - communicate via chat when done
+- Views: Template views (serve HTML) vs API views (return JSON) - ALWAYS separate
+- API versioning MANDATORY: `/{app}/api/v1/{resource}/`
+- Template views: Only serve templates, no business logic, no ORM queries
+- API views: Call controllers, return serialized data, no business logic
+- Controllers: Orchestrate validators + repositories + services
+- Validators: Input validation only, return {'valid': bool, 'error': str, 'data': dict}
+- Repositories: ORM access only, no business logic
+- Media files: `media/` with Docker volumes for persistence
+- Static files: `static/` (source) + `staticfiles/` (collectstatic, gitignored)
+- Controller returns: Objects (not dicts with 'success'/'error')
+- API returns: Serialized objects + HTTP status (201/200/404/204)
+- INSERT/UPDATE return serialized object, DELETE returns 204 No Content
+- Management commands: App-specific → app/management/, Global → core/management/
+- Nomenclature: Service = External API, Processor = Internal processing
+- Templates: ALL in templates/ root, organized by app (templates/app_name/)
+- Template paths: Relative to templates/ (e.g., 'dashboard/analytics.html')
 
 ## File Organization Rules
 
@@ -90,3 +109,28 @@ See `config/system/MAPEAMENTO_ASSUNTOS.md` for detailed mapping of:
 2. Update relevant context files
 3. Move temporary files to appropriate folders
 4. Commit to private repository (automatic)
+
+## Detailed Rules Documentation
+All rules are documented in `core/docs/rules/`. Key rules:
+
+### Architecture Patterns (MANDATORY)
+- **REPOSITORY_PATTERN_OBRIGATORIO.md** - Data access layer, ORM encapsulation
+- **CONTROLLER_PATTERN_OBRIGATORIO.md** - Business logic orchestration
+- **SEPARACAO_VIEWS_TEMPLATES_API.md** - Template views vs API views separation
+
+### API Standards (MANDATORY)
+- **API_VERSIONING_OBRIGATORIO.md** - Versioned APIs (/{app}/api/v1/)
+- **VALIDATORS_OBRIGATORIO.md** - Input validation layer
+- **RETORNOS_CONTROLLERS_E_APIS.md** - Standard return types (objects, not dicts)
+
+### Data Access (MANDATORY)
+- **SQL_PURO_APENAS_SELECT.md** - Raw SQL only for SELECT, ORM for INSERT/UPDATE/DELETE
+- **NOMENCLATURA_SERVICES.md** - Service = External API, Processor = Internal logic
+
+### Organization (MANDATORY)
+- **TEMPLATES_ORGANIZACAO.md** - All templates in templates/ root, by app
+- **MANAGEMENT_COMMANDS_ORGANIZACAO.md** - App commands vs Core commands
+- **NO_STATUS_FILES_IN_CLIENT_PROJECTS.md** - Status files go to config/, not client projects
+
+### Security
+- **SECURITY_SECRETS.md** - Environment variables, credential management
