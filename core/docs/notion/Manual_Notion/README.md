@@ -234,10 +234,10 @@ Este manual foi **testado completamente** em 11/10/2025 com:
    - Ver: `../Templates/TEMPLATES_PESSOAIS_GUIA.md`
    
 2. **Verificação Inteligente** - Sistema de detecção de tarefas atrasadas
-   - Ver: `../Regras/REGRAS_VERIFICACAO_TAREFAS.md`
+   - Ver: `../../../config/notion/verification.md`
    
 3. **Lógica YouTube** - Regras especiais para Data de Lançamento
-   - Ver: `../Regras/REGRAS_YOUTUBE_LOGICA_ESPECIAL.md`
+   - Ver: `../../../config/notion/youtube-logic.md`
 
 ### ✅ Regras Atualizadas
 - Status ignorados em verificações

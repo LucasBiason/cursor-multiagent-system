@@ -1,0 +1,236 @@
+---
+alwaysApply: true
+---
+
+# contexto geral - todos os agentes
+
+**este arquivo contém informações que todos os agentes devem conhecer.**
+
+---
+
+## notion api e mcp
+
+### servidor mcp notion automation suite
+
+**localização:** `my-local-place/services/external/notion-automation-suite`  
+**execução:** via `scripts/notion-mcp.sh`  
+**configuração:** `config/system/infrastructure/cursor_mcp_config.json`
+
+**como usar:**
+- todas as consultas/criações/atualizações devem usar o servidor fastmcp
+- usar ferramentas do mcp notion automation suite
+- nunca usar api direta do notion (usar sempre o mcp)
+
+### database ids
+
+**localização:** `config/system/infrastructure/notion-ids.json`
+
+**bases disponíveis:**
+- personal: base de tarefas pessoais
+- studies: base de cursos
+- work: base de trabalho
+- social_media: base de videos do canal (youtuber)
+- gaming: gaming system - lucas
+
+**importante:**
+- sempre consultar `config/system/infrastructure/notion-ids.json` para ids
+- nunca hardcodar ids nos scripts
+- usar data_source_id para queries
+
+### regras de uso do notion
+
+**regras gerais (públicas):**
+- consultar `core/agents/notion-agent.mdc` para regras gerais obrigatórias
+- timezone sempre gmt-3 (nunca utc)
+- emojis como ícone (nunca no título)
+- verificar duplicatas antes de criar
+
+**regras específicas (privadas):**
+- templates pessoais: `config/notion/templates.md`
+- status por base: `config/notion/status.md`
+- propriedades específicas: `config/notion/properties.md`
+- workflows específicos: `config/notion/workflows.md`
+- lógica youtube: `config/notion/youtube-logic.md`
+
+**antes de criar qualquer card:**
+1. executar busca via `notion.search` ou query direta
+2. comparar título + data + cliente/projeto
+3. somente criar se não houver correspondência
+
+**status ignorados (não reportar como atrasado):**
+- concluído, cancelado, realocada, descartado, publicado
+- ver `config/notion/status.md` para lista completa por base
+
+---
+
+## agendamento e horários
+
+### timezone
+
+**sempre usar:** gmt-3 (são paulo, brazil)  
+**nunca usar:** utc
+
+**formato:** 2025-11-01t19:00:00-03:00
+
+### horários oficiais
+
+**localização:** `config/system/schedule/schedule.md`
+
+**horários de trabalho:**
+- segunda a sexta: 08:00-17:00
+- terças: 08:00-16:00 (tratamento médico 16:00-19:00)
+
+**horários de estudo:**
+- segunda, quarta, quinta, sexta: 19:00-21:00
+- terças: 19:30-21:00
+- limite rígido: 21:00 (nunca exceder)
+
+**horários de produção youtube:**
+- diário: 21:00-00:00
+- finais de semana: flexível
+
+**planejamento semanal:**
+- segunda a sexta: 07:00-08:00
+
+### regras de agendamento
+
+**nunca agendar:**
+- estudos após 21:00 (limite rígido)
+- gravações durante horário de trabalho (08:00-17:00)
+- tarefas conflitantes no mesmo horário
+
+**sempre verificar:**
+- conflitos de horário antes de criar cards
+- disponibilidade no calendário
+- timezone correto (gmt-3)
+
+**overflow de estudos:**
+- se exceder 21:00, mover para próximo dia disponível
+- nunca criar cards de estudo após 21:00
+
+---
+
+## variáveis de ambiente
+
+### localização
+
+**arquivo de senhas:** `core/config/.env.passwords` (gitignored)  
+**arquivo exemplo:** `core/config/.env.example`  
+**script de exemplo:** `core/config/load_env_example.py`
+
+### como usar
+
+**sempre:**
+- usar `python-dotenv` com `load_dotenv()` em scripts python
+- referenciar `core/config/.env.example` para nomes de variáveis
+- nunca hardcodar senhas, ips, tokens ou credenciais
+
+**variáveis comuns:**
+- notion_token: token da api do notion
+- render_api_key: chave api do render.com
+- hostinger_*: credenciais dos servidores hostinger
+- database_*: conexões de banco de dados
+
+---
+
+## informações financeiras
+
+### salário
+
+**salário mensal:** r$ 12.500,00
+
+**uso:**
+- cálculos de viabilidade de projetos freelancer
+- análise de custos e orçamentos
+- comparação de valores de propostas
+- planejamento financeiro
+
+**importante:**
+- usar este valor como referência para cálculos de viabilidade
+- considerar salário ao avaliar propostas de freelancer
+- calcular se projeto freelancer compensa vs. tempo investido
+
+---
+
+## estrutura de arquivos
+
+### config/
+
+**organização:**
+- `config/personal/` - contexto pessoal
+- `config/studies/` - contexto de estudos
+- `config/work/` - contexto de trabalho
+- `config/youtube/` - contexto youtube
+- `config/cicd/` - regras de deploy
+- `config/system/` - sistema e automações
+  - `system/infrastructure/` - configurações de infra (mcp, notion ids)
+  - `system/schedule/` - horários e agendamento
+  - `system/automacao/` - mcps de automação
+
+### logs/
+
+**localização:** `logs/` (gitignored)
+
+**estrutura:**
+- `logs/system/` - logs gerais do sistema
+- `logs/<frente>/` - logs por frente (work, studies, personal, youtube)
+
+**regras:**
+- nunca criar logs em repositórios externos
+- nunca criar logs em pastas versionadas
+- sempre usar `logs/` para checkpoints temporários
+
+---
+
+## regras gerais
+
+### timezone
+- sempre gmt-3, nunca utc
+- formatar datas como: 2025-11-01t19:00:00-03:00
+- código python:
+```python
+from datetime import datetime, timezone, timedelta
+SAO_PAULO_TZ = timezone(timedelta(hours=-3))
+dt = datetime(2025, 11, 1, 19, 0, 0, tzinfo=SAO_PAULO_TZ)
+formatted = dt.isoformat()  # 2025-11-01T19:00:00-03:00
+```
+
+### duplicações
+- sempre verificar antes de criar cards
+- comparar título + data + cliente/projeto
+- usar busca do notion antes de criar
+
+### documentação sensível
+- usar apenas submódulo `config/` para informações detalhadas
+- nunca copiar informações sensíveis para arquivos públicos
+- senhas, ips, tokens sempre em `.env.passwords`
+
+### organização de arquivos
+- scripts temporários: `Scripts e Deploys/`
+- documentação de contexto: `config/`
+- logs: `logs/`
+- nunca criar arquivos temporários em repositórios git
+
+### validação antes de criar cards
+- [ ] timezone é gmt-3
+- [ ] não há cards duplicados
+- [ ] todas as propriedades obrigatórias presentes
+- [ ] status é válido para a base
+- [ ] datas estão formatadas corretamente
+
+### validação antes de agendar
+- [ ] horário está disponível
+- [ ] não há conflitos com tarefas existentes
+- [ ] dentro dos horários de trabalho/estudo
+- [ ] respeita limites rígidos (21:00 para estudos)
+
+### coordenação entre agentes
+- monitorar notion regularmente
+- atualizar cards quando necessário
+- verificar calendário e conflitos
+- respeitar horários e limites
+- compartilhar contexto na base de conhecimento
+
+---
+
+**última atualização:** 2025-12-08

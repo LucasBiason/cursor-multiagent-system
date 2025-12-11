@@ -9,37 +9,71 @@ Each agent is defined in a `.mdc` (Markdown Context) file:
 ```
 agents/
 ├── personal-assistant.mdc    # Entry point coordinator
-├── studies-coach.mdc         # Teaching specialist
-├── work-coach.mdc            # Development specialist
-├── social-media-coach.mdc    # Content specialist
-└── template-*.mdc            # Public templates
+├── studies-assistant.mdc         # Teaching specialist
+├── work-assistant.mdc            # Development specialist
+├── social-media-assistant.mdc    # Content specialist
+├── cicd-agent.mdc            # CI/CD and deployment specialist
+├── programming.mdc           # Programming rules (ALL AGENTS - MANDATORY)
+└── README.md                 # This file
 ```
 
-## Agent File Format
+## Technical Rules
 
-See `core/templates/agent-template.mdc` for the standard template.
+**ALL agents must follow `programming.mdc`** which contains:
+- REST API Best Practices (MANDATORY)
+- Architecture Patterns (Django, FastAPI)
+- Code Standards (Python, TypeScript)
+- Testing Requirements
+- Security Best Practices
+- Git Workflow
+- Deployment Standards
+- React/TypeScript Best Practices
+
+## Agent File Format
 
 Each agent file must include:
 - Role definition
 - Responsibilities
-- Configuration
-- Rules
+- Configuration (without sensitive data)
+- Rules (reference programming.mdc)
 - Capabilities
 - Triggers
-- Examples
+- Examples (without sensitive data)
 - Integration points
 
-## Privacy
+## Privacy and Security
 
-Agent files containing sensitive information:
-- Are gitignored (see .gitignore)
-- Contain actual Notion IDs, tokens, personal data
-- Should be backed up separately
+### Sensitive Information
+- **NEVER** include in agent files:
+  - IP addresses
+  - Passwords or credentials
+  - Client names
+  - Project names (use generic descriptions)
+  - Email addresses
+  - API keys or tokens
+  - Server hostnames with IPs
 
-Public template files:
-- Are committed to git
-- Contain no sensitive data
-- Serve as examples for others
+### Where to Store Sensitive Data
+- Credentials: `.env.passwords` (gitignored)
+- Project details: `config/CONTEXTO_TRABALHO.md`, `config/CONTEXTO_ESTUDOS.md`
+- Deployment configs: `config/cicd/projects/` (without credentials)
+- General Context: `core/agents/general-context.mdc` (ALWAYS applies to all agents)
+- Notion IDs: `config/system/infrastructure/notion-ids.json` (in private submodule)
+- Schedule: `config/system/schedule/schedule.md` (official schedule)
+
+### Examples in Agent Files
+- Use generic examples (e.g., "project" instead of "ExpenseIQ")
+- Use placeholder IPs (e.g., "server.example.com" instead of real IPs)
+- Use placeholder credentials ("[From .env.passwords]")
+
+## Updating Agents
+
+When updating agents:
+1. **Add technical rules**: Reference `programming.mdc`
+2. **Remove sensitive data**: IPs, passwords, client names
+3. **Update examples**: Make them generic
+4. **Keep structure**: Maintain agent file format
+5. **Test triggers**: Ensure agent activates correctly
 
 ## Creating a New Agent
 
@@ -49,10 +83,10 @@ cp ../templates/agent-template.mdc new-agent.mdc
 ```
 
 2. Edit with your agent's specifics
-
-3. Register in config.json
-
-4. Test activation
+3. Reference `programming.mdc` for technical standards
+4. Remove all sensitive information
+5. Register in `config.json`
+6. Test activation
 
 ## Loading Agents in Cursor
 
@@ -75,6 +109,5 @@ Agent should activate and respond appropriately.
 
 ---
 
-Last Updated: 2024-11-01
-
-
+**Last Updated:** 2025-12-08  
+**Version:** 2.0

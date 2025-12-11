@@ -1,7 +1,10 @@
 #!/bin/bash
 # Script para salvar contexto automaticamente após cada interação
 
-CONFIG_DIR="/home/lucas-biason/Projetos/Infraestrutura/cursor-multiagent-system/config"
+# Get the project root directory (parent of scripts/)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+CONFIG_DIR="$PROJECT_ROOT/config"
 TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S GMT-3")
 
 # Criar arquivo de contexto da sessão

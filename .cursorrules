@@ -1,9 +1,9 @@
-# Cursor Multiagent System - Rules
+# Cursor Multiagent System - Global Rules
 
 ## Context Saving
 - **ALWAYS** save context after significant interactions
 - Use `scripts/save_context.py` to save session context
-- Update `config/CONTEXTO_COMPLETO_ATUAL.md` timestamp
+- Update `config/CONTEXTO_GERAL.md` timestamp
 - Commit changes to private config repository
 
 ## Multi-Machine Sync
@@ -13,124 +13,129 @@
 - Never commit config/ to public repository
 
 ## Project Context
-- Always check `config/CONTEXTO_COMPLETO_ATUAL.md` for current status
-- Check `config/PROJETOS_DETALHADOS.md` for project details
+- Always check `config/CONTEXTO_GERAL.md` for current status
+- Check specific context files when relevant:
+  - `config/CONTEXTO_ESTUDOS.md` - Studies
+  - `config/CONTEXTO_TRABALHO.md` - Work
+  - `config/CONTEXTO_YOUTUBE.md` - YouTube
+  - `config/CONTEXTO_PESSOAL.md` - Personal
 - Update context files when projects change
 
-## Important Rules
-- **NO EMOJIS IN CODE** (Python, JavaScript, CSS, HTML, configs) - Only in Jupyter notebooks when explicitly teaching
-- All code comments and docstrings in ENGLISH (except Jupyter tutorials)
-- TypeScript for frontend
-- Python type hints required
-- Don't modify Django migrations manually
-- Don't modify config files without explicit request
-- **NEVER create status/feedback/summary files in client projects** (use chat or config/)
-- Minimize documentation files - communicate via chat when done
-- Views: Template views (serve HTML) vs API views (return JSON) - ALWAYS separate
-- API versioning MANDATORY: `/{app}/api/v1/{resource}/`
-- Template views: Only serve templates, no business logic, no ORM queries
-- API views: Call controllers, return serialized data, no business logic
-- Controllers: Orchestrate validators + repositories + services
-- Validators: Input validation only, return {'valid': bool, 'error': str, 'data': dict}
-- Repositories: ORM access only, no business logic
-- Media files: `media/` with Docker volumes for persistence
-- Static files: `static/` (source) + `staticfiles/` (collectstatic, gitignored)
-- Controller returns: Objects (not dicts with 'success'/'error')
-- API returns: Serialized objects + HTTP status (201/200/404/204)
-- INSERT/UPDATE return serialized object, DELETE returns 204 No Content
-- Management commands: App-specific → app/management/, Global → core/management/
-- Nomenclature: Service = External API, Processor = Internal processing
-- Templates: ALL in templates/ root, organized by app (templates/app_name/)
-- Template paths: Relative to templates/ (e.g., 'dashboard/analytics.html')
+## Agent Rules Mapping
+
+**ALL agents MUST follow their specific `.mdc` files in `core/agents/`:**
+
+### Mandatory for ALL Agents
+- **`core/agents/programming.mdc`** - Programming rules (MANDATORY for any code)
+- **`core/agents/notion.mdc`** - Notion integration rules (MANDATORY for Notion operations)
+
+### Agent-Specific Rules
+- **Personal Assistant**: `core/agents/personal-assistant.mdc`
+  - Gamification system rules
+  - YouTube content management
+  - Notion workspace coordination
+  - Daily/weekly card creation
+
+- **Studies Assistant**: `core/agents/studies-assistant.mdc`
+  - Teaching methodology
+  - Project guidance
+  - StuffsCode content (Instagram)
+  - Knowledge Base project
+
+- **Work Assistant**: `core/agents/work-assistant.mdc`
+  - Professional development
+  - Code review standards
+  - Deployment practices
+  - Git workflow
+  - CI/CD processes
+
+- **CI/CD Agent**: `core/agents/cicd-agent.mdc`
+  - Deployment automation
+  - Infrastructure management
+  - Server configuration
+
+- **Social Media Assistant**: `core/agents/social-media-assistant.mdc`
+  - Currently inactive (YouTube moved to Personal Assistant, StuffsCode moved to Studies Assistant)
 
 ## File Organization Rules
 
 ### Config Directory Structure
 - **Root of config/**: ONLY permanent general context files
-  - ✅ `CONTEXTO_COMPLETO_ATUAL.md`, `PROJETOS_DETALHADOS.md`, `user-context.md`, `system-context.md`
+  - ✅ `CONTEXTO_GERAL.md`, `CONTEXTO_ESTUDOS.md`, `CONTEXTO_TRABALHO.md`, etc.
   - ✅ `config.json`, `notion-ids.json`, `schedule.md`, `README.md`
-  - ✅ `INSTRUCOES_SINCRONIZACAO.md`, `RESUMO_REPOSITORIO.md`, `cursor_mcp_config.json`
-  - ❌ NO temporary planning files, NO project-specific docs, NO session summaries, NO guides
+  - ❌ NO temporary planning files, NO project-specific docs, NO session summaries
 
 ### Temporary Files Location
-- **Planning documents**: `config/system/planning/` (temporary plans, daily schedules, executive summaries)
+- **Planning documents**: `config/system/planning/` (temporary plans, daily schedules)
 - **Session summaries**: `config/sessions/` (format: `YYYYMMDD_HHMMSS_context.md`)
 - **Project-specific context**: `config/work/`, `config/studies/`, `config/personal/` (by domain)
 
 ### Scripts and Disposable Files
 - **Scripts e Deploys/**: ONLY disposable scripts (.py, .sh), test files, deployment scripts, logs (.log)
-- **Context documents**: MUST be in `config/` (see `config/system/MAPEAMENTO_ASSUNTOS.md` for precise mapping)
-- **Logs**: Keep in Scripts e Deploys/ or ignore (never in config/)
-- **Binary files**: Google Drive or local (never in config/)
-- **JSON temporários**: Scripts e Deploys/ (checkpoints, dados processados)
+- **Test files** (`test_*.py`, `*_test.py`): Scripts e Deploys/ (NEVER in project root)
+- **Shell scripts** (`.sh`): Scripts e Deploys/ (NEVER in project root)
+- **Context documents**: MUST be in `config/` (see `config/system/MAPEAMENTO_ASSUNTOS.md`)
 
-### File Classification Flow
-1. **Is it context?** (documentation, analysis, planning, guides, reports)
-   - ✅ YES → `config/`
-   - ❌ NO → `Scripts e Deploys/` or delete
-2. **Is it permanent?**
-   - ✅ YES → `config/{domain}/{project}/`
-   - ❌ NO → `config/system/planning/` or `config/sessions/`
-3. **Which domain?**
-   - Work → `config/work/`
-   - Studies → `config/studies/`
-   - Personal → `config/personal/`
-   - System/Infra → `config/system/`
-   - YouTube → `config/youtube/`
-   - Gaming → `config/gaming/`
-   - Social → `config/social/`
+### Project Documentation
+- **Project README.md**: ONLY in project root (one file)
+- **Project documentation**: `docs/` or `docs-private/` within project
+- **NEVER create multiple README files or test scripts in project root**
+- **NEVER create documentation files in project root**
 
-### Documents from Scripts e Deploys
-- **README.md files**: Move to appropriate `config/` subdirectory (NOT scripts)
-- **Analysis/Planning docs**: Move to `config/{domain}/projects/{project}/` or `config/system/`
-- **Reports**: Move to `config/{domain}/` or `config/system/`
-- **Guides/Tutorials**: Move to `config/{domain}/` or `config/system/Automacao/`
-- **Mappings/Structures**: Move to `config/system/infrastructure/`
-- **Corrections/Diagnostics**: Move to `config/{domain}/{project}/`
-- **NEVER leave context documents in Scripts e Deploys/**
-
-### Precise Mapping
-See `config/system/MAPEAMENTO_ASSUNTOS.md` for detailed mapping of:
-- Where each type of file should go
-- Examples of file classification
-- Rules for specific file types
-- Checklist before creating/moving files
+### Logs Directory
+- **Location**: `logs/` (gitignored)
+- **Content**: ONLY conversation logs
+- **Structure**: `logs/{domain}/{YYYY-MM-DD}_{subject}.md`
+- **NEVER commit logs to git**
 
 ## Context Files Location
-- Main context: `config/CONTEXTO_COMPLETO_ATUAL.md`
-- Projects: `config/PROJETOS_DETALHADOS.md`
-- User: `config/user-context.md`
-- System: `config/system-context.md`
-- Sessions: `config/sessions/`
-- Mapping: `config/system/MAPEAMENTO_ASSUNTOS.md` (where to put each type of file)
+- **Main context:** `config/CONTEXTO_GERAL.md` (UPDATE AFTER EVERY SIGNIFICANT INTERACTION)
+- **Specific contexts:**
+  - `config/CONTEXTO_ESTUDOS.md` - Studies, FIAP, Tech Challenge
+  - `config/CONTEXTO_TRABALHO.md` - Work, projects
+  - `config/CONTEXTO_YOUTUBE.md` - YouTube, series, production
+  - `config/CONTEXTO_PESSOAL.md` - Personal, weekly cards, treatment
+- **Sessions:** `config/sessions/`
+- **Mapping:** `config/system/MAPEAMENTO_ASSUNTOS.md` (where to put each type of file)
 
 ## After Each Interaction
-1. Save context using `save_context.py`
-2. Update relevant context files
-3. Move temporary files to appropriate folders
-4. Commit to private repository (automatic)
+1. **ALWAYS update `config/CONTEXTO_GERAL.md`** with significant changes
+2. Update specific context files when relevant
+3. Save context using `save_context.py`
+4. Move temporary files to appropriate folders
+5. Commit to private repository (automatic)
 
-## Detailed Rules Documentation
-All rules are documented in `core/docs/rules/`. Key rules:
+## Context Update Rules
+- **CONTEXTO_GERAL.md:** Update after EVERY significant interaction
+- **Specific contexts:** Update only when relevant to that area
+- **DO NOT create new context files** - use existing ones
+- **Keep structure clean** - no duplicate information
 
-### Architecture Patterns (MANDATORY)
-- **REPOSITORY_PATTERN_OBRIGATORIO.md** - Data access layer, ORM encapsulation
-- **CONTROLLER_PATTERN_OBRIGATORIO.md** - Business logic orchestration
-- **SEPARACAO_VIEWS_TEMPLATES_API.md** - Template views vs API views separation
+## No AI Reports in Git
+- **NEVER create**: RESUMO_SESSAO, RELATORIO, FEEDBACK, ATUALIZACAO, ANALISE files
+- **NEVER create**: Status reports, feedback files, or AI-generated summaries
+- **NEVER create**: Arquivos de resumo/contexto para "me responder" (ex: RESUMO-CONTEXTO-AGENTE.md, RESUMO-APRENDIZADO.md)
+  - **Responder no chat** quando usuário perguntar sobre contexto/aprendizado
+  - **Criar arquivo apenas** se usuário solicitar explicitamente e indicar onde criar
+  - **Motivo**: Arquivos automáticos geram muitos arquivos e deixam agentes lentos
+- **Exception**: Only if user explicitly requests a report file
+- **Changes go to**: CHANGELOG.md (succinct, no sensitive info)
 
-### API Standards (MANDATORY)
-- **API_VERSIONING_OBRIGATORIO.md** - Versioned APIs (/{app}/api/v1/)
-- **VALIDATORS_OBRIGATORIO.md** - Input validation layer
-- **RETORNOS_CONTROLLERS_E_APIS.md** - Standard return types (objects, not dicts)
+## Agent Activation
+- Agents should check their `.mdc` files in `core/agents/` for specific rules
+- Agents should reference `programming.mdc` when working with code
+- Agents should reference `notion.mdc` when working with Notion
+- Agents should create/update log files in `logs/` when needed (daily if there's interaction)
 
-### Data Access (MANDATORY)
-- **SQL_PURO_APENAS_SELECT.md** - Raw SQL only for SELECT, ORM for INSERT/UPDATE/DELETE
-- **NOMENCLATURA_SERVICES.md** - Service = External API, Processor = Internal logic
+## Daily Logs
+- **Location**: `logs/{domain}/` (gitignored)
+- **Format**: `YYYY-MM-DD_{subject}.md`
+- **Content**: Conversation logs, interaction summaries
+- **Frequency**: Daily if there's interaction
+- **NEVER commit to git**
 
-### Organization (MANDATORY)
-- **TEMPLATES_ORGANIZACAO.md** - All templates in templates/ root, by app
-- **MANAGEMENT_COMMANDS_ORGANIZACAO.md** - App commands vs Core commands
-- **NO_STATUS_FILES_IN_CLIENT_PROJECTS.md** - Status files go to config/, not client projects
+---
 
-### Security
-- **SECURITY_SECRETS.md** - Environment variables, credential management
+**Version:** 2.0  
+**Last Updated:** 2025-12-08  
+**Note:** Specific rules are in agent `.mdc` files in `core/agents/`

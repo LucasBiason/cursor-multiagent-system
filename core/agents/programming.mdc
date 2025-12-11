@@ -1,0 +1,555 @@
+---
+alwaysApply: true
+---
+
+# programming rules - mandatory for all agents
+
+> **this file contains all programming rules that apply to all agents working with code.**
+> **this is the most important document for any agent that touches code.**
+> **always reference this file before writing any code.**
+
+---
+
+## 🚀 criar api do zero
+
+**quando o usuário pedir uma api, seguir a estrutura exata em `QUICK_START_API.md`**
+
+### estrutura obrigatória
+
+**django:**
+```
+app/
+├── models/              # model django
+├── repositories/        # acesso ao orm
+├── validators/          # validação de entrada
+├── controllers/         # lógica de negócio
+├── api/
+│   ├── urls.py         # rotas (com /api/v1/)
+│   ├── views.py        # views da api
+│   └── serializers.py  # serializers drf
+└── urls.py             # urls principais
+```
+
+**fastapi:**
+```
+app/
+├── models/              # model sqlalchemy
+├── repositories/        # acesso ao orm
+├── validators/          # validação de entrada
+├── controllers/         # lógica de negócio
+├── schemas/             # pydantic models
+└── routers/             # rotas (com /api/v1/)
+```
+
+### regras críticas ao criar api
+
+1. **sempre criar todas as camadas:** model → repository → validator → controller → api view/router
+2. **nunca pular camadas:** não fazer lógica na view, não acessar orm direto
+3. **versionamento obrigatório:** todas as apis em `/api/v1/`
+4. **seguir estrutura exata:** ver `QUICK_START_API.md` para exemplos completos
+
+**guia completo:** `core/docs/programming/QUICK_START_API.md`
+
+---
+
+## 📚 documentação completa
+
+**toda a documentação detalhada está em `core/docs/programming/` organizada por área de conhecimento.**
+
+### estrutura de documentação
+
+```
+core/docs/programming/
+├── README.md              # índice completo
+├── QUICK_START_API.md     # ⭐ guia passo a passo para criar api
+├── python.md              # python, django, fastapi
+├── typescript.md          # typescript, react, frontend
+├── git.md                 # git workflow, commits, branches
+├── api-rest.md            # api rest, endpoints, versionamento
+├── architecture.md        # padrões arquiteturais, mvc
+├── devops.md              # docker, deploy, ci/cd
+├── testing.md            # testes, tdd, cobertura
+├── security.md            # segurança, secrets, validação
+├── mcp.md                 # model context protocol
+└── code-quality.md        # clean code e qualidade
+```
+
+**sempre consultar a documentação específica antes de implementar.**
+
+---
+
+## regras gerais de código
+
+**documentação completa:** `core/docs/programming/code-quality.md`
+
+### código
+- **sem emojis** em código (python, javascript, css, html, configs)
+- **zero emojis em projetos de trabalho/work** (qualquer parte do código)
+- emojis apenas em README.md e notebooks jupyter para estudos
+- **comentários e docstrings em inglês** (exceto notebooks de ensino)
+- **typescript** para frontend (nunca javascript)
+- **python type hints obrigatórios** (todas as funções)
+- **linha máxima 79 caracteres** - obrigatório (PEP 8 E501)
+- não modificar migrations django manualmente
+- não modificar arquivos de config sem solicitação explícita
+- **documentação completa:** `core/docs/programming/EMOJIS_RULES.md`
+
+### clean code e qualidade
+- **nomenclatura descritiva** (sem abreviações confusas)
+- **funções pequenas** (< 20 linhas quando possível)
+- **uma função, uma responsabilidade**
+- **sem código duplicado** (princípio DRY)
+- **erros tratados explicitamente** (nunca except genérico)
+- **sem números mágicos** (usar constantes nomeadas)
+- **complexidade baixa** (poucos ifs aninhados)
+- **sempre consultar** `code-quality.md` para padrões detalhados
+
+### organização de arquivos
+- **project readme.md:** apenas um na raiz do projeto
+- **documentação:** `docs/` ou `docs-private/` dentro do projeto
+- **test files** (`test_*.py`, `*_test.py`): `Scripts e Deploys/` (nunca na raiz)
+- **shell scripts** (`.sh`): `Scripts e Deploys/` (nunca na raiz)
+- **nunca criar** múltiplos readme ou scripts de teste na raiz
+- **nunca criar** arquivos de documentação na raiz
+
+---
+
+## python
+
+**documentação completa:** `core/docs/programming/python.md`
+
+### regras críticas
+- **type hints obrigatórios** em todas as funções
+- **docstrings** em padrão google style (inglês)
+- **preferir funções** quando possível (classes apenas quando necessário)
+- **métodos estáticos** em controllers e repositories
+
+### padrões obrigatórios
+- **repository pattern** → ver `core/docs/programming/architecture.md` e `python.md`
+- **controller pattern** → ver `core/docs/programming/architecture.md` e `python.md`
+- **validators** → ver `core/docs/programming/architecture.md` e `python.md`
+- **sql puro apenas para select** → ver `core/docs/programming/python.md`
+
+### django
+- **estrutura obrigatória:** seguir User Service do ExpenseIQ como modelo
+- **static files:** adicionar em `urls.py` (DEBUG) e usar `collectstatic` + nginx (produção)
+- **documentação:** sempre incluir swagger, redoc e admin em `urls.py`
+- **error handlers:** usar template de `src/handlers.py` (não retornar HTML de erro 500)
+- **health check:** sempre implementar endpoint retornando service, version, dt
+- **arquivos padronizados:** usar `cache_system.py`, `database.py`, `handlers.py` do ExpenseIQ
+- **template completo:** `core/templates/django/DJANGO_SERVICE_TEMPLATE.md`
+- **documentação completa:** `core/docs/programming/DJANGO_RULES.md`
+
+### fastapi
+- pydantic models para validação
+- dependency injection para auth e database
+- `apirouter` para organização de rotas
+- `httpexception` para erros
+- **sempre consultar** `python.md` para padrões detalhados
+
+### testing
+- **pytest obrigatório** (em funções, não classes)
+- **estrutura espelhada:** `app/users/controllers/user_controller.py` → `tests/users/controllers/test_user_controller.py`
+- **mocks obrigatórios:** banco, fila, cache, APIs externas (nunca usar recursos reais)
+- **coverage mínimo 90% por arquivo** (não é média, cada arquivo individualmente)
+- **pytest.ini e conftest.py:** usar templates em `core/templates/django/`
+- **documentação completa:** `core/docs/programming/TESTING_RULES.md`
+
+---
+
+## typescript e react
+
+**documentação completa:** `core/docs/programming/typescript.md`  
+**documentação react:** `core/docs/programming/typescript.md`
+
+### regras críticas
+- **typescript obrigatório** (nunca javascript)
+- **absolute imports** obrigatório (`@/components`, `@/hooks`, etc.)
+- **function components** obrigatório (classes apenas para error boundaries)
+- **react.memo** para performance (quando apropriado)
+- **usecallback** para handlers e hooks customizados
+- **tailwind css** obrigatório (nunca css inline)
+- **frontend ecosystem:** consultar `core/docs/programming/typescript.md`
+  - Gerenciamento de estado (useState, useReducer, Context, Zustand)
+  - Performance (code splitting, virtual scrolling)
+  - TypeScript avançado (generics, type guards)
+  - Testes e estrutura de projeto
+
+### nomenclatura
+- **pascalcase** para componentes e types
+- **camelcase** para variáveis e funções
+- **prefixo `handle`** para funções de evento
+- **prefixos booleanos** (`is`, `has`, `can`)
+
+### css e estilos
+- **pasta `styles/`** com arquivos separados por tipo (app.css, componentes.css, dashboard.css, table.css, menu.css)
+- **versões `.min.css` obrigatórias** de cada arquivo
+- **carregar apenas `.min.css` em produção** (nunca versão legível)
+- **carregar apenas arquivos necessários** em cada página
+- **django:** usar `collectstatic` e servir via nginx em produção
+- **documentação completa:** `core/docs/programming/CSS_RULES.md`
+
+---
+
+## git workflow
+
+**documentação completa:** `core/docs/programming/git.md`
+
+### regras críticas
+- **feature branches** obrigatório
+- **mensagens de commit** descritivas com tipo
+- **pull requests** sempre revisados antes de merge
+- **nunca force push** para main
+- **sempre rodar testes** antes de commit
+
+### tipos de commit
+- `feat`: nova feature
+- `fix`: correção de bug
+- `refactor`: refatoração
+- `docs`: documentação
+- `test`: testes
+- `chore`: manutenção
+
+---
+
+## api rest
+
+**documentação completa:** `core/docs/programming/api-rest.md`
+
+### regras críticas
+- **versionamento obrigatório:** `/{app}/api/v1/{resource}/`
+- **resource-oriented design:** urls representam recursos, não ações
+- **http methods** corretos (get, post, put, patch, delete)
+- **status codes** apropriados (200, 201, 204, 400, 401, 403, 404, 409, 422, 429, 500)
+- **pagination obrigatória** para list endpoints
+- **serialização** via serializers (django) ou pydantic (fastapi)
+
+### anti-patterns (nunca fazer)
+- ❌ action verbs in urls
+- ❌ mixed naming conventions
+- ❌ generic error messages
+- ❌ returning html on api errors
+- ❌ exposing stack traces
+- ❌ no pagination on list endpoints
+- ❌ n+1 queries
+- ❌ no rate limiting
+
+---
+
+## arquitetura
+
+**documentação completa:** `core/docs/programming/architecture.md`
+
+### padrões obrigatórios
+
+#### repository pattern
+- **obrigatório** para todo acesso ao orm
+- **nunca** acessar orm diretamente em views/controllers
+- **localização:** `app/repositories/`
+- **documentação:** `core/docs/programming/architecture.md` (seção repository pattern)
+
+#### controller pattern
+- **obrigatório** para toda lógica de negócio
+- **views/apis** são apenas entry points
+- **localização:** `app/controllers/`
+- **documentação:** `core/docs/programming/architecture.md` (seção controller pattern)
+
+#### validators
+- **obrigatório** para toda validação de entrada
+- **controllers** nunca fazem validação inline
+- **localização:** `app/validators/` ou `app/api/validators.py`
+- **documentação:** `core/docs/programming/architecture.md` (seção validators)
+
+#### separação views
+- **template views** em `views.py` (apenas servir html)
+- **api views** em `api/views.py` (endpoints rest)
+- **documentação:** `core/docs/programming/architecture.md` (seção separação views)
+
+### nomenclatura
+- **service** = external api
+- **processor** = internal processing
+- **documentação:** `core/docs/programming/architecture.md` (seção nomenclatura)
+
+### retornos
+- **controllers** retornam objetos (não dicts com 'success'/'error')
+- **apis** serializam e definem http status
+- **documentação:** `core/docs/programming/architecture.md` (seção retornos)
+
+---
+
+## segurança
+
+**documentação completa:** `core/docs/programming/security.md`
+
+### regras críticas
+- **nunca commitar secrets** (todos em `.env.passwords` gitignored)
+- **variáveis de ambiente** para todos os dados sensíveis
+- **validação de entrada** na camada de validator
+- **sql injection prevention** (orm ou parâmetros, nunca concatenação)
+- **authentication/authorization** adequada
+- **rate limiting** em todos os endpoints
+
+### secrets management
+- **documentação:** `core/docs/programming/security.md` (seção secrets management)
+- **arquivo:** `core/config/.env.passwords` (gitignored)
+- **exemplo:** `core/config/.env.example`
+
+---
+
+## testing
+
+**documentação completa:** `core/docs/programming/testing.md`
+
+### regras críticas
+- **tdd approach** (testes primeiro quando possível)
+- **unit tests** para componentes isolados
+- **integration tests** para fluxo completo
+- **cobertura mínima de 80%**
+- **todos os testes passando** antes de merge
+- **nunca commitar** testes quebrados
+
+---
+
+## devops
+
+**documentação completa:** `core/docs/programming/devops.md`
+
+### regras críticas
+- **staging first** (sempre testar em staging antes de produção)
+- **environment variables** para configurações
+- **docker secrets** em `.env` (gitignored)
+- **migrations validadas** antes de deploy
+- **rollback plan** sempre pronto
+- **monitoramento** após deploy
+
+### docker, compose, entrypoint e makefile
+- **dockerfile:** multi-stage builds, usuário não-root, healthchecks
+- **docker compose:** healthchecks, depends_on com conditions, volumes nomeados
+- **entrypoint:** aguardar dependências, rodar migrations, validar configs
+- **makefile:** automação de tarefas comuns (up, down, test, shell, etc)
+- **sempre consultar** `devops.md` para padrões detalhados
+
+---
+
+## mcp (model context protocol)
+
+**documentação completa:** `core/docs/programming/mcp.md`
+
+### estrutura
+- tools em `src/tools/`
+- services em `src/services/`
+- custom implementations em `src/custom/`
+- utils em `src/utils/`
+- exceptions em `src/exceptions/`
+
+### best practices
+- validação de entrada em todas as tools
+- error handling adequado
+- logging estruturado
+- formatação de dados consistente
+
+---
+
+## regra fundamental: modificação de código
+
+**documentação completa:** `core/docs/programming/CODE_MODIFICATION_RULES.md`
+
+### só alterar o que foi pedido
+- **alterar apenas o que foi explicitamente solicitado**
+- **não fazer alterações "melhorias" não solicitadas**
+- **não remover código que não foi pedido para remover**
+- **não adicionar funcionalidades que não foram solicitadas**
+- **não refatorar código que não foi pedido para refatorar**
+
+### proibições absolutas
+- nunca remover código existente sem solicitação
+- nunca adicionar novas funcionalidades sem solicitação
+- nunca refatorar código sem solicitação
+- nunca alterar estrutura de arquivos sem solicitação
+- nunca modificar configurações existentes sem solicitação
+- nunca alterar nomes de variáveis/funções/classes sem solicitação
+
+---
+
+## templates de configuração
+
+**todos os templates estão em `core/templates/` organizados por tipo de projeto.**
+
+### django
+- `core/templates/django/entrypoint.sh` - entrypoint sem cores/emojis
+- `core/templates/django/Dockerfile.dev` - dockerfile desenvolvimento
+- `core/templates/django/Dockerfile.prod` - dockerfile produção
+- `core/templates/django/.editorconfig` - configuração editor
+- `core/templates/django/.flake8` - configuração flake8
+- `core/templates/django/pytest.ini` - configuração pytest
+- `core/templates/django/conftest.py` - configuração conftest
+- `core/templates/django/pyproject.toml` - configuração pyproject
+- `core/templates/.gitignore` - gitignore completo
+
+### estrutura configs/
+- `configs/docker-compose.dev.yml` - compose desenvolvimento
+- `configs/docker-compose.prod.yml` - compose produção
+- `configs/nginx.conf` - configuração nginx
+- `configs/.env.development` - variáveis desenvolvimento
+- `configs/.env.production` - variáveis produção
+- `configs/.env.database` - variáveis banco de dados (se usar container)
+- outros serviços: `.env.redis`, `.env.kafka`, `.env.mongodb` (se necessário)
+- **documentação:** `core/templates/django/configs/README.md`
+
+---
+
+## referências rápidas
+
+### padrões obrigatórios
+- repository pattern → `core/docs/programming/architecture.md` e `python.md`
+- controller pattern → `core/docs/programming/architecture.md` e `python.md`
+- validators → `core/docs/programming/architecture.md` e `python.md`
+- api versioning → `core/docs/programming/api-rest.md`
+- sql puro apenas select → `core/docs/programming/python.md` (seção sql puro)
+
+### regras críticas
+- sem emojis no código → `core/docs/programming/EMOJIS_RULES.md`
+- só alterar o que foi pedido → `core/docs/programming/CODE_MODIFICATION_RULES.md`
+- type hints obrigatórios → `core/docs/programming/python.md`
+- absolute imports → `core/docs/programming/typescript.md`
+- secrets em .env → `core/docs/programming/security.md`
+
+### documentação detalhada
+- **guia completo de boas práticas** → `core/docs/programming/BEST_PRACTICES.md`
+- python completo → `core/docs/programming/python.md`
+- typescript/react completo → `core/docs/programming/typescript.md`
+- git workflow → `core/docs/programming/git.md`
+- api rest → `core/docs/programming/api-rest.md`
+- arquitetura → `core/docs/programming/architecture.md`
+- segurança → `core/docs/programming/security.md`
+- testing → `core/docs/programming/TESTING_RULES.md`
+- css → `core/docs/programming/CSS_RULES.md`
+- django → `core/docs/programming/DJANGO_RULES.md`
+- devops completo → `core/docs/programming/devops.md`
+- mcp → `core/docs/programming/mcp.md`
+- code quality → `core/docs/programming/code-quality.md`
+- emojis → `core/docs/programming/EMOJIS_RULES.md`
+- modificação de código → `core/docs/programming/CODE_MODIFICATION_RULES.md`
+
+---
+
+## checklist antes de escrever código
+
+### criar api
+- [ ] consultar `QUICK_START_API.md` primeiro
+- [ ] criar todas as camadas (model, repository, validator, controller, api)
+- [ ] versionamento obrigatório (`/api/v1/`)
+- [ ] seguir estrutura exata do guia
+- [ ] não pular camadas
+- [ ] não criar arquivos fora do padrão
+
+### python
+- [ ] type hints em todas as funções
+- [ ] docstrings em padrão google (inglês)
+- [ ] repository pattern para acesso ao orm
+- [ ] controller pattern para lógica de negócio
+- [ ] validators para validação de entrada
+- [ ] sql puro apenas para select
+
+### typescript/react
+- [ ] typescript (nunca javascript)
+- [ ] absolute imports (`@/components`, etc.)
+- [ ] function components (não classes)
+- [ ] react.memo quando apropriado
+- [ ] usecallback para handlers
+- [ ] tailwind css (não css inline)
+
+### api rest
+- [ ] versionamento (`/api/v1/`)
+- [ ] resource-oriented urls
+- [ ] status codes apropriados
+- [ ] paginação em list endpoints
+- [ ] serialização via serializers/pydantic
+
+### segurança
+- [ ] nenhum secret hardcoded
+- [ ] validação de entrada
+- [ ] sql injection prevention
+- [ ] rate limiting
+
+### git
+- [ ] feature branch
+- [ ] mensagem de commit descritiva
+- [ ] testes passando
+- [ ] código revisado
+
+---
+
+## violações comuns
+
+### nunca fazer
+- ❌ criar api sem seguir estrutura de `QUICK_START_API.md`
+- ❌ pular camadas (ex: lógica direto na view)
+- ❌ criar arquivos fora do padrão estabelecido
+- ❌ emojis no código (zero em projetos de trabalho)
+- ❌ alterar código que não foi pedido para alterar
+- ❌ orm direto em views/controllers
+- ❌ lógica de negócio em views
+- ❌ validação inline em controllers
+- ❌ secrets hardcoded
+- ❌ sql puro para insert/update/delete
+- ❌ api sem versionamento
+- ❌ commits sem mensagem descritiva
+- ❌ código sem type hints
+- ❌ javascript ao invés de typescript
+- ❌ testes sem mocks (banco, fila, cache, APIs externas)
+- ❌ coverage abaixo de 90% por arquivo
+- ❌ carregar CSS legível em produção (sempre .min.css)
+- ❌ django sem health check, swagger, redoc, admin
+- ❌ django sem error handler customizado
+- ❌ django sem static files configurado corretamente
+
+---
+
+**version:** 3.0  
+**last updated:** 2025-12-08  
+**applies to:** all agents working with code
+
+**esta documentação é a fonte de verdade para todos os padrões de programação. sempre consultar antes de implementar.**
+
+---
+
+## checklist expandido antes de escrever código
+
+### emojis
+- [ ] zero emojis em código (python, js, ts, css, html, configs)
+- [ ] zero emojis em projetos de trabalho/work
+- [ ] emojis apenas em README.md e notebooks jupyter (estudos)
+
+### modificação de código
+- [ ] alterar apenas o que foi explicitamente solicitado
+- [ ] não fazer "melhorias" não solicitadas
+- [ ] não remover código não solicitado
+- [ ] não adicionar funcionalidades não solicitadas
+
+### testes
+- [ ] estrutura espelhada (app/ → tests/)
+- [ ] mocks para banco, fila, cache, APIs externas
+- [ ] coverage mínimo 90% por arquivo
+- [ ] pytest.ini e conftest.py usando templates
+
+### django
+- [ ] seguir estrutura do User Service ExpenseIQ
+- [ ] static files configurado (DEBUG + collectstatic + nginx)
+- [ ] swagger, redoc, admin em urls.py
+- [ ] error handler customizado (src/handlers.py)
+- [ ] health check implementado
+- [ ] usar cache_system.py, database.py padronizados
+
+### css
+- [ ] pasta styles/ com arquivos separados
+- [ ] versões .min.css criadas
+- [ ] carregar apenas .min.css em produção
+- [ ] carregar apenas arquivos necessários por página
+
+### configuração
+- [ ] entrypoint.sh sem cores/emojis
+- [ ] Dockerfile.dev e Dockerfile.prod usando templates
+- [ ] .editorconfig, .flake8, pytest.ini, conftest.py usando templates
+- [ ] pyproject.toml seguindo boas práticas
+- [ ] estrutura configs/ completa (docker-compose, nginx, .env)

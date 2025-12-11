@@ -1,8 +1,13 @@
 # 📚 GUIA COMPLETO - SISTEMA NOTION
 
 **Data:** 22/10/2025  
-**Versão:** 4.0  
-**Status:** Documentação Completa e Atualizada
+**Versão:** 5.0  
+**Status:** Documentação Consolidada
+
+> **⚠️ IMPORTANTE:** Este guia foi consolidado.  
+> **Para regras gerais:** `core/agents/notion-agent.mdc`  
+> **Para regras específicas:** `config/notion/`  
+> **Para manual completo:** `core/docs/notion/Manual_Notion/`
 
 ---
 
@@ -13,7 +18,7 @@ Sistema completo de gerenciamento de 4 bases do Notion com:
 - ✅ Motor de criação de cards (`NotionEngine`)
 - ✅ Templates reutilizáveis (`PersonalTemplates`)
 - ✅ Verificação inteligente de tarefas
-- ✅ 6 agentes de automação (planejados)
+- ✅ Agentes de automação
 
 ### Para Quem
 - Você (usuário principal)
@@ -36,17 +41,14 @@ Sistema completo de gerenciamento de 4 bases do Notion com:
 
 ## 🔑 REGRAS DE OURO
 
+> **📌 NOTA:** Regras detalhadas foram movidas para os agentes e config.  
+> **Consulte:** `core/agents/notion-agent.mdc` e `config/notion/`
+
 ### 1. TIMEZONE ⏰
 **SEMPRE GMT-3 (São Paulo)**  
 **NUNCA UTC**
 
-```python
-# ✅ CORRETO
-'start': '2025-10-22T19:00:00-03:00'
-
-# ❌ ERRADO
-'start': '2025-10-22T22:00:00Z'  # UTC
-```
+**Documentação completa:** `config/notion/timezone.md`
 
 ---
 
@@ -54,57 +56,19 @@ Sistema completo de gerenciamento de 4 bases do Notion com:
 **SEMPRE como ícone da página**  
 **NUNCA no título**
 
-```python
-# ✅ CORRETO
-{
-    'title': 'Meu Curso',
-    'emoji': '🎓'
-}
-
-# ❌ ERRADO
-{
-    'title': '🎓 Meu Curso'
-}
-```
+**Documentação:** `core/agents/notion-agent.mdc`
 
 ---
 
 ### 3. STATUS IGNORADOS 🚫
 
-Em verificações de tarefas atrasadas, ignorar:
-
-```python
-IGNORED_STATUSES = [
-    "Concluído", "Concluido", "Completo", "Done",
-    "Cancelado", "Realocada", "Descartado", "Publicado"
-]
-```
-
-**Motivo:** Estes status indicam que o card não precisa mais de ação.
+**Documentação completa:** `config/notion/status.md`
 
 ---
 
 ### 4. YOUTUBE - LÓGICA ESPECIAL 🎥
 
-#### Campos de Data
-- **Periodo:** Quando **GRAVAR** o episódio
-- **Data de Lançamento:** Quando **PUBLICAR** no YouTube
-
-#### Verificação de Atrasos
-```python
-if status == "Publicado":
-    # Ignorar - já está no ar
-    
-elif status in ["Editando", "Para Edição", "Revisão"]:
-    # Verificar Data de Lançamento (não o Período)
-    if data_lancamento < hoje:
-        # Atrasado
-        
-else:
-    # Verificar Período (data de gravação)
-    if periodo < hoje:
-        # Atrasado
-```
+**Documentação completa:** `config/notion/youtube-logic.md`
 
 ---
 
@@ -234,7 +198,7 @@ Detecção inteligente de tarefas atrasadas
 python3 check_overdue_tasks.py
 ```
 
-**Documentação:** `Regras/REGRAS_VERIFICACAO_TAREFAS.md`
+**Documentação:** `config/notion/verification.md`
 
 ---
 
@@ -265,11 +229,11 @@ python3 check_overdue_tasks.py
 │   ├── TEMPLATES_PESSOAIS_GUIA.md
 │   └── README.md
 │
-├── Regras/                 # Regras consolidadas (NOVO)
-│   ├── REGRAS_TIMEZONE.md
-│   ├── REGRAS_STATUS_IGNORADOS.md
-│   ├── REGRAS_YOUTUBE_LOGICA_ESPECIAL.md
-│   ├── REGRAS_VERIFICACAO_TAREFAS.md
+├── config/notion/          # Regras específicas do Notion (NOVO)
+│   ├── timezone.md
+│   ├── status.md
+│   ├── youtube-logic.md
+│   ├── verification.md
 │   └── README.md
 │
 ├── Agendas/                # Agendas históricas
@@ -335,20 +299,29 @@ card_id = templates.create_consulta_medica(
 
 ## 📖 ROTEIRO DE LEITURA
 
+### Para Agentes
+1. **Sempre consultar primeiro:**
+   - `core/agents/notion-agent.mdc` (regras gerais obrigatórias)
+   - `core/agents/general-context.mdc` (contexto compartilhado)
+2. **Consultar regras específicas:**
+   - `config/notion/` (regras específicas privadas)
+3. **Usar manual para exemplos:**
+   - `core/docs/notion/Manual_Notion/` (exemplos práticos)
+
 ### Para Iniciantes
-1. Leia: `Manual_Notion/README.md`
-2. Leia: `Manual_Notion/01_ESTRUTURA_BASES.md`
-3. Leia: `Manual_Notion/02_REGRAS_CRIACAO_CARDS.md`
-4. Pratique: `Manual_Notion/04_EXEMPLOS_PRATICOS.md`
+1. Leia: `core/docs/notion/Manual_Notion/README.md`
+2. Leia: `core/docs/notion/Manual_Notion/01_ESTRUTURA_BASES.md`
+3. Leia: `core/docs/notion/Manual_Notion/02_REGRAS_CRIACAO_CARDS.md`
+4. Pratique: `core/docs/notion/Manual_Notion/04_EXEMPLOS_PRATICOS.md`
 
 ### Para Usuários Intermediários
-1. Revise: `Regras/README.md`
-2. Explore: `Templates/README.md`
+1. Revise: `config/notion/README.md`
+2. Explore: `config/notion/templates.md`
 3. Use: Scripts em `/Projetos/Automações/`
 
 ### Para Implementadores de Agentes
-1. Leia: `Agentes/AGENTE_ORGANIZADOR_CONTEXTO.md`
-2. Estude: `Regras/REGRAS_VERIFICACAO_TAREFAS.md`
+1. Leia: `core/agents/notion-agent.mdc`
+2. Estude: `config/notion/verification.md`
 3. Implemente: Usando todas as regras consolidadas
 
 ---
@@ -550,11 +523,13 @@ aula_id = engine.create_card('STUDIES', {
 
 ### Tarefa "atrasada" mas já concluída
 → Status deve estar na lista de ignorados  
-→ Ver: `Regras/REGRAS_STATUS_IGNORADOS.md`
+→ Ver: `config/notion/status.md`  
+→ Ver: `core/agents/notion-agent.mdc`
 
 ### YouTube mostrando muitos "atrasados"
 → Verificar lógica especial  
-→ Ver: `Regras/REGRAS_YOUTUBE_LOGICA_ESPECIAL.md`
+→ Ver: `config/notion/youtube-logic.md`  
+→ Ver: `config/notion/verification.md`
 
 ---
 
@@ -606,14 +581,14 @@ aula_id = engine.create_card('STUDIES', {
 ## 📞 SUPORTE
 
 ### Documentação
-- **Manual Completo:** `Manual_Notion/README.md`
-- **Regras:** `Regras/README.md`
-- **Templates:** `Templates/README.md`
-- **Agentes:** `Agentes/README.md`
+- **Regras Gerais:** `core/agents/notion-agent.mdc`
+- **Contexto Geral:** `core/agents/general-context.mdc`
+- **Regras Específicas:** `config/notion/README.md`
+- **Manual Completo:** `core/docs/notion/Manual_Notion/README.md`
 
 ### Problemas Comuns
-- **Troubleshooting:** `Manual_Notion/06_TROUBLESHOOTING.md`
-- **Exemplos:** `Manual_Notion/04_EXEMPLOS_PRATICOS.md`
+- **Troubleshooting:** `core/docs/notion/Manual_Notion/06_TROUBLESHOOTING.md`
+- **Exemplos:** `core/docs/notion/Manual_Notion/04_EXEMPLOS_PRATICOS.md`
 
 ### Código
 - **GitHub:** https://github.com/LucasBiason/notion-automation-scripts

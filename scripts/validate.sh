@@ -30,8 +30,8 @@ echo ""
 # Check private configuration
 echo "Checking private configuration..."
 
-if [ ! -f "config/notion-ids.json" ]; then
-    echo "WARNING: Missing config/notion-ids.json"
+if [ ! -f "config/system/infrastructure/notion-ids.json" ]; then
+    echo "WARNING: Missing config/system/infrastructure/notion-ids.json"
     echo "  Create this file with your Notion database IDs"
     ERRORS=$((ERRORS + 1))
 fi
@@ -70,8 +70,8 @@ if command -v jq &> /dev/null; then
         fi
     fi
     
-    if [ -f "config/notion-ids.json" ]; then
-        jq empty config/notion-ids.json 2>/dev/null
+    if [ -f "config/system/infrastructure/notion-ids.json" ]; then
+        jq empty config/system/infrastructure/notion-ids.json 2>/dev/null
         if [ $? -eq 0 ]; then
             echo "OK: notion-ids.json syntax valid"
         else

@@ -2,6 +2,10 @@
 *.env
 .env.local
 .env.production
+.env.passwords
+**/.env.passwords
+core/config/.env.passwords
+config/**/.env.passwords
 secrets/
 credentials/
 tokens/
@@ -55,6 +59,7 @@ Thumbs.db
 *.log
 logs/
 *.log.*
+# Conversation logs only - keep in logs/ (gitignored)
 
 # TESTING
 .pytest_cache/

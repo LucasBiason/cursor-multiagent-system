@@ -1,0 +1,29 @@
+FROM python:3.11
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PATH="/usr/local/bin:$PATH"
+
+RUN apt-get update && apt-get install -y gcc g++ libpq-dev python3-dev curl
+
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt && \
+    pip show gunicorn
+
+RUN useradd -m -s /bin/bash user
+WORKDIR /app
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+COPY app .
+RUN chown -R user:user /app
+RUN chmod -R 775 /app
+
+USER user
+
+EXPOSE 8000
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["prod"]
+
+

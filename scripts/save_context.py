@@ -12,7 +12,10 @@ import subprocess
 import json
 
 # Configurações
-CONFIG_DIR = Path("/home/lucas-biason/Projetos/Infraestrutura/cursor-multiagent-system/config")
+# Get the project root directory (parent of scripts/)
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+CONFIG_DIR = PROJECT_ROOT / "config"
 SESSIONS_DIR = CONFIG_DIR / "sessions"
 TIMESTAMP = datetime.now().strftime("%Y-%m-%d %H:%M:%S GMT-3")
 HOSTNAME = os.uname().nodename if hasattr(os, 'uname') else os.environ.get('HOSTNAME', 'unknown')

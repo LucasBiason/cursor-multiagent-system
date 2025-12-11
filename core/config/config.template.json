@@ -1,10 +1,10 @@
 {
   "system": {
-    "version": "1.0.0",
-    "pilot_phase": true,
-    "pilot_month": "2025-11",
+    "version": "1.2.0",
+    "pilot_phase": false,
     "timezone": "GMT-3",
-    "user": "Lucas Biason"
+    "user": "Lucas Biason",
+    "last_updated": "2025-12-08"
   },
   "agents": {
     "enabled": true,
@@ -23,7 +23,9 @@
           "notion_management",
           "agenda_coordination",
           "task_delegation",
-          "report_generation"
+          "report_generation",
+          "youtube_content_management",
+          "gamification_tracking"
         ],
         "triggers": [
           "agenda",
@@ -34,21 +36,25 @@
           "relatorio",
           "bom dia",
           "prepare",
-          "organize"
+          "organize",
+          "youtube",
+          "episodio"
         ],
         "always_active": true
       },
       {
-        "id": "studies-coach",
-        "name": "Studies Coach",
-        "file": "core/agents/studies-coach.mdc",
+        "id": "studies-assistant",
+        "name": "Studies Assistant",
+        "file": "core/agents/studies-assistant.mdc",
         "role": "specialist",
         "priority": "high",
         "capabilities": [
           "teaching",
           "project_guidance",
           "code_review_educational",
-          "schedule_management"
+          "schedule_management",
+          "stuffscode_content",
+          "knowledge_base_management"
         ],
         "triggers": [
           "retomar",
@@ -57,17 +63,22 @@
           "projeto",
           "como funciona",
           "explica",
-          "criar revisao"
+          "criar revisao",
+          "fiap",
+          "tech challenge",
+          "stuffscode",
+          "knowledge base"
         ],
         "context_requirements": [
-          "config/user-context.md",
-          "core/docs/RULES_SYSTEM.md"
+          "config/CONTEXTO_ESTUDOS.md",
+          "core/agents/programming.mdc",
+          "core/agents/notion.mdc"
         ]
       },
       {
-        "id": "work-coach",
-        "name": "Work Coach",
-        "file": "core/agents/work-coach.mdc",
+        "id": "work-assistant",
+        "name": "Work Assistant",
+        "file": "core/agents/work-assistant.mdc",
         "role": "specialist",
         "priority": "high",
         "capabilities": [
@@ -75,27 +86,33 @@
           "code_review",
           "testing",
           "deployment",
-          "git_workflow"
+          "git_workflow",
+          "ci_cd_processes"
         ],
         "triggers": [
           "bug",
           "erro",
           "expenseiq",
+          "kpi",
+          "portfolio",
           "trabalho",
           "implementar",
           "feature",
           "deploy",
-          "code review"
+          "code review",
+          "testes"
         ],
         "context_requirements": [
-          "config/work-context.md",
-          "core/docs/RULES_SYSTEM.md"
+          "config/CONTEXTO_TRABALHO.md",
+          "core/agents/programming.mdc",
+          "core/agents/notion.mdc",
+          "config/cicd/projects/"
         ]
       },
       {
-        "id": "social-media-coach",
-        "name": "Social Media Coach",
-        "file": "core/agents/social-media-coach.mdc",
+        "id": "social-media-assistant",
+        "name": "Social Media Assistant",
+        "file": "core/agents/social-media-assistant.mdc",
         "role": "specialist",
         "priority": "medium",
         "capabilities": [
@@ -109,27 +126,65 @@
           "episodio",
           "youtube",
           "lancamento",
-          "stuffscode",
-          "instagram",
           "serie",
           "o que gravar"
         ],
         "context_requirements": [
-          "config/youtube-context.md",
-          "core/docs/RULES_SYSTEM.md"
+          "config/youtube/README.md",
+          "core/agents/notion.mdc"
+        ],
+        "status": "inactive",
+        "note": "YouTube content management moved to Personal Assistant. StuffsCode moved to Studies Assistant."
+      },
+      {
+        "id": "cicd-agent",
+        "name": "CI/CD Agent",
+        "file": "core/agents/cicd-agent.mdc",
+        "role": "specialist",
+        "priority": "high",
+        "capabilities": [
+          "deployment_automation",
+          "infrastructure_management",
+          "server_configuration",
+          "docker_management",
+          "nginx_configuration",
+          "script_organization"
+        ],
+        "triggers": [
+          "deploy",
+          "hostinger",
+          "render",
+          "infrastructure",
+          "docker",
+          "nginx",
+          "servidor",
+          "ci/cd"
+        ],
+        "context_requirements": [
+          "config/cicd/README.md",
+          "config/cicd/projects/",
+          "core/agents/programming.mdc",
+          "core/config/.env.example"
         ]
       }
     ]
   },
   "notion": {
-    "api_key_env": "NOTION_API_KEY",
-    "databases_file": "config/notion-ids.json",
+    "api_key_env": "NOTION_TOKEN",
+    "databases_file": "config/system/infrastructure/notion-ids.json",
     "timezone": "GMT-3",
     "retry_attempts": 3,
     "rate_limit": {
       "requests_per_second": 3,
       "backoff_factor": 2
-    }
+    },
+    "mcp_server": "my-local-place/services/external/notion-automation-suite"
+  },
+  "environment": {
+    "env_file": "core/config/.env.passwords",
+    "env_example": "core/config/.env.example",
+    "load_pattern": "python-dotenv",
+    "reference_script": "core/config/load_env_example.py"
   },
   "composer": {
     "enabled": true,
@@ -146,31 +201,35 @@
         "weekly_report": "0 7 * * 1",
         "create_weekly_cards": "0 23 * * 0"
       },
-      "social-media-coach": {
-        "check_recordings": "0 20 * * *",
-        "production_report": "0 9 * * 6"
+      "studies-assistant": {
+        "check_schedule": "0 9 * * *",
+        "update_progress": "0 20 * * *"
       }
     }
   },
   "logging": {
     "enabled": true,
     "level": "INFO",
-    "file": "logs/multiagent.log",
-    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    "directories": {
+      "system": "logs/system/",
+      "work": "logs/work/",
+      "studies": "logs/studies/",
+      "personal": "logs/personal/",
+      "youtube": "logs/youtube/"
+    },
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "gitignored": true
   },
   "validation": {
     "timezone_check": true,
     "duplicate_check": true,
     "property_validation": true,
     "schedule_conflict_check": true
+  },
+  "mandatory_files": {
+    "general_context": "core/agents/general-context.mdc",
+    "programming_rules": "core/agents/programming.mdc",
+    "notion_rules": "core/agents/notion.mdc",
+    "env_example": "core/config/.env.example"
   }
 }
-
-
-
-
-
-
-
-
-

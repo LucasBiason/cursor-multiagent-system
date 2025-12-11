@@ -1,0 +1,245 @@
+---
+alwaysApply: true
+---
+
+# Notion Integration Rules - MANDATORY (General Rules)
+
+> **This file contains GENERAL rules for working with Notion API and MCP.**  
+> **These are PUBLIC rules that apply to all Notion integrations.**  
+> **For SPECIFIC rules (templates, workflows, personal configurations), see `config/notion/`.**  
+> **ALL agents that interact with Notion MUST follow these rules.**  
+> **ALWAYS consult `core/agents/general-context.mdc` for shared Notion/MCP information.**
+
+## Notion MCP Server
+
+**ALWAYS consult `core/agents/general-context.mdc` first for shared Notion/MCP information.**
+
+### Server Location
+- **FastMCP Server**: `my-local-place/services/external/notion-automation-suite`
+- **Execution**: Via `scripts/notion-mcp.sh`
+- **MCP Name**: `Notion Automation Suite`
+- **Config**: `config/system/infrastructure/cursor_mcp_config.json`
+
+### Database IDs
+- **Location**: `config/system/infrastructure/notion-ids.json` (private submodule)
+- **Structure**: JSON with `databases` and `pages` sections
+- **NEVER** expose database IDs in public files
+- **NEVER** commit database IDs to public repository
+- **Loading**: Use `data_source_id` field for API calls
+
+### Available Databases
+1. **Personal** - Personal tasks, weekly cards, medical appointments
+2. **Studies** - Courses, projects, learning materials
+3. **Work** - Work projects, tasks, client work
+4. **Youtuber** - YouTube content, series, episodes
+5. **Gaming** - Gamification system, XP, badges, streaks
+
+**Note:** Database IDs are stored in `config/system/infrastructure/notion-ids.json` (private).
+
+## Notion Operations
+
+### Querying Databases
+- **ALWAYS** use MCP `Notion Automation Suite` tools
+- **ALWAYS** check for duplicates before creating
+- Use `notion.search` or direct query via Notion Service
+- Compare: title + date + client/project before creating
+
+### Creating Cards
+**Before creating ANY card:**
+1. Search for existing card with same title + date
+2. Check if card exists in target database
+3. Only create if no duplicate found
+4. Use correct property names from schema
+5. Validate all dates (GMT-3, NEVER UTC)
+6. Set appropriate status
+7. Link to parent items when applicable
+
+### Updating Cards
+- Use correct property names (check schema first)
+- Update status using proper status values
+- Never update calculated fields (Progress, etc.)
+- Always validate dates (GMT-3)
+
+### Property Names
+**Common property names (verify in actual database):**
+- **Title field**: Usually "Project name", "Nome", "Nome da tarefa"
+- **Status**: "Status" (check valid options)
+- **Date/Period**: "Data", "Período", "Periodo"
+- **Description**: "Descrição", "Description"
+- **Client**: "Cliente", "Client"
+- **Project**: "Projeto", "Project"
+- **Parent**: "Parent item", "Item principal"
+
+**CRITICAL**: Always query database schema first to get exact property names!
+
+**For specific property names per base:** See `config/notion/properties.md`
+
+## Timezone Rules
+
+### MANDATORY: GMT-3
+- **ALWAYS** use GMT-3 (Sao Paulo, Brazil)
+- **NEVER** use UTC
+- **Format**: `2025-12-08T19:00:00-03:00`
+- Use `utils.formatters.format_date_gmt3()` for formatting
+
+## Status Values
+
+### General Rule
+**Always verify status options per database before using.**
+
+### Ignored Statuses (don't count in reports)
+These statuses indicate tasks that should be ignored in overdue checks:
+- Concluído, Concluido, Completo, Done
+- Cancelado, Realocada, Descartado
+- Publicado (YouTube)
+
+**Reason:** These tasks are either completed, cancelled, or no longer user's responsibility.
+
+**For specific status values per base:** See `config/notion/status.md`
+
+## Card Creation Rules
+
+### General Rules
+- Always check for duplicates before creating
+- Use correct property names from schema
+- Validate all dates (GMT-3, NEVER UTC)
+- Set appropriate status
+- Link to parent items when applicable
+- Use emoji as page icon (not in title)
+
+### Database-Specific Rules
+**For specific rules per database (templates, workflows, properties):**
+- See `config/notion/templates.md` for personal templates
+- See `config/notion/workflows.md` for specific workflows
+- See `config/notion/properties.md` for property details
+- See `config/notion/youtube-logic.md` for YouTube special logic
+
+## Duplicate Prevention
+
+### Before Creating ANY Card
+1. **Search by title**: Use `notion.search` with title
+2. **Check date**: Verify if card with same date exists
+3. **Check client/project**: For work cards, verify client + project
+4. **Compare properties**: Match title + date + client/project
+5. **Only create if**: No match found
+
+### Common Duplicate Scenarios
+- Weekly cards created multiple times
+- Project cards duplicated
+- Lesson cards with same title
+- Episode cards with same number
+
+## Error Handling
+
+### Common Errors
+- **400 Bad Request**: Check property names and status values
+- **404 Not Found**: Verify database ID and page ID
+- **Validation errors**: Check required fields and data types
+
+### Error Recovery
+1. Log error details
+2. Verify database schema
+3. Check property names
+4. Validate data types
+5. Retry with corrected data
+
+## Best Practices
+
+### General Principles
+1. **Be Explicit:** Clear communication with user
+2. **Validate First:** Check before executing
+3. **Log Everything:** Maintain audit trail
+4. **Error Gracefully:** Handle failures properly
+5. **Stay in Sync:** Keep Notion updated
+6. **Respect Privacy:** Never expose sensitive data
+
+### Daily Operations
+- Check for duplicates before creating
+- Update cards immediately after completion
+- Use correct timezone (GMT-3)
+- Validate all dates
+- Use proper status values
+
+### Weekly Operations
+- Create weekly cards on Sunday/Monday
+- Update progress on Friday
+- Archive old cards if needed
+- Review and clean up duplicates
+
+### Monthly Operations
+- Create monthly tracking cards (Duolingo, etc.)
+- Review and update project statuses
+- Archive completed projects
+- Update gamification tracking
+
+## MCP Tool Usage
+
+### Available Tools (via Notion Automation Suite)
+- `notion.query_database` - Query cards
+- `notion.create_page` - Create new card
+- `notion.update_page` - Update existing card
+- `notion.archive_page` - Archive card
+- `notion.search` - Search across databases
+
+### Tool Usage Pattern
+```python
+# 1. Search for duplicates
+results = notion.search(query="card title")
+
+# 2. Verify no duplicates
+if not results:
+    # 3. Create card
+    card = notion.create_page(
+        database_id=database_id,
+        properties={...},
+        icon={...}
+    )
+```
+
+## Context Storage
+
+### Notion-Related Context
+
+**General (Public):**
+- **MCP Config**: `config/system/infrastructure/cursor_mcp_config.json`
+- **General Rules**: `core/agents/notion-agent.mdc` (this file)
+- **General Context**: `core/agents/general-context.mdc`
+
+**Specific (Private):**
+- **Database IDs**: `config/system/infrastructure/notion-ids.json` (private)
+- **Timezone Rules**: `config/notion/timezone.md` (sempre GMT-3)
+- **Status Rules**: `config/notion/status.md` (status válidos e ignorados)
+- **Verification**: `config/notion/verification.md` (sistema de verificação)
+- **Templates**: `config/notion/templates.md`
+- **Properties**: `config/notion/properties.md`
+- **Workflows**: `config/notion/workflows.md`
+- **YouTube Logic**: `config/notion/youtube-logic.md`
+- **Logs**: `logs/system/notion/` (gitignored)
+
+### Never Store
+- Database IDs in public files
+- API tokens in code
+- Sensitive Notion content in public repos
+- Personal templates in public files
+- Specific workflows in public files
+
+---
+
+## Referências para Regras Específicas
+
+**Para regras específicas e configurações privadas:**
+- **Timezone (obrigatório):** `config/notion/timezone.md` (sempre GMT-3)
+- **Status por base:** `config/notion/status.md` (status válidos e ignorados)
+- **Verificação de tarefas:** `config/notion/verification.md` (sistema completo)
+- **Lógica YouTube:** `config/notion/youtube-logic.md` (lógica especial)
+- **Templates pessoais:** `config/notion/templates.md`
+- **Propriedades específicas:** `config/notion/properties.md`
+- **Workflows específicos:** `config/notion/workflows.md`
+- **README:** `config/notion/README.md`
+
+---
+
+**Version:** 2.0  
+**Last Updated:** 2025-12-08  
+**Applies To:** ALL Agents Using Notion  
+**Note:** This file contains GENERAL rules. For SPECIFIC rules, see `config/notion/`
