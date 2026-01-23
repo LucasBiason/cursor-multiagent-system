@@ -58,7 +58,7 @@ Each agent file must include:
 - Project details: `config/CONTEXTO_TRABALHO.md`, `config/CONTEXTO_ESTUDOS.md`
 - Deployment configs: `config/cicd/projects/` (without credentials)
 - General Context: `core/agents/general-context.mdc` (ALWAYS applies to all agents)
-- Notion IDs: `config/system/infrastructure/notion-ids.json` (in private submodule)
+- Notion IDs: No projeto do MCP (`my-local-place/services/external/notion-automation-suite/config/.env` - gitignored)
 - Schedule: `config/system/schedule/schedule.md` (official schedule)
 
 ### Examples in Agent Files

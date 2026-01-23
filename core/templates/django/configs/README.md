@@ -1,89 +1,26 @@
-# Estrutura de Configurações
+# Configs Templates
 
-**Última Atualização:** 2025-12-08
-
----
-
-## estrutura obrigatória
-
-```
-configs/
-├── docker-compose.dev.yml
-├── docker-compose.prod.yml
-├── nginx.conf
-├── .env.development
-├── .env.production
-└── .env.database
-```
+**Templates de configuração para copiar e colar.**
 
 ---
 
-## docker-compose
+## 📁 Arquivos Disponíveis
 
-**desenvolvimento (`docker-compose.dev.yml`):**
-- usar `Dockerfile.dev`
-- volumes para hot-reload
-- banco de dados local
-- redis local (se necessário)
-
-**produção (`docker-compose.prod.yml`):**
-- usar `Dockerfile.prod`
-- sem volumes (imagens finais)
-- configurações de produção
-- health checks
-
-**banco de dados:**
-- se usar container de banco, criar `.env.database`
-- separar configurações de banco das da aplicação
+- `docker-compose.yml` - Docker Compose
+- `nginx.conf` - Configuração Nginx
+- `.env.development` - Variáveis de ambiente (desenvolvimento)
+- `.env.production` - Variáveis de ambiente (produção)
+- `.env.database` - Variáveis de ambiente (banco de dados)
 
 ---
 
-## nginx
+## 📖 Documentação
 
-**configuração:**
-- proxy para serviços backend
-- servir arquivos estáticos (produção)
-- health check endpoint
-- CORS headers
-
-**template:** usar como base o nginx do ExpenseIQ
+**Para instruções sobre configurações, consulte:**
+- **Docker Compose:** `skills/infrastructure/docker-compose/SKILL.md`
+- **Dockerfile:** `skills/infrastructure/dockerfile-generator/SKILL.md`
+- **Django:** `skills/backend/django/SKILL.md`
 
 ---
 
-## arquivos .env
-
-**desenvolvimento (`.env.development`):**
-- DEBUG=True
-- banco local
-- redis local
-- configurações de dev
-
-**produção (`.env.production`):**
-- DEBUG=False
-- banco de produção
-- redis de produção
-- secrets reais
-
-**banco (`.env.database`):**
-- POSTGRES_USER
-- POSTGRES_PASSWORD
-- POSTGRES_DB
-- PGPORT
-
-**outros serviços:**
-- `.env.redis` (se necessário)
-- `.env.kafka` (se necessário)
-- `.env.mongodb` (se necessário)
-
----
-
-## referências
-
-- templates: `core/templates/django/configs/`
-- regras gerais: `core/agents/programming.mdc`
-
----
-
-**esta estrutura é obrigatória para todos os projetos.**
-
-
+**Última Atualização:** 2026-01-22

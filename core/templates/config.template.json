@@ -1,0 +1,235 @@
+{
+  "system": {
+    "version": "1.2.0",
+    "pilot_phase": false,
+    "timezone": "GMT-3",
+    "user": "Lucas Biason",
+    "last_updated": "2025-12-08"
+  },
+  "agents": {
+    "enabled": true,
+    "max_parallel": 8,
+    "default_agent": "personal-assistant",
+    "context_sharing": true,
+    "unified_history": true,
+    "agents_list": [
+      {
+        "id": "personal-assistant",
+        "name": "Personal Assistant",
+        "file": "core/agents/personal-assistant.mdc",
+        "role": "coordinator",
+        "priority": "critical",
+        "capabilities": [
+          "notion_management",
+          "agenda_coordination",
+          "task_delegation",
+          "report_generation",
+          "youtube_content_management",
+          "gamification_tracking"
+        ],
+        "triggers": [
+          "agenda",
+          "status",
+          "tarefas",
+          "criar card",
+          "verificar",
+          "relatorio",
+          "bom dia",
+          "prepare",
+          "organize",
+          "youtube",
+          "episodio"
+        ],
+        "always_active": true
+      },
+      {
+        "id": "studies-assistant",
+        "name": "Studies Assistant",
+        "file": "core/agents/studies-assistant.mdc",
+        "role": "specialist",
+        "priority": "high",
+        "capabilities": [
+          "teaching",
+          "project_guidance",
+          "code_review_educational",
+          "schedule_management",
+          "stuffscode_content",
+          "knowledge_base_management"
+        ],
+        "triggers": [
+          "retomar",
+          "estudar",
+          "aula",
+          "projeto",
+          "como funciona",
+          "explica",
+          "criar revisao",
+          "fiap",
+          "tech challenge",
+          "stuffscode",
+          "knowledge base"
+        ],
+        "context_requirements": [
+          "config/CONTEXTO_ESTUDOS.md",
+          "core/agents/programming.mdc",
+          "core/agents/notion.mdc"
+        ]
+      },
+      {
+        "id": "work-assistant",
+        "name": "Work Assistant",
+        "file": "core/agents/work-assistant.mdc",
+        "role": "specialist",
+        "priority": "high",
+        "capabilities": [
+          "coprogramming",
+          "code_review",
+          "testing",
+          "deployment",
+          "git_workflow",
+          "ci_cd_processes"
+        ],
+        "triggers": [
+          "bug",
+          "erro",
+          "expenseiq",
+          "kpi",
+          "portfolio",
+          "trabalho",
+          "implementar",
+          "feature",
+          "deploy",
+          "code review",
+          "testes"
+        ],
+        "context_requirements": [
+          "config/CONTEXTO_TRABALHO.md",
+          "core/agents/programming.mdc",
+          "core/agents/notion.mdc",
+          "config/cicd/projects/"
+        ]
+      },
+      {
+        "id": "social-media-assistant",
+        "name": "Social Media Assistant",
+        "file": "core/agents/social-media-assistant.mdc",
+        "role": "specialist",
+        "priority": "medium",
+        "capabilities": [
+          "content_planning",
+          "production_management",
+          "schedule_optimization",
+          "youtube_workflows"
+        ],
+        "triggers": [
+          "gravar",
+          "episodio",
+          "youtube",
+          "lancamento",
+          "serie",
+          "o que gravar"
+        ],
+        "context_requirements": [
+          "config/youtube/README.md",
+          "core/agents/notion.mdc"
+        ],
+        "status": "inactive",
+        "note": "YouTube content management moved to Personal Assistant. StuffsCode moved to Studies Assistant."
+      },
+      {
+        "id": "cicd-agent",
+        "name": "CI/CD Agent",
+        "file": "core/agents/cicd-agent.mdc",
+        "role": "specialist",
+        "priority": "high",
+        "capabilities": [
+          "deployment_automation",
+          "infrastructure_management",
+          "server_configuration",
+          "docker_management",
+          "nginx_configuration",
+          "script_organization"
+        ],
+        "triggers": [
+          "deploy",
+          "deployment",
+          "render",
+          "infrastructure",
+          "docker",
+          "nginx",
+          "servidor",
+          "ci/cd"
+        ],
+        "context_requirements": [
+          "config/cicd/README.md",
+          "config/cicd/projects/",
+          "core/agents/programming.mdc",
+          "config/.env.example"
+        ]
+      }
+    ]
+  },
+  "notion": {
+    "api_key_env": "NOTION_TOKEN",
+    "databases_file": "NOT_USED - Database IDs are in MCP project (my-local-place/services/external/notion-automation-suite/config/.env)",
+    "timezone": "GMT-3",
+    "retry_attempts": 3,
+    "rate_limit": {
+      "requests_per_second": 3,
+      "backoff_factor": 2
+    },
+    "mcp_server": "my-local-place/services/external/notion-automation-suite"
+  },
+  "environment": {
+    "env_file": "config/.env.passwords",
+    "env_example": "config/.env.example",
+    "load_pattern": "python-dotenv",
+    "reference_script": "core/scripts/infrastructure/load_env_example.py"
+  },
+  "composer": {
+    "enabled": true,
+    "auto_delegate": true,
+    "parallel_execution": true,
+    "max_concurrent": 3,
+    "context_persistence": true
+  },
+  "background_agents": {
+    "enabled": true,
+    "schedule": {
+      "personal-assistant": {
+        "check_delays": "0 8 * * *",
+        "weekly_report": "0 7 * * 1",
+        "create_weekly_cards": "0 23 * * 0"
+      },
+      "studies-assistant": {
+        "check_schedule": "0 9 * * *",
+        "update_progress": "0 20 * * *"
+      }
+    }
+  },
+  "logging": {
+    "enabled": true,
+    "level": "INFO",
+    "directories": {
+      "system": "logs/system/",
+      "work": "logs/work/",
+      "studies": "logs/studies/",
+      "personal": "logs/personal/",
+      "youtube": "logs/youtube/"
+    },
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "gitignored": true
+  },
+  "validation": {
+    "timezone_check": true,
+    "duplicate_check": true,
+    "property_validation": true,
+    "schedule_conflict_check": true
+  },
+  "mandatory_files": {
+    "general_context": "core/agents/general-context.mdc",
+    "programming_rules": "core/agents/programming.mdc",
+    "notion_rules": "core/agents/notion.mdc",
+    "env_example": "config/.env.example"
+  }
+}

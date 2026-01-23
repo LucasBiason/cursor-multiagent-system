@@ -1,0 +1,4 @@
+"""
+FastAPI Project - Basic Template
+"""
+

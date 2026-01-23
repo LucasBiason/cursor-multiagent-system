@@ -1,0 +1,252 @@
+{
+  "info": {
+    "_postman_id": "{{collection_id}}",
+    "name": "{{api_name}} - Documentação",
+    "description": "# {{api_name}}\n\n## Visão Geral\n\n{{description}}\n\n## Serviços Incluídos\n\n- {{services}}\n\n## URLs Base\n\n- Desenvolvimento: `{{dev_url}}`\n- Produção: `{{prod_url}}`\n\n## Autenticação\n\n{{auth_type}}: JWT (Bearer Token)\n\n- Endpoint de login: `POST /auth/login`\n- Endpoint de refresh: `POST /auth/refresh`\n\n## Status\n\n- ✅ Em desenvolvimento\n- ✅ Documentação completa",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Endpoints de autenticação JWT",
+      "item": [
+        {
+          "name": "POST /auth/login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "## Login\n\n### Validações\n- email (string): Obrigatório → 422: \"Email is required\"\n- password (string): Obrigatório → 422: \"Password is required\"\n\n### Regras de Negócio\n- Credenciais devem estar corretas\n- Usuário deve estar ativo\n- Token válido por 24h (access_token)\n- Refresh token válido por 7 dias\n\n### Erros\n- 422: Email/Password ausente\n- 401: Credenciais inválidas\n- 403: Usuário inativo"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Login successful\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "let res = pm.response.json();",
+                  "",
+                  "if (res.access_token) {",
+                  "    pm.environment.set('auth_token', res.access_token);",
+                  "}",
+                  "",
+                  "if (res.refresh_token) {",
+                  "    pm.environment.set('refresh_token', res.refresh_token);",
+                  "}",
+                  "",
+                  "if (res.expires_in) {",
+                  "    let expiresAt = Date.now() + (res.expires_in * 1000);",
+                  "    pm.environment.set('auth_expires_at', expiresAt);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "response": [
+            {
+              "name": "✅ Sucesso",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"expires_in\": 86400\n}"
+            },
+            {
+              "name": "❌ 422 - Email ausente",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["auth", "login"]
+                }
+              },
+              "status": "Unprocessable Entity",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"type\": \"value_error.missing\",\n      \"loc\": [\"body\", \"email\"],\n      \"msg\": \"Email is required\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "❌ 401 - Credenciais inválidas",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"wrong@example.com\",\n  \"password\": \"wrongpassword\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/login",
+                  "host": ["{{base_url}}"],
+                  "path": ["auth", "login"]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Invalid credentials\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "POST /auth/refresh",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/refresh",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "refresh"]
+            },
+            "description": "## Refresh Token\n\n### Validações\n- refresh_token (string): Obrigatório → 422: \"Refresh token is required\"\n\n### Regras de Negócio\n- Refresh token deve ser válido\n- Novo access_token é gerado\n- Refresh token pode ser rotacionado\n\n### Erros\n- 422: Refresh token ausente\n- 401: Refresh token inválido ou expirado"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Refresh successful\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "let res = pm.response.json();",
+                  "",
+                  "if (res.access_token) {",
+                  "    pm.environment.set('auth_token', res.access_token);",
+                  "}",
+                  "",
+                  "if (res.refresh_token) {",
+                  "    pm.environment.set('refresh_token', res.refresh_token);",
+                  "}",
+                  "",
+                  "if (res.expires_in) {",
+                  "    pm.environment.set('auth_expires_at', Date.now() + (res.expires_in * 1000));",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          "// Collection-level pre-request: attach Authorization header if auth_token present",
+          "if (pm.environment.get('auth_token')) {",
+          "  pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + pm.environment.get('auth_token') });",
+          "}",
+          "",
+          "// Auto-refresh if token expired",
+          "let expiresAt = pm.environment.get('auth_expires_at');",
+          "if (expiresAt && Date.now() >= parseInt(expiresAt)) {",
+          "  console.log('Access token expired — attempting refresh...');",
+          "  let refreshReq = {",
+          "    url: pm.environment.get('base_url') + '/auth/refresh',",
+          "    method: 'POST',",
+          "    header: { 'Content-Type': 'application/json' },",
+          "    body: { mode: 'raw', raw: JSON.stringify({ refresh_token: pm.environment.get('refresh_token') }) }",
+          "  };",
+          "  pm.sendRequest(refreshReq, function (err, res) {",
+          "    if (!err && res.code === 200) {",
+          "      let json = res.json();",
+          "      if (json.access_token) { pm.environment.set('auth_token', json.access_token); }",
+          "      if (json.refresh_token) { pm.environment.set('refresh_token', json.refresh_token); }",
+          "      if (json.expires_in) { pm.environment.set('auth_expires_at', Date.now() + (json.expires_in * 1000)); }",
+          "    } else { console.error('Refresh failed', err || res); }",
+          "  });",
+          "}"
+        ],
+        "type": "text/javascript"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}
+

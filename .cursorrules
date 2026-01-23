@@ -1,25 +1,71 @@
 # Cursor Multiagent System - Global Rules
 
-## Context Saving
-- **ALWAYS** save context after significant interactions
-- Use `scripts/save_context.py` to save session context
-- Update `config/CONTEXTO_GERAL.md` timestamp
-- Commit changes to private config repository
+## Workflow Integrado: Cursor + Claude Code
 
-## Multi-Machine Sync
-- This system works across two machines (Linux + Windows via Tailscale)
-- All agents MUST save context in `config/` directory
-- Context is synced via private git submodule
-- Never commit config/ to public repository
+Este projeto usa workflow integrado entre Cursor e Claude Code:
 
-## Project Context
-- Always check `config/CONTEXTO_GERAL.md` for current status
-- Check specific context files when relevant:
-  - `config/CONTEXTO_ESTUDOS.md` - Studies
-  - `config/CONTEXTO_TRABALHO.md` - Work
-  - `config/CONTEXTO_YOUTUBE.md` - YouTube
-  - `config/CONTEXTO_PESSOAL.md` - Personal
-- Update context files when projects change
+| Responsabilidade | Cursor | Claude Code |
+|------------------|--------|-------------|
+| Escrita de código novo | ✅ Principal | ❌ |
+| Refatoração complexa | ✅ Principal | ❌ |
+| Debug interativo | ✅ Principal | ❌ |
+| **Code Review** | ❌ | ✅ Principal |
+| **Execução de testes** | ❌ | ✅ Principal |
+| **Git (commits, PRs)** | ❌ | ✅ Principal |
+
+### Handoff Cursor → Claude Code
+```bash
+# Após implementar no Cursor
+claude "review as alterações, rode os testes e reporte"
+claude "prepare o commit das alterações"
+```
+
+---
+
+## Scripts Utilitários
+
+Scripts disponíveis em `scripts/`:
+
+| Script | Uso |
+|--------|-----|
+| `cleanup_temp.py` | Limpeza de arquivos temporários |
+| `ssh_utils.py` | Conexão SSH para projetos remotos |
+| `notion_batch.py` | Operações batch no Notion |
+| `project_status.py` | Status consolidado dos projetos |
+| `daily_standup.py` | Standup diário / planning semanal |
+| `git_multi.py` | Gerenciamento multi-repo git |
+
+Ver `scripts/README.md` para documentação completa.
+
+---
+
+## Regras de Criação de Arquivos
+
+### PROIBIDO CRIAR:
+- ❌ Arquivos na raiz de qualquer projeto
+- ❌ Arquivos RESUMO_*, RELATORIO_*, ANALISE_* fora de logs/
+- ❌ Scripts .py ou .sh fora de scripts/ ou logs/
+- ❌ Documentação .md fora de docs/ ou config/
+- ❌ Qualquer arquivo para "me responder" ou "guardar contexto"
+- ❌ Pastas @temp em config/ (NUNCA criar @temp em config/)
+
+### ONDE CRIAR:
+| Tipo de Arquivo | Local Correto |
+|-----------------|---------------|
+| Script temporário | logs/[frente]/[projeto]/scripts-temporarios/ |
+| Interação diária (daily, planejamento, resumos) | logs/[frente]/[projeto]/interacao-diaria/ |
+| Análise/relatório | logs/[dominio]/[YYYY-MM-DD]_[subject].md |
+| Spec de projeto | config/[area]/[projeto]/requisitos-tecnicos/ |
+| Conhecimento | config/[area]/[projeto]/requisitos-tecnicos/ |
+| Documentação pública | docs/ |
+
+### ANTES DE CRIAR ARQUIVO:
+1. Perguntar: "Isso precisa existir como arquivo?"
+2. Se sim: "Qual a categoria? (spec/log/temp)"
+3. Criar no local correto conforme tabela acima
+4. **NUNCA criar na raiz do projeto**
+
+---
 
 ## Agent Rules Mapping
 
@@ -31,111 +77,152 @@
 
 ### Agent-Specific Rules
 - **Personal Assistant**: `core/agents/personal-assistant.mdc`
-  - Gamification system rules
-  - YouTube content management
-  - Notion workspace coordination
-  - Daily/weekly card creation
-
 - **Studies Assistant**: `core/agents/studies-assistant.mdc`
-  - Teaching methodology
-  - Project guidance
-  - StuffsCode content (Instagram)
-  - Knowledge Base project
-
 - **Work Assistant**: `core/agents/work-assistant.mdc`
-  - Professional development
-  - Code review standards
-  - Deployment practices
-  - Git workflow
-  - CI/CD processes
-
 - **CI/CD Agent**: `core/agents/cicd-agent.mdc`
-  - Deployment automation
-  - Infrastructure management
-  - Server configuration
 
-- **Social Media Assistant**: `core/agents/social-media-assistant.mdc`
-  - Currently inactive (YouTube moved to Personal Assistant, StuffsCode moved to Studies Assistant)
+---
 
 ## File Organization Rules
 
 ### Config Directory Structure
 - **Root of config/**: ONLY permanent general context files
-  - ✅ `CONTEXTO_GERAL.md`, `CONTEXTO_ESTUDOS.md`, `CONTEXTO_TRABALHO.md`, etc.
-  - ✅ `config.json`, `notion-ids.json`, `schedule.md`, `README.md`
-  - ❌ NO temporary planning files, NO project-specific docs, NO session summaries
+  - ✅ `CONTEXTO_GERAL.md`, `CONTEXTO_ESTUDOS.md`, etc.
+  - ✅ `config.json`, `notion-ids.json`, `README.md`
+  - ❌ NO temporary planning files, NO project-specific docs
 
 ### Temporary Files Location
-- **Planning documents**: `config/system/planning/` (temporary plans, daily schedules)
-- **Session summaries**: `config/sessions/` (format: `YYYYMMDD_HHMMSS_context.md`)
-- **Project-specific context**: `config/work/`, `config/studies/`, `config/personal/` (by domain)
+- **Planning documents**: `config/system/planning/`
+- **Session summaries**: `config/sessions/`
+- **Project-specific context**: `config/work/`, `config/studies/`, `config/personal/`
 
-### Scripts and Disposable Files
-- **Scripts e Deploys/**: ONLY disposable scripts (.py, .sh), test files, deployment scripts, logs (.log)
-- **Test files** (`test_*.py`, `*_test.py`): Scripts e Deploys/ (NEVER in project root)
-- **Shell scripts** (`.sh`): Scripts e Deploys/ (NEVER in project root)
-- **Context documents**: MUST be in `config/` (see `config/system/MAPEAMENTO_ASSUNTOS.md`)
+### Scripts Structure
+```
+scripts/           # Scripts permanentes e utilitários
+├── README.md      # Documentação dos scripts
+├── cleanup_temp.py
+├── ssh_utils.py
+├── notion_batch.py
+├── project_status.py
+├── daily_standup.py
+└── git_multi.py
 
-### Project Documentation
-- **Project README.md**: ONLY in project root (one file)
-- **Project documentation**: `docs/` or `docs-private/` within project
-- **NEVER create multiple README files or test scripts in project root**
-- **NEVER create documentation files in project root**
+logs/              # Scripts temporários e interações (GITIGNORED)
+├── [frente]/[projeto]/
+│   ├── scripts-temporarios/    # Scripts temporários do projeto
+│   └── interacao-diaria/        # Dailys, planejamentos, resumos
+└── system/
+    ├── scripts-temporarios/     # Scripts temporários gerais
+    └── interacao-diaria/        # Interações diárias gerais
+```
 
 ### Logs Directory
 - **Location**: `logs/` (gitignored)
-- **Content**: ONLY conversation logs
 - **Structure**: `logs/{domain}/{YYYY-MM-DD}_{subject}.md`
 - **NEVER commit logs to git**
 
+---
+
 ## Context Files Location
-- **Main context:** `config/CONTEXTO_GERAL.md` (UPDATE AFTER EVERY SIGNIFICANT INTERACTION)
+
+- **Main context:** `config/CONTEXTO_GERAL.md`
 - **Specific contexts:**
-  - `config/CONTEXTO_ESTUDOS.md` - Studies, FIAP, Tech Challenge
+  - `config/CONTEXTO_ESTUDOS.md` - Studies
   - `config/CONTEXTO_TRABALHO.md` - Work, projects
-  - `config/CONTEXTO_YOUTUBE.md` - YouTube, series, production
-  - `config/CONTEXTO_PESSOAL.md` - Personal, weekly cards, treatment
+  - `config/CONTEXTO_PESSOAL.md` - Personal
 - **Sessions:** `config/sessions/`
-- **Mapping:** `config/system/MAPEAMENTO_ASSUNTOS.md` (where to put each type of file)
-
-## After Each Interaction
-1. **ALWAYS update `config/CONTEXTO_GERAL.md`** with significant changes
-2. Update specific context files when relevant
-3. Save context using `save_context.py`
-4. Move temporary files to appropriate folders
-5. Commit to private repository (automatic)
-
-## Context Update Rules
-- **CONTEXTO_GERAL.md:** Update after EVERY significant interaction
-- **Specific contexts:** Update only when relevant to that area
-- **DO NOT create new context files** - use existing ones
-- **Keep structure clean** - no duplicate information
-
-## No AI Reports in Git
-- **NEVER create**: RESUMO_SESSAO, RELATORIO, FEEDBACK, ATUALIZACAO, ANALISE files
-- **NEVER create**: Status reports, feedback files, or AI-generated summaries
-- **NEVER create**: Arquivos de resumo/contexto para "me responder" (ex: RESUMO-CONTEXTO-AGENTE.md, RESUMO-APRENDIZADO.md)
-  - **Responder no chat** quando usuário perguntar sobre contexto/aprendizado
-  - **Criar arquivo apenas** se usuário solicitar explicitamente e indicar onde criar
-  - **Motivo**: Arquivos automáticos geram muitos arquivos e deixam agentes lentos
-- **Exception**: Only if user explicitly requests a report file
-- **Changes go to**: CHANGELOG.md (succinct, no sensitive info)
-
-## Agent Activation
-- Agents should check their `.mdc` files in `core/agents/` for specific rules
-- Agents should reference `programming.mdc` when working with code
-- Agents should reference `notion.mdc` when working with Notion
-- Agents should create/update log files in `logs/` when needed (daily if there's interaction)
-
-## Daily Logs
-- **Location**: `logs/{domain}/` (gitignored)
-- **Format**: `YYYY-MM-DD_{subject}.md`
-- **Content**: Conversation logs, interaction summaries
-- **Frequency**: Daily if there's interaction
-- **NEVER commit to git**
 
 ---
 
-**Version:** 2.0  
-**Last Updated:** 2025-12-08  
-**Note:** Specific rules are in agent `.mdc` files in `core/agents/`
+## No AI Reports in Git
+
+- **NEVER create**: RESUMO_SESSAO, RELATORIO, FEEDBACK, ANALISE files
+- **NEVER create**: Status reports, feedback files, or AI-generated summaries
+- **Responder no chat** quando usuário perguntar sobre contexto
+- **Exception**: Only if user explicitly requests a report file
+
+---
+
+## Skills System
+
+Skills estão organizadas em `skills/`:
+
+```
+skills/
+├── workflow/
+│   ├── cursor-handoff/SKILL.md
+│   ├── commit-workflow/SKILL.md
+│   ├── code-review/SKILL.md
+│   ├── test-runner/SKILL.md
+│   └── daily-standup/SKILL.md
+├── backend/
+│   ├── fastapi/SKILL.md
+│   ├── django/SKILL.md
+│   ├── python/SKILL.md
+│   └── nodejs/SKILL.md
+├── frontend/
+│   └── react/SKILL.md
+├── infrastructure/
+│   ├── docker-compose/SKILL.md
+│   ├── docker-execution/SKILL.md
+│   └── makefile/SKILL.md
+└── documentation/
+    └── diagram-generation/SKILL.md
+```
+
+Ver `skills/README.md` para lista completa e descrições.
+
+---
+
+## Git Workflow
+
+### Commits
+- Usar conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, etc.
+- **NUNCA** fazer commit sem permissão explícita
+- **SEMPRE** mostrar preview antes de commitar
+
+### Branches
+- `main` - produção
+- `develop` - desenvolvimento
+- `feature/*` - features
+- `fix/*` - correções
+
+### Pre-commit Hooks
+- Validação de segurança automática via `.pre-commit-config.yaml`
+- Verifica dados sensíveis antes de commitar
+- Verifica Docker Compose por variáveis expostas
+
+---
+
+## Regras Críticas de Segurança
+
+### Docker Compose
+- ❌ **NUNCA** expor variáveis sensíveis em `environment:` do docker-compose.yml
+- ✅ **SEMPRE** usar `env_file:` para variáveis sensíveis
+- ✅ **SEMPRE** criar arquivos `.env.*` separados por serviço
+- ✅ **SEMPRE** adicionar `.env.*` ao `.gitignore`
+
+### Execução de Containers e Scripts
+- ❌ **NUNCA** apenas mostrar comandos para o usuário executar
+- ✅ **SEMPRE** executar containers/scripts diretamente
+- ✅ **SEMPRE** verificar Makefile antes de executar comandos
+- ✅ **SEMPRE** analisar logs após subir containers
+
+### Makefile
+- ✅ **SEMPRE** verificar se existe Makefile antes de executar comandos
+- ✅ **SEMPRE** usar comandos do Makefile quando existirem
+- ✅ **SEMPRE** criar comandos no Makefile se não existirem
+
+### Múltiplas Classes
+- Quando um módulo tem mais de uma classe, cada classe deve estar em um arquivo separado
+- Criar módulo (pasta) com `__init__.py` que exporta todas as classes
+
+### Migrations
+- ❌ **NUNCA** alterar migrations já aplicadas (Django ou Alembic)
+- ✅ **SEMPRE** criar nova migration para alterações
+
+---
+
+**Version:** 3.1
+**Last Updated:** 2026-01-20
+**Note:** Specific rules are in agent `.mdc` files in `core/agents/` and skills in `skills/`

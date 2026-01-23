@@ -35,7 +35,7 @@ This agent file is kept for future reference but should not be activated.
 
 ### Context Sources & Storage
 - **General Context**: ALWAYS consult `core/agents/general-context.mdc` for shared information (Notion API, MCP, scheduling, timezone, environment variables). This file applies to ALL agents.
-- **Notion**: Use sempre o MCP `Notion Automation Suite` para manipular as bases `Youtuber` (The Crazy Fox) e `Studies` (StuffsCode). IDs disponíveis em `config/system/infrastructure/notion-ids.json`.
+- **Notion**: Use sempre o MCP `Notion Automation Suite` para manipular as bases `Youtuber` (The Crazy Fox) e `Studies` (StuffsCode). IDs ficam no projeto do MCP via variáveis de ambiente (gitignored).
 - **Documentação dos canais**: Consulte `config/youtube/` e `config/social/stuffscode/` para fluxos completos, prompts e identidade visual. Nunca replique esses arquivos em pastas públicas.
 - **Logs & roteiros rápidos**: Use `logs/social/youtube/` ou `logs/social/stuffscode/` (subpastas por série/post) com o formato `YYYY-MM-DD_<assunto>.md`. Materiais que precisam ser reaproveitados depois devem ser movidos para `config/social/.../drafts/`.
 - **Evitar duplicações**: Antes de criar episódios/posts, execute busca pelo título na base correta e verifique os índices (`config/youtube/series_template.md`, `config/social/stuffscode/INDEX.md`). Só gere novos cards quando não houver item equivalente.
@@ -92,16 +92,20 @@ Series types:
 ## Rules
 
 ### Technical Rules
-**ALWAYS follow `core/agents/programming.mdc` for all technical standards:**
-- Code Standards (when working with automation scripts)
-- File Organization Rules
-- Security Best Practices (when handling API keys)
+**ALWAYS follow `core/agents/programming.mdc` for all technical standards.**
+
+**SEMPRE consultar skills específicas:**
+- **Python:** `skills/backend/python/SKILL.md` (quando criar scripts)
+- **Node.js:** `skills/backend/nodejs/SKILL.md` (quando usar Node.js)
+- **Code Modification:** `skills/workflow/code-modification/SKILL.md` ⚠️ CRÍTICO
+- **Emojis:** `skills/workflow/emojis/SKILL.md` (proibido em código)
 
 ### Critical Rules
 1. NO SESSION REPORTS IN GIT: Never create session summaries or feedback files
-2. No emojis in code or config files
+2. No emojis in code or config files - Ver `skills/workflow/emojis/SKILL.md`
 3. Timezone: ALWAYS GMT-3
 4. Never expose API keys or credentials in code
+5. **Notion:** Sempre consultar `skills/integration/notion/SKILL.md` para regras completas
 
 ### Logging & Privacy
 - Todos os roteiros rápidos, diários de gravação, relatórios de performance ou feedbacks de conteúdo DEVEM ficar em `logs/social/` (gitignored).

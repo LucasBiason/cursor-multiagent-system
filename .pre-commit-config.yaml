@@ -1,0 +1,29 @@
+# Pre-commit hooks para validação de segurança
+# Instalar: pip install pre-commit && pre-commit install
+
+repos:
+  - repo: local
+    hooks:
+      - id: check-sensitive-data
+        name: Check for sensitive data
+        entry: bash -c 'scripts/validate.sh'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [commit]
+
+      - id: check-docker-compose
+        name: Check Docker Compose for exposed variables
+        entry: bash -c 'for f in $(find . -name "docker-compose*.yml" -not -path "./.git/*"); do if grep -E "environment:" -A 10 "$f" | grep -E "(password|secret|key|token|uri|connection)" | grep -v "env_file" > /dev/null; then echo "ERROR: $f may contain exposed sensitive variables. Use env_file: instead."; exit 1; fi; done'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [commit]
+
+      - id: check-commit-message
+        name: Check commit message for sensitive data
+        entry: bash -c 'if echo "$1" | grep -E "(ntn_[0-9]{10,}|ghp_[a-zA-Z0-9]{36,}|password|secret|token)" > /dev/null; then echo "ERROR: Commit message may contain sensitive data"; exit 1; fi' --
+        language: system
+        pass_filenames: false
+        stages: [commit-msg]
+

@@ -19,13 +19,15 @@ você atua como professor, mentor e coach de programação, guiando o aprendizad
 ### sempre seguir
 
 1. **programming rules:** `core/agents/programming.mdc` (obrigatório)
-   - estrutura de API (urls, views, controllers, validators, repositories, schemas, models)
-   - padrões arquiteturais (repository, controller, validator)
-   - boas práticas de código
-   - versionamento de API (`/api/v1/`)
-   - ver `core/docs/programming/QUICK_START_API.md` para guia completo
+   - **SEMPRE consultar skills específicas antes de implementar:**
+   - **FastAPI:** `skills/backend/fastapi/SKILL.md` - estrutura completa, padrões, versionamento
+   - **Django:** `skills/backend/django/SKILL.md` - estrutura completa, padrões, versionamento
+   - **Python:** `skills/backend/python/SKILL.md` - type hints obrigatórios, styleguide
+   - **React:** `skills/frontend/react/SKILL.md` - TypeScript obrigatório, padrões React
+   - **Templates:** `core/templates/fastapi-project/` ou `core/templates/django/` para guias passo a passo
 
 2. **notion integration:** `core/agents/notion-agent.mdc`
+   - **SEMPRE consultar:** `skills/integration/notion/SKILL.md` para regras completas
    - manter base Studies sempre atualizada
    - criar/atualizar cards de cursos e projetos
    - registrar tempo de aulas (início/fim)
@@ -134,9 +136,12 @@ você atua como professor, mentor e coach de programação, guiando o aprendizad
    - validar antes de continuar
 
 2. **seguir padrões:**
-   - sempre seguir `programming.mdc`
-   - usar estrutura correta (repository, controller, validator)
+   - sempre seguir `programming.mdc` e consultar skills específicas
+   - usar estrutura correta (repository, controller, validator) - Ver `skills/backend/fastapi/SKILL.md` ou `skills/backend/django/SKILL.md`
    - seguir padrões do projeto de referência (ex: ml-sales-forecasting)
+   - cobertura de testes mínima 90% - Ver `skills/workflow/test-runner/SKILL.md`
+   - testes no navegador - Ver `skills/workflow/browser-testing/SKILL.md` (Playwright MCP)
+   - ferramentas locais - Ver `skills/infrastructure/my-local-place/SKILL.md` (quando não disponíveis no docker-compose)
 
 3. **criar apenas arquivos necessários:**
    - não criar arquivos desnecessários
@@ -605,11 +610,13 @@ Vamos resolver passo a passo:
 
 ## scripts e logs - regras obrigatórias
 
-**referência completa:** `config/system/REGRAS_SCRIPTS_LOGS.md`
+**referência completa:** `skills/workflow/scripts-logs/SKILL.md`
+
+**⚠️ REGRA CRÍTICA: NUNCA criar pastas `@temp/` em `config/` ou na raiz do projeto.**
 
 ### scripts temporários
 
-**localização obrigatória:** `logs/studies/[projeto]/scripts-temporarios/`
+**localização obrigatória:** `logs/studies/[projeto]/scripts-temporarios/` ou `logs/system/scripts-temporarios/`
 
 **formato:** `YYYY-MM-DD_[assunto].py` ou `.sh`
 
@@ -618,7 +625,25 @@ Vamos resolver passo a passo:
 - scripts de validação
 - scripts de teste de MCP
 - nunca criar em projetos com git (exceto em `logs/`)
+- nunca criar em `config/` ou `@temp/`
 - apagar após uso
+
+### interação diária (daily, planejamento, resumos, dúvidas)
+
+**localização obrigatória:** `logs/studies/[projeto]/interacao-diaria/` ou `logs/system/interacao-diaria/`
+
+**formato:** `YYYY-MM-DD_[assunto].md`
+
+**conteúdo:**
+- dailys do projeto
+- planejamentos
+- resumos de conversas
+- dúvidas e respostas
+- análises temporárias
+
+**regras:**
+- nunca criar em `config/` ou `@temp/`
+- logs mínimos possíveis
 
 ### scripts genéricos
 
@@ -632,7 +657,7 @@ Vamos resolver passo a passo:
 
 ### feedbacks/relatórios
 
-**localização obrigatória:** `logs/studies/[projeto]/`
+**localização obrigatória:** `logs/studies/[projeto]/` ou `logs/studies/[projeto]/historico-contexto/`
 
 **formato:** `YYYY-MM-DD_[assunto].md`
 

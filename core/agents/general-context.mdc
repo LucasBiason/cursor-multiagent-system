@@ -14,7 +14,7 @@ alwaysApply: true
 
 **localização:** `my-local-place/services/external/notion-automation-suite`  
 **execução:** via `scripts/notion-mcp.sh`  
-**configuração:** `config/system/infrastructure/cursor_mcp_config.json`
+**configuração:** No projeto do MCP (`my-local-place/services/external/notion-automation-suite/config/`)
 
 **como usar:**
 - todas as consultas/criações/atualizações devem usar o servidor fastmcp
@@ -23,7 +23,7 @@ alwaysApply: true
 
 ### database ids
 
-**localização:** `config/system/infrastructure/notion-ids.json`
+**localização:** No projeto do MCP (`my-local-place/services/external/notion-automation-suite/config/.env` - gitignored)
 
 **bases disponíveis:**
 - personal: base de tarefas pessoais
@@ -33,7 +33,8 @@ alwaysApply: true
 - gaming: gaming system - lucas
 
 **importante:**
-- sempre consultar `config/system/infrastructure/notion-ids.json` para ids
+- ⚠️ **NÃO consultar IDs diretamente** - usar apenas o MCP construído
+- IDs ficam no projeto do MCP via variáveis de ambiente (gitignored)
 - nunca hardcodar ids nos scripts
 - usar data_source_id para queries
 
@@ -47,8 +48,8 @@ alwaysApply: true
 
 **regras específicas (privadas):**
 - templates pessoais: `config/notion/templates.md`
-- status por base: `config/notion/status.md`
-- propriedades específicas: `config/notion/properties.md`
+- status por base: `skills/integration/notion/SKILL.md` (seção Status)
+- propriedades específicas: `skills/integration/notion/SKILL.md` (seção Estrutura das 4 Bases)
 - workflows específicos: `config/notion/workflows.md`
 - lógica youtube: `config/notion/youtube-logic.md`
 
@@ -59,7 +60,7 @@ alwaysApply: true
 
 **status ignorados (não reportar como atrasado):**
 - concluído, cancelado, realocada, descartado, publicado
-- ver `config/notion/status.md` para lista completa por base
+- ver `skills/integration/notion/SKILL.md` para lista completa por base
 
 ---
 
@@ -114,21 +115,21 @@ alwaysApply: true
 
 ### localização
 
-**arquivo de senhas:** `core/config/.env.passwords` (gitignored)  
-**arquivo exemplo:** `core/config/.env.example`  
-**script de exemplo:** `core/config/load_env_example.py`
+**arquivo de senhas:** `config/.env.passwords` (gitignored, subrepositório privado)  
+**arquivo exemplo:** `config/.env.example`  
+**script de exemplo:** `core/scripts/infrastructure/load_env_example.py`
 
 ### como usar
 
 **sempre:**
 - usar `python-dotenv` com `load_dotenv()` em scripts python
-- referenciar `core/config/.env.example` para nomes de variáveis
+- referenciar `config/.env.example` para nomes de variáveis
 - nunca hardcodar senhas, ips, tokens ou credenciais
 
 **variáveis comuns:**
 - notion_token: token da api do notion
 - render_api_key: chave api do render.com
-- hostinger_*: credenciais dos servidores hostinger
+- deployment_*: credenciais dos servidores de produção (VPS/Cloud)
 - database_*: conexões de banco de dados
 
 ---
@@ -233,4 +234,17 @@ formatted = dt.isoformat()  # 2025-11-01T19:00:00-03:00
 
 ---
 
-**última atualização:** 2025-12-08
+## CHANGELOG - Obrigatório em Todos os Projetos
+
+**SEMPRE consultar:** `skills/workflow/changelog/SKILL.md` para regras completas.
+
+**Resumo crítico:**
+- ✅ **SEMPRE** manter `CHANGELOG.md` na raiz de TODOS os projetos
+- ✅ **SEMPRE** seguir formato [Keep a Changelog](https://keepachangelog.com/)
+- ✅ **SEMPRE** adicionar mudanças em `[Unreleased]` antes de commitar
+- ❌ **NUNCA** modificar versões já lançadas (com tags como `[1.2.0]`)
+- ❌ **NUNCA** fazer mudanças sem documentar no CHANGELOG
+
+---
+
+**última atualização:** 2026-01-20

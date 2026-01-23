@@ -1,43 +1,62 @@
-# Agent Templates
+# Templates
 
-This directory contains templates for creating new agents.
-
-## Available Templates
-
-### Agent Template
-- **`agent-template.mdc`** - Base template for creating new agent definitions
-
-## Usage
-
-1. Copy the template:
-   ```bash
-   cp agent-template.mdc ../agents/my-new-agent.mdc
-   ```
-
-2. Fill in the template with:
-   - Agent name and role
-   - Core responsibilities
-   - Configuration details
-   - Rules and best practices
-   - Capabilities and triggers
-   - Integration points
-
-3. Reference mandatory files:
-   - `core/agents/programming.mdc` - For any code-related work
-   - `core/agents/notion.mdc` - For Notion operations
-
-## Agent Naming Convention
-
-- Use `-assistant.mdc` suffix (not `-coach.mdc`)
-- Examples: `personal-assistant.mdc`, `work-assistant.mdc`, `studies-assistant.mdc`
-
-## Important Notes
-
-- All agents should reference `programming.mdc` when working with code
-- All agents should reference `notion.mdc` when working with Notion
-- Sensitive information should be in `config/` (private submodule)
-- Non-sensitive rules and processes go in agent `.mdc` files
+**Templates de código e configuração para copiar e colar ao criar novos projetos ou configurar o sistema.**
 
 ---
 
-**Last Updated:** 2025-12-08
+## 📁 Templates Disponíveis
+
+### Configuração
+- **`config.template.json`** - Template de configuração do sistema multiagent
+  - Estrutura de agents, Notion, environment, logging
+  - Copiar para `config/` e personalizar conforme necessário
+
+### Agent
+- **`agent-template.mdc`** - Template para criar novos agents
+
+### Django
+- **`django/`** - Template completo de serviço Django
+
+### FastAPI
+- **`fastapi-project/`** - Templates de projeto FastAPI (basic e with-framework)
+
+### Entrypoint Scripts
+- **`entrypoint/`** - Templates de entrypoint.sh para diferentes stacks
+
+### Snippets
+- **`cache/`** - Snippets de cache Redis
+- **`database/`** - Snippets de banco de dados (SQL puro)
+
+### Postman
+- **`postman-collection/`** - Templates de coleção Postman
+
+---
+
+## 🚀 Como Usar
+
+```bash
+# Copiar template de configuração
+cp core/templates/config.template.json config/config.json
+
+# Copiar template de agent
+cp core/templates/agent-template.mdc core/agents/my-agent.mdc
+
+# Copiar template Django
+cp -r core/templates/django my-django-service
+
+# Copiar template FastAPI
+cp -r core/templates/fastapi-project/basic my-fastapi-service
+```
+
+---
+
+## 📖 Documentação
+
+**Para instruções completas sobre como usar cada template, consulte as skills:**
+- **Django:** `skills/backend/django/SKILL.md`
+- **FastAPI:** `skills/backend/fastapi/SKILL.md`
+- **Configuração:** `config/README.md`
+
+---
+
+**Última Atualização:** 2026-01-22

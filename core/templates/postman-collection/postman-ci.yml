@@ -1,0 +1,43 @@
+name: Postman Collection Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci || npm i
+
+      - name: Install jq (for environment manipulation)
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Run Newman (Postman tests)
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
+          USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+        run: |
+          # Write environment with secrets
+          jq '.values[] |= (if .key=="base_url" then .value="'$BASE_URL'" elif .key=="user_email" then .value="'$USER_EMAIL'" elif .key=="user_password" then .value="'$USER_PASSWORD'" else . end)' postman/environment.json > tmp_env.json
+          
+          npx newman run postman/collection.json -e tmp_env.json \
+            --reporters cli,junit \
+            --reporter-junit-export postman/junit-results.xml
+      
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-results
+          path: postman/junit-results.xml
+

@@ -1,20 +1,28 @@
+# ============================================
+# CURSOR MULTIAGENT SYSTEM - .gitignore
+# ============================================
+# Arquivo único centralizado para ignorar
+# arquivos sensíveis, temporários e gerados
+# ============================================
+
+# ============================================
 # SENSITIVE INFORMATION
+# ============================================
 *.env
-.env.local
-.env.production
-.env.passwords
-**/.env.passwords
-core/config/.env.passwords
-config/**/.env.passwords
+.env.*
+!*.env.example
 secrets/
 credentials/
 tokens/
-
-# NOTION IDS AND KEYS
 **/notion-ids.json
 **/api-keys.json
+**/CREDENCIAIS*.md
+**/*credentials*.md
+**/*secrets*.md
 
+# ============================================
 # PYTHON
+# ============================================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -34,19 +42,124 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 .venv/
 venv/
 env/
 ENV/
+env.bak/
+venv.bak/
+*.venv/
+*venv/
 
-# IDE
+# Python Virtual Environments (including study projects)
+config/studies/projetos/**/venv/
+config/studies/projetos/**/.venv/
+config/studies/projetos/**/__pycache__/
+
+# Python Tools
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+cover/
+*pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+cython_debug/
+
+# Python Package Managers
+Pipfile.lock
+poetry.lock
+.pdm.toml
+__pypackages__/
+
+# ============================================
+# DATABASES
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+
+# ============================================
+# LOGS AND TEMPORARY FILES
+# ============================================
+logs/
+@temp/
+*.log
+*.log.*
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*_backup
+*.swp
+*.swo
+*~
+
+# Session Reports and Interaction Logs (NEVER COMMIT)
+**/RESUMO_*.md
+**/RELATORIO_*.md
+**/FEEDBACK_*.md
+**/ANALISE_*.md
+**/STATUS_*.md
+**/PLANO_*.md
+**/RECOVERY_*.md
+**/SESSION_*.md
+**/INTERACTION_*.md
+**/REORGANIZACAO_*.md
+**/INDICE_*.md
+**/ACTIVATION_*.md
+**/TEST_*.md
+**/REGRAS_*.md
+**/MIGRACAO_*.md
+**/PRONTO_*.md
+**/SISTEMA_*.md
+**/VALIDACAO_*.md
+**/CONTEXTO_RESPOSTA_*.md
+**/GAMING_REPORT_*.md
+**/ANALISE_AGENDA_*.md
+
+# ============================================
+# IDE AND EDITORS
+# ============================================
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+.spyderproject
+.spyproject
+.ropeproject
+.cursor/
+.cursor/conversations/
+**/*.dmd
 
-# OS
+# ============================================
+# CLAUDE CODE
+# ============================================
+.claude/cache/
+~/.claude/projects/
+~/.claude/history.jsonl
+~/.claude/todos/
+
+# ============================================
+# OS GENERATED FILES
+# ============================================
 .DS_Store
 .DS_Store?
 ._*
@@ -55,55 +168,75 @@ ENV/
 ehthumbs.db
 Thumbs.db
 
-# LOGS
+# ============================================
+# FRAMEWORKS AND TOOLS
+# ============================================
+
+# Django
+local_settings.py
 *.log
-logs/
-*.log.*
-# Conversation logs only - keep in logs/ (gitignored)
 
-# TESTING
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.coverage.*
+# Flask
+instance/
+.webassets-cache
 
-# TEMPORARY
-tmp/
-temp/
+# Scrapy
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath
+*.sage.py
+
+# mkdocs
+/site
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Translations
+*.mo
+*.pot
+
+# Media files
+*media/
+*medias/
+
+# ============================================
+# PROJECT SPECIFIC
+# ============================================
+# Reports and generated files
+reports/
+*.html
+*.xml
+
+# Postman reports (generated)
+reports/postman/
+
+# Temporary project files
 *.tmp
-*.bak
-*.swp
-
-# BACKUP FILES
-*.backup
-*.old
-*_backup
-
-# SESSION REPORTS AND INTERACTION LOGS (NEVER COMMIT)
-**/RESUMO_SESSAO*.md
-**/RELATORIO*.md
-**/FEEDBACK*.md
-**/ANALISE_AGENDA*.md
-**/GAMING_REPORT*.md
-**/STATUS_*.md
-**/PLANO_*.md
-**/RECOVERY*.md
-**/SESSION*.md
-**/INTERACTION*.md
-**/REORGANIZACAO*.md
-**/INDICE_MESTRE*.md
-**/ACTIVATION_STATUS*.md
-**/TEST_ACTIVATION*.md
-**/REGRAS_CRITICAS*.md
-**/MIGRACAO_*.md
-**/PRONTO_*.md
-**/SISTEMA_PRONTO*.md
-**/VALIDACAO_*.md
-docs/pilot/daily-logs/**
-logs/**
-
-# CURSOR CONVERSATION FILES (DMD/MD from conversations)
-**/*.dmd
-.cursor/conversations/
-
+*.temp

@@ -7,7 +7,7 @@
     {
       "id": "personal-assistant",
       "name": "Personal Assistant",
-      "path": "../config/agents/personal-assistant.mdc",
+      "path": "../core/agents/personal-assistant.mdc",
       "role": "coordinator",
       "priority": "critical",
       "alwaysActive": true,
@@ -24,9 +24,9 @@
       ]
     },
     {
-      "id": "studies-coach",
-      "name": "Studies Coach",
-      "path": "../config/agents/studies-coach.mdc",
+      "id": "studies-assistant",
+      "name": "Studies Assistant",
+      "path": "../core/agents/studies-assistant.mdc",
       "role": "specialist",
       "priority": "high",
       "triggers": [
@@ -40,9 +40,9 @@
       ]
     },
     {
-      "id": "work-coach",
-      "name": "Work Coach",
-      "path": "../config/agents/work-coach.mdc",
+      "id": "work-assistant",
+      "name": "Work Assistant",
+      "path": "../core/agents/work-assistant.mdc",
       "role": "specialist",
       "priority": "high",
       "triggers": [
@@ -57,9 +57,9 @@
       ]
     },
     {
-      "id": "social-media-coach",
-      "name": "Social Media Coach",
-      "path": "../config/agents/social-media-coach.mdc",
+      "id": "social-media-assistant",
+      "name": "Social Media Assistant",
+      "path": "../core/agents/social-media-assistant.mdc",
       "role": "specialist",
       "priority": "medium",
       "triggers": [

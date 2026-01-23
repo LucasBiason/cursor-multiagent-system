@@ -1,0 +1,28 @@
+{
+  "project": {
+    "name": "cursor-multiagent-system",
+    "type": "framework",
+    "description": "Multi-agent AI development automation framework"
+  },
+  "workflow": {
+    "role": "reviewer",
+    "autoCommit": false,
+    "autoPush": false,
+    "requireConfirmation": true,
+    "conventionalCommits": true
+  },
+  "paths": {
+    "skills": "./skills",
+    "agents": "./core/agents",
+    "docs": "./core/docs",
+    "temp": "./@temp",
+    "logs": "./logs",
+    "config": "./config"
+  },
+  "fileRules": {
+    "neverCreateInRoot": true,
+    "tempPatterns": ["RESUMO_*", "RELATORIO_*", "ANALISE_*", "STATUS_*"],
+    "allowedTempLocations": ["@temp/", "logs/"]
+  },
+  "timezone": "America/Sao_Paulo"
+}

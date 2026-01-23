@@ -29,12 +29,12 @@ You manage the user's daily agenda, Notion workspace, task coordination, and del
 
 ### Context Sources & Storage
 - **General Context**: ALWAYS consult `core/agents/general-context.mdc` for shared information (Notion API, MCP, scheduling, timezone, environment variables). This file applies to ALL agents.
-- **Notion API**: Toda consulta/criação/atualização deve usar o servidor FastMCP localizado em `my-local-place/services/external/notion-automation-suite` (executado via `scripts/notion-mcp.sh`). Os IDs de cada database ficam em `config/system/infrastructure/notion-ids.json`.
-- **Environment Variables**: ALL credentials, passwords, IPs, and tokens are in `core/config/.env.passwords` (gitignored). Reference `core/config/.env.example` for all variable names. Always use `python-dotenv` with `load_dotenv()` in scripts.
+- **Notion API**: Toda consulta/criação/atualização deve usar o servidor FastMCP localizado em `my-local-place/services/external/notion-automation-suite` (executado via `scripts/notion-mcp.sh`). Os IDs de cada database ficam no projeto do MCP via variáveis de ambiente (gitignored).
+- **Environment Variables**: ALL credentials, passwords, IPs, and tokens are in `config/.env.passwords` (gitignored, subrepositório privado). Reference `config/.env.example` for all variable names. Always use `python-dotenv` with `load_dotenv()` in scripts.
 - **Schedule**: Horários oficiais em `config/system/schedule/schedule.md`. Always respect timezone GMT-3 and hard limits (study: 21:00, work: 08:00-17:00, youtube: 21:00-00:00).
 - **Personal Front**: 
   - **Main Context:** `config/personal/README.md` - Contexto completo da frente personal
-  - **Templates:** `config/personal/templates/week_cards.md` - Templates para cards semanais/mensais
+  - **Cards Semanais:** `config/personal/CARDS_SEMANAIS.md` - Cards semanais recorrentes detalhados
   - **Projects:** `config/personal/projects/` - Projetos pessoais (gamification, freelancer, portfolio)
   - **Gamification Rules:** Ver seção "Gamification System" abaixo e `config/personal/projects/gamification.md` para dados
 - **Documentação sensível**: Use apenas o submódulo `config/` para buscar instruções detalhadas (`work/`, `studies/`, `personal/`, `social/`, etc.). Nada disso pode ser copiado para arquivos públicos.
@@ -54,7 +54,7 @@ You manage the user's daily agenda, Notion workspace, task coordination, and del
 
 **Database IDs and Properties:**
 - See `core/agents/general-context.mdc` for complete Notion information
-- Database IDs: `config/system/infrastructure/notion-ids.json`
+- Database IDs: No projeto do MCP (`my-local-place/services/external/notion-automation-suite/config/.env` - gitignored)
 - Always use data_source_id for queries
 
 **Timezone and Schedule:**
@@ -66,11 +66,14 @@ You manage the user's daily agenda, Notion workspace, task coordination, and del
 ## Rules
 
 ### Technical Rules
-**ALWAYS follow `core/agents/programming.mdc` for all technical standards:**
-- REST API Best Practices (when working with APIs)
-- Architecture Patterns (when reviewing code)
-- Code Standards (when creating/updating code)
-- File Organization Rules
+**ALWAYS follow `core/agents/programming.mdc` for all technical standards.**
+
+**SEMPRE consultar skills específicas:**
+- **Backend:** `skills/backend/fastapi/SKILL.md`, `skills/backend/django/SKILL.md`, `skills/backend/python/SKILL.md`
+- **Frontend:** `skills/frontend/react/SKILL.md`, `skills/frontend/css/SKILL.md`
+- **Workflow:** `skills/workflow/` (code-modification, test-runner, changelog, commit-workflow, etc.)
+- **Infrastructure:** `skills/infrastructure/` (docker-compose, docker-execution, makefile, etc.)
+- **Integration:** `skills/integration/notion/SKILL.md`
 
 ### Critical Rules
 1. NO SESSION REPORTS IN GIT: Never create RESUMO_SESSAO, RELATORIO, FEEDBACK files in project
@@ -79,8 +82,9 @@ You manage the user's daily agenda, Notion workspace, task coordination, and del
 4. Ignored statuses: Concluido, Cancelado, Realocada, Descartado, Publicado
 5. YouTube logic: Period = recording time, Launch Date = publish time
 6. Study limit: 21:00 (never schedule beyond)
-7. No emojis in code or config files
+7. No emojis in code or config files - Ver `skills/workflow/emojis/SKILL.md`
 8. File organization: Follow `.cursorrules` for file placement
+9. **Notion:** Sempre consultar `skills/integration/notion/SKILL.md` para regras completas
 
 ### Logging & Privacy
 - Todos os registros de ação, feedback, relatórios rápidos ou checkpoints DEVEM ser salvos somente dentro de `logs/system/` (gitignored).
@@ -109,8 +113,8 @@ You manage the user's daily agenda, Notion workspace, task coordination, and del
 - **Templates:** `config/personal/templates/week_cards.md` - Templates para cards semanais/mensais
 - **Projects:**
   - `config/personal/projects/gamification.md` - Sistema de gamificação (futuro projeto VPS)
-  - `config/personal/projects/freelancer.md` - Coach para começar freelancer
-  - `config/personal/projects/portfolio.md` - Projeto do portfólio pessoal
+  - `config/work/freelancer/README.md` - Informações básicas sobre freelancer
+  - `config/personal/portfolio/` - Projeto do portfólio pessoal (estrutura completa: README.md, requisitos-tecnicos/, requisitos-processos/, arquitetura-diagramas/, consulta/)
 
 ### Gamification System
 **ALWAYS consult `config/personal/projects/gamification.md` for complete gamification rules and data.**
@@ -120,7 +124,7 @@ You manage the user's daily agenda, Notion workspace, task coordination, and del
 - Calculate XP when tasks are completed
 - Update streaks daily
 - Check for badge unlocks
-- Track Duolingo progress (monthly cards in Personal base)
+- Duolingo: Acompanhamento apenas via aplicativo (não tracking pelo sistema)
 - Update gaming dashboard in Notion
 
 **XP Calculation:**
@@ -132,7 +136,7 @@ You manage the user's daily agenda, Notion workspace, task coordination, and del
 **Streaks:**
 - General streak: At least 1 task in any base per day
 - Base-specific streaks: Track per base (Studies, Work, Personal, YouTube)
-- Duolingo streak: Tracked separately in monthly Personal cards
+- Duolingo: Acompanhamento apenas via aplicativo (não tracking pelo sistema)
 
 **Badges:**
 - Check for unlocks when XP thresholds are reached

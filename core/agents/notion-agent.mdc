@@ -14,18 +14,30 @@ alwaysApply: true
 
 **ALWAYS consult `core/agents/general-context.mdc` first for shared Notion/MCP information.**
 
+**SEMPRE consultar a skill completa:** `skills/integration/notion/SKILL.md`
+
+**Esta skill contém:**
+- Regras gerais e específicas do Notion
+- Uso do MCP Notion Automation Suite
+- Estrutura das bases (Work, Studies, Personal, Youtuber)
+- Regras de timezone (GMT-3), status, propriedades
+- Templates e workflows
+- Troubleshooting completo
+
 ### Server Location
 - **FastMCP Server**: `my-local-place/services/external/notion-automation-suite`
 - **Execution**: Via `scripts/notion-mcp.sh`
 - **MCP Name**: `Notion Automation Suite`
-- **Config**: `config/system/infrastructure/cursor_mcp_config.json`
+- **Skill Completa**: `skills/integration/notion/SKILL.md`
 
-### Database IDs
-- **Location**: `config/system/infrastructure/notion-ids.json` (private submodule)
-- **Structure**: JSON with `databases` and `pages` sections
+### Database IDs e Configuração
+- **Localização:** No projeto do MCP (`my-local-place/services/external/notion-automation-suite/config/`)
+- **Documentação:** `my-local-place/services/external/notion-automation-suite/config/README.md`
+- **Template:** `my-local-place/services/external/notion-automation-suite/config/defaults/env.example`
+- **Arquivo real:** `config/.env` ou `config/notion-mcp.env` (gitignored no projeto do MCP)
+- **⚠️ IMPORTANTE:** O cursor-multiagent-system não deve ter acesso direto a IDs ou tokens. Use apenas o MCP construído.
 - **NEVER** expose database IDs in public files
 - **NEVER** commit database IDs to public repository
-- **Loading**: Use `data_source_id` field for API calls
 
 ### Available Databases
 1. **Personal** - Personal tasks, weekly cards, medical appointments
@@ -34,7 +46,7 @@ alwaysApply: true
 4. **Youtuber** - YouTube content, series, episodes
 5. **Gaming** - Gamification system, XP, badges, streaks
 
-**Note:** Database IDs are stored in `config/system/infrastructure/notion-ids.json` (private).
+**Note:** Database IDs are stored in the MCP project (`my-local-place/services/external/notion-automation-suite/config/.env` - gitignored). The cursor-multiagent-system should only use the MCP, not access IDs directly.
 
 ## Notion Operations
 
@@ -72,7 +84,7 @@ alwaysApply: true
 
 **CRITICAL**: Always query database schema first to get exact property names!
 
-**For specific property names per base:** See `config/notion/properties.md`
+**For specific property names per base:** See `skills/integration/notion/SKILL.md` (seção Estrutura das 4 Bases)
 
 ## Timezone Rules
 
@@ -95,7 +107,7 @@ These statuses indicate tasks that should be ignored in overdue checks:
 
 **Reason:** These tasks are either completed, cancelled, or no longer user's responsibility.
 
-**For specific status values per base:** See `config/notion/status.md`
+**For specific status values per base:** See `skills/integration/notion/SKILL.md` (seção Status Disponíveis)
 
 ## Card Creation Rules
 
@@ -111,7 +123,7 @@ These statuses indicate tasks that should be ignored in overdue checks:
 **For specific rules per database (templates, workflows, properties):**
 - See `config/notion/templates.md` for personal templates
 - See `config/notion/workflows.md` for specific workflows
-- See `config/notion/properties.md` for property details
+- See `skills/integration/notion/SKILL.md` for property details (seção Estrutura das 4 Bases)
 - See `config/notion/youtube-logic.md` for YouTube special logic
 
 ## Duplicate Prevention
@@ -167,7 +179,7 @@ These statuses indicate tasks that should be ignored in overdue checks:
 - Review and clean up duplicates
 
 ### Monthly Operations
-- Create monthly tracking cards (Duolingo, etc.)
+- Create monthly tracking cards (Duolingo não é mais acompanhado pelo sistema, apenas via aplicativo)
 - Review and update project statuses
 - Archive completed projects
 - Update gamification tracking
@@ -201,17 +213,17 @@ if not results:
 ### Notion-Related Context
 
 **General (Public):**
-- **MCP Config**: `config/system/infrastructure/cursor_mcp_config.json`
+- **MCP Config**: Configurado no projeto do MCP (`my-local-place/services/external/notion-automation-suite/`)
 - **General Rules**: `core/agents/notion-agent.mdc` (this file)
 - **General Context**: `core/agents/general-context.mdc`
 
 **Specific (Private):**
-- **Database IDs**: `config/system/infrastructure/notion-ids.json` (private)
-- **Timezone Rules**: `config/notion/timezone.md` (sempre GMT-3)
-- **Status Rules**: `config/notion/status.md` (status válidos e ignorados)
+- **Database IDs**: No projeto do MCP (`config/.env` - gitignored)
+- **Timezone Rules**: `skills/integration/notion/SKILL.md` (seção Timezone) e `config/CONTEXTO_GERAL.md` (horários)
+- **Status Rules**: `skills/integration/notion/SKILL.md` (seção Status Disponíveis)
 - **Verification**: `config/notion/verification.md` (sistema de verificação)
 - **Templates**: `config/notion/templates.md`
-- **Properties**: `config/notion/properties.md`
+- **Properties**: `skills/integration/notion/SKILL.md` (seção Estrutura das 4 Bases)
 - **Workflows**: `config/notion/workflows.md`
 - **YouTube Logic**: `config/notion/youtube-logic.md`
 - **Logs**: `logs/system/notion/` (gitignored)
@@ -228,12 +240,13 @@ if not results:
 ## Referências para Regras Específicas
 
 **Para regras específicas e configurações privadas:**
-- **Timezone (obrigatório):** `config/notion/timezone.md` (sempre GMT-3)
-- **Status por base:** `config/notion/status.md` (status válidos e ignorados)
+- **Timezone (obrigatório):** `skills/integration/notion/SKILL.md` (seção Timezone) e `config/CONTEXTO_GERAL.md` (horários)
+- **Status por base:** `skills/integration/notion/SKILL.md` (seção Status Disponíveis)
 - **Verificação de tarefas:** `config/notion/verification.md` (sistema completo)
 - **Lógica YouTube:** `config/notion/youtube-logic.md` (lógica especial)
 - **Templates pessoais:** `config/notion/templates.md`
-- **Propriedades específicas:** `config/notion/properties.md`
+- **Propriedades específicas:** `skills/integration/notion/SKILL.md` (seção Estrutura das 4 Bases)
+- **Compromissos e projetos:** `config/notion/` (organizado por frente)
 - **Workflows específicos:** `config/notion/workflows.md`
 - **README:** `config/notion/README.md`
 

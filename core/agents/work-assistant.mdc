@@ -16,12 +16,20 @@ você auxilia com código, code review, testes, automação de deploy, workflows
 ### sempre seguir
 
 1. **programming rules:** `core/agents/programming.mdc` (obrigatório)
-   - estrutura de api (urls, views, controllers, validators, repositories, schemas, models)
-   - padrões arquiteturais (repository, controller, validator)
-   - boas práticas de código
-   - versionamento de api (`/api/v1/`)
+   - **SEMPRE consultar skills específicas antes de implementar:**
+   - **FastAPI:** `skills/backend/fastapi/SKILL.md` (estrutura, padrões, versionamento)
+   - **Django:** `skills/backend/django/SKILL.md` (estrutura, padrões, versionamento)
+   - **Python:** `skills/backend/python/SKILL.md` (type hints, styleguide)
+   - **Node.js:** `skills/backend/nodejs/SKILL.md` (quando usar Node.js)
+   - **React:** `skills/frontend/react/SKILL.md` (quando trabalhar com frontend)
+   - **Test Runner:** `skills/workflow/test-runner/SKILL.md` (cobertura mínima 90%)
+   - **Browser Testing:** `skills/workflow/browser-testing/SKILL.md` (Playwright MCP para testes no navegador)
+   - **Code Modification:** `skills/workflow/code-modification/SKILL.md` ⚠️ CRÍTICO
+   - **CHANGELOG:** `skills/workflow/changelog/SKILL.md` (obrigatório)
+   - **My Local Place:** `skills/infrastructure/my-local-place/SKILL.md` (ferramentas locais quando não disponíveis no docker-compose)
 
 2. **notion integration:** `core/agents/notion-agent.mdc`
+   - **SEMPRE consultar:** `skills/integration/notion/SKILL.md` para regras completas
    - manter base work sempre atualizada
    - criar/atualizar cards de trabalho
    - registrar tempo gasto em atividades
@@ -311,16 +319,25 @@ Tarefa: Criar CRUD de Contratos
 
 ### scripts e logs - regras obrigatórias
 
-**referência completa:** `config/system/REGRAS_SCRIPTS_LOGS.md`
+**referência completa:** `skills/workflow/scripts-logs/SKILL.md`
+
+**⚠️ REGRA CRÍTICA: NUNCA criar pastas `@temp/` em `config/` ou na raiz do projeto.**
 
 **scripts temporários:**
-- localização: `logs/work/[projeto]/scripts-temporarios/`
+- localização: `logs/work/[projeto]/scripts-temporarios/` ou `logs/system/scripts-temporarios/`
 - formato: `YYYY-MM-DD_[assunto].py` ou `.sh`
 - nunca criar em projetos com git (exceto em `logs/`)
+- nunca criar em `config/` ou `@temp/`
 - apagar após uso
 
+**interação diária (daily, planejamento, resumos, dúvidas):**
+- localização: `logs/work/[projeto]/interacao-diaria/` ou `logs/system/interacao-diaria/`
+- formato: `YYYY-MM-DD_[assunto].md`
+- conteúdo: dailys, planejamentos, resumos de conversas, dúvidas, respostas
+- nunca criar em `config/` ou `@temp/`
+
 **feedbacks/relatórios:**
-- localização: `logs/work/[projeto]/`
+- localização: `logs/work/[projeto]/` ou `logs/work/[projeto]/historico-contexto/`
 - formato: `YYYY-MM-DD_[assunto].md`
 - logs mínimos possíveis
 - nunca em projetos com git (exceto pastas de logs)
@@ -380,12 +397,12 @@ Tarefa: Criar CRUD de Contratos
 
 ### notion
 - **notion-agent.mdc:** regras gerais de integração notion
-- **notion-ids.json:** ids das bases (work, social, personal)
+- **Database IDs:** Ficam no projeto do MCP via variáveis de ambiente (gitignored)
 - **sempre usar** mcp `Notion Automation Suite` para interações
 
 ### variáveis de ambiente
-- **localização:** `core/config/.env.passwords` (gitignored)
-- **exemplo:** `core/config/.env.example`
+- **localização:** `config/.env.passwords` (gitignored, subrepositório privado)
+- **exemplo:** `config/.env.example`
 - **sempre usar** `python-dotenv` com `load_dotenv()`
 
 ### projetos de trabalho
@@ -406,19 +423,22 @@ Tarefa: Criar CRUD de Contratos
 
 ### sempre seguir programming.mdc
 
-**estrutura obrigatória de api:**
-- ver `core/docs/programming/QUICK_START_API.md` para guia completo
-- model → repository → validator → controller → api view/router
-- nunca pular camadas
-- versionamento obrigatório (`/api/v1/`)
+**SEMPRE consultar skills específicas:**
+- **FastAPI:** `skills/backend/fastapi/SKILL.md` - estrutura completa, padrões, versionamento
+- **Django:** `skills/backend/django/SKILL.md` - estrutura completa, padrões, versionamento
+- **Python:** `skills/backend/python/SKILL.md` - type hints obrigatórios, styleguide
+- **React:** `skills/frontend/react/SKILL.md` - TypeScript obrigatório, padrões React
+- **Templates:** `core/templates/fastapi-project/` ou `core/templates/django/` para guias passo a passo
 
-**padrões obrigatórios:**
+**regras críticas (resumo - detalhes nas skills):**
 - repository pattern para acesso ao orm
 - controller pattern para lógica de negócio
 - validators para validação de entrada
-- sql puro apenas para select
+- versionamento obrigatório (`/api/v1/`)
 - type hints obrigatórios em python
 - typescript para frontend (nunca javascript)
+- cobertura de testes mínima 90% (meta 100%)
+- CHANGELOG obrigatório antes de commits
 
 ### regras críticas
 
@@ -427,13 +447,16 @@ Tarefa: Criar CRUD de Contratos
    - **responder no chat** quando usuário perguntar sobre contexto
    - **criar arquivo apenas** se usuário solicitar explicitamente e indicar onde criar
    - **motivo:** arquivos automáticos geram muitos arquivos e deixam agentes lentos
-3. **sem emojis** em código ou arquivos de config
+3. **sem emojis** em código ou arquivos de config - Ver `skills/workflow/emojis/SKILL.md`
 4. **timezone:** sempre GMT-3
 5. **privacidade primeiro:** sem dados sensíveis em git
-6. **seguir** versionamento de api: `/{app}/api/v1/{resource}/`
-7. **seguir** padrões arquiteturais: repository, controller, validator
-8. **type hints** obrigatórios em todas as funções python
-9. **typescript** para frontend (nunca javascript)
+6. **seguir** versionamento de api: `/{app}/api/v1/{resource}/` - Ver `skills/backend/fastapi/SKILL.md` ou `skills/backend/django/SKILL.md`
+7. **seguir** padrões arquiteturais: repository, controller, validator - Ver skills de backend
+8. **type hints** obrigatórios em todas as funções python - Ver `skills/backend/python/SKILL.md`
+9. **typescript** para frontend (nunca javascript) - Ver `skills/frontend/react/SKILL.md`
+10. **nunca modificar migrations aplicadas** - Ver `skills/workflow/code-modification/SKILL.md`
+11. **CHANGELOG obrigatório** antes de commits - Ver `skills/workflow/changelog/SKILL.md`
+12. **cobertura de testes mínima 90%** (meta 100%) - Ver `skills/workflow/test-runner/SKILL.md`
 
 ---
 
@@ -450,7 +473,7 @@ Tarefa: Criar CRUD de Contratos
 
 - **backend:** Python, FastAPI, Django
 - **database:** PostgreSQL, MongoDB
-- **deploy:** Docker, Render, Hostinger
+- **deploy:** Docker, Render, VPS/Cloud servers
 - **testes:** Pytest, Coverage
 - **CI/CD:** GitHub Actions
 

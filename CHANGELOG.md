@@ -5,252 +5,102 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2024-11-01
-
-### Added
-
-#### Project Structure
-- Created complete project structure
-- Added core framework directories
-- Set up configuration system
-- Implemented .gitignore for privacy
-
-#### Agents
-- Personal Assistant agent (coordinator)
-- Studies Coach agent (teaching specialist)
-- Work Coach agent (development specialist)
-- Social Media Coach agent (content specialist)
-
-#### Documentation
-- README.md with project overview
-- ARCHITECTURE.md with system design
-- GETTING_STARTED.md guide (redirects to README)
-- CONTRIBUTING.md guidelines
-- Rules consolidated in agents (notion-agent.mdc, general-context.mdc) and config/notion/
-
-#### Configuration
-- config.json for system settings
-- Agent configuration files
-- Private context separation
-- Notion IDs management
-
-#### Scripts
-- setup.sh for initial setup
-- validate.sh for configuration validation
-
-#### Templates
-- Agent template for creating new agents
-- Configuration examples
-
-### Security
-- .gitignore configured to protect sensitive data
-- Separation of public framework and private configs
-- Environment variable support for secrets
-
-## [1.1.0] - 2025-10-31
-
-### Added
-- Script de automação para commits e push (commit-and-push.sh)
-- Proteção contra commit de tokens sensíveis
-- Guia completo de segurança (SECURITY.md)
-- Guia de versionamento (VERSIONING_GUIDE.md)
+## [Unreleased]
 
 ### Changed
-- Removidos arquivos de sessão temporários (ACTIVATION_STATUS, INDICE_MESTRE, etc)
-- Atualizada documentação principal (README, ARCHITECTURE, PROJECT_SUMMARY)
-- Melhorada estrutura de guias (COMO_COMECAR, CONTRIBUTING)
-- Atualizadas configurações de agentes e exemplos
-- Todos os caminhos pessoais substituídos por placeholders genéricos
-
-### Security
-- Removidos todos os tokens Notion da documentação
-- Removida pasta config/backups/ com IDs sensíveis do Notion
-- Substituídos por placeholders seguros (ntn_YOUR_NOTION_TOKEN_HERE)
-- Histórico git reescrito para remover tokens sensíveis
-- Caminhos pessoais (/home/lucas-biason) substituídos por genéricos
-- Script de commit aprimorado para detectar apenas adições de tokens
-- .gitignore atualizado para proteger config/backups/
-
-### Infrastructure
-- Repositório configurado no GitHub: https://github.com/LucasBiason/cursor-multiagent-system
-- Sistema de versionamento e controle configurado
-- Push protection ativado para prevenir vazamento de secrets
-- Verificação automática de segurança em cada commit
-
-## [1.3.0] - 2025-12-10
-
-### Added
-- **Programming Documentation**: Complete programming best practices documentation
-  - `core/docs/programming/BEST_PRACTICES.md` - Comprehensive programming guide
-  - `core/docs/programming/CODE_MODIFICATION_RULES.md` - Rules for code modification
-  - `core/docs/programming/CSS_RULES.md` - CSS file organization rules
-  - `core/docs/programming/DJANGO_RULES.md` - Django-specific rules and patterns
-  - `core/docs/programming/EMOJIS_RULES.md` - Explicit emoji usage rules
-  - `core/docs/programming/TESTING_RULES.md` - Testing standards and practices
-  - `core/docs/programming/GENERATIVE_AI_PROJECT_STRUCTURE.md` - Generative AI project structure guide
-  - `core/docs/programming/` - Complete programming documentation structure
-- **Django Templates**: Complete Django service templates
-  - `core/templates/django/` - Full Django project template structure
-  - `core/templates/django/DJANGO_SERVICE_TEMPLATE.md` - Django service template guide
-  - `core/templates/django/Dockerfile.dev` and `Dockerfile.prod` - Docker templates
-  - `core/templates/django/entrypoint.sh` - Entrypoint script template
-  - `core/templates/django/pytest.ini` and `conftest.py` - Testing templates
-  - `core/templates/django/.editorconfig` and `.flake8` - Code quality templates
-  - `core/templates/django/pyproject.toml` - Python project configuration
-  - `core/templates/django/configs/` - Configuration templates
-- **Diagram Generator**: Complete diagram generation system
-  - `scripts/diagram-generator/` - Full diagram generator implementation
-  - `scripts/diagram-generator/prompt_engineering/` - Prompt engineering module
-  - `scripts/diagram-generator/prompt_engineering/base.py` - Base prompt classes
-  - `scripts/diagram-generator/prompt_engineering/chainer.py` - Prompt chaining
-  - `scripts/diagram-generator/prompt_engineering/few_shot.py` - Few-shot examples
-  - `scripts/diagram-generator/prompt_engineering/templates/` - Prompt templates
-  - `scripts/diagram-generator/generators/` - Image generation clients
-- **Agent Improvements**: Enhanced agent system
-  - `core/agents/agent-behavior.mdc` - General agent behavior rules
-  - `core/agents/cicd-agent.mdc` - CI/CD agent
-  - `core/agents/general-context.mdc` - General context rules
-  - `core/agents/notion-agent.mdc` - Notion integration agent
-  - `core/agents/programming.mdc` - Programming rules (v3.0)
-- **Scripts**: Enhanced utility scripts
-  - `scripts/save_context.py` - Dynamic paths (no hardcoded paths)
-  - `scripts/save-context.sh` - Dynamic paths implementation
-  - `core/config/load_env_example.py` - Environment loading helper
-
-### Changed
-- **README.md**: Added emojis for better visual appeal and navigation
-- **Scripts**: All scripts now use dynamic paths (no hardcoded `/home/lucas-biason`)
-  - `scripts/save_context.py` - Uses `Path(__file__).resolve().parent`
-  - `scripts/save-context.sh` - Uses `${BASH_SOURCE[0]}` for dynamic paths
-  - `scripts/diagram-generator/config.py` - Dynamic output directory
-- **Programming Rules**: Updated to version 3.0
-  - Added emoji rules (explicit prohibition in code)
-  - Added code modification rules (only change what's requested)
-  - Enhanced testing rules (90% coverage per file, mocks required)
-  - Added CSS rules (styles/, .min versions)
-  - Added Django rules (static files, docs, error handlers)
-- **Agents**: Updated with new rules
-  - `work-assistant.mdc` - Updated with script/log management rules
-  - `studies-assistant.mdc` - Updated with script/log management rules
-  - `cicd-agent.mdc` - Updated with script/log management rules
-  - `agent-behavior.mdc` - Added script/log organization rules
+- **Reorganização completa de estudos:** Estrutura de estudos completamente reorganizada e consolidada
+  - LeetCode consolidado em arquivo único (`config/studies/leetcode/README.md`)
+  - Projetos consolidados em catálogo único (`config/studies/projetos/CATALOGO_PROJETOS.md`)
+  - Knowledge Bases reorganizado com estrutura padrão de projeto (README.md, requisitos-tecnicos/, requisitos-processos/, arquitetura-diagramas/, consulta/)
+  - Social focado apenas em YouTube (automações quando necessário)
+  - Personal: Cards semanais consolidados em arquivo único (`config/personal/CARDS_SEMANAIS.md`)
+- **Reorganização completa de scripts:** Scripts movidos de `scripts/` para `core/scripts/` organizados por temática (git, notion, projects, infrastructure, workflow)
+- **Templates movidos:** Utils (database, base_repository, cache_system) movidos de `core/utils/` para `core/templates/` como snippets reutilizáveis
+- **Documentação:** Criados README.md detalhados para cada categoria de scripts e templates
+- **Referências atualizadas:** Todas as referências no projeto atualizadas para novos caminhos
+- **Contexto geral:** Atualizado com regras de agendamento, timezone e horários detalhados
+- **Agentes atualizados:** Referências a idiomas removidas (acompanhamento apenas via aplicativos)
 
 ### Removed
-- **Old Documentation**: Cleanup of outdated documentation
-  - `COMO_CLONAR.md` - Content moved to README.md
-  - `CONFIGURACAO_COMPLETA.md` - Content moved to README.md
-  - `core/docs/rules/` - All individual rule files (consolidated)
-  - `core/docs/workflows/youtube-production.md` - Moved to config
-  - `docs/handbook/` - Old handbook files
-  - `docs/archive/backups/` - Backup files
-  - `production_plan.md` - Outdated planning document
-- **Old Templates**: Cleanup of template files
-  - `core/templates/GAMING_*.md` - Moved to config/gaming/
-  - `core/templates/SISTEMA_*.md` - Moved to config/
-  - `core/examples/task-manager/` - Removed outdated examples
-- **Old Agent Files**: Removed old coach files (renamed to assistant)
-  - `core/agents/social-media-coach.mdc`
-  - `core/agents/studies-coach.mdc`
-  - `core/agents/work-coach.mdc`
+- **Pasta idiomas:** Removida `config/studies/idiomas/` (acompanhamento apenas via aplicativos)
+- **Pasta notion-data:** Removida `config/studies/notion-data/` (dados ficam no MCP do Notion)
+- **Pasta pesquisas:** Removida `config/studies/pesquisas/` (portfolio fica em `config/personal/portfolio/`)
+- **Arquivos duplicados:** Removidos arquivos duplicados de leetcode (CONTEXTO_COMPLETO.md, ESTADO_ATUAL.md, rules.md)
+- **Pasta templates personal:** Removida `config/personal/templates/` (conteúdo consolidado em CARDS_SEMANAIS.md)
+- **Documentação privada:** Removido `docs/CLAUDE_CODE_TEMPLATES_INTEGRATION.md` (conteúdo privado não deve estar em repositório público)
+- **Pastas antigas knowledge-bases:** Removidas pastas antigas (ia-ml-kb/, programming-kb/, data-science-kb/) reorganizadas em estrutura padrão
 
-### Fixed
-- **Dynamic Paths**: All scripts now work regardless of project location
-- **Import Errors**: Fixed imports in prompt_engineering module
-- **Documentation**: Consolidated and organized all programming documentation
-- **Template Structure**: Standardized Django project templates
+### Added
+- **Estrutura padrão de projeto:** Aplicada estrutura padrão (README.md, requisitos-tecnicos/, requisitos-processos/, arquitetura-diagramas/, consulta/) para Knowledge Bases
+- **Catálogo consolidado de projetos:** Criado `config/studies/projetos/CATALOGO_PROJETOS.md` consolidando todos os projetos (concluídos, em andamento, para fazer)
+- **Cards semanais consolidados:** Criado `config/personal/CARDS_SEMANAIS.md` com todos os cards semanais detalhados
+- **Subsídios Stuffscode:** Conteúdo do Stuffscode (pausado) movido para `config/studies/projetos/knowledge-bases/consulta/stuffscode-content/` como subsídios
+- **Skills de organização:** Criadas skills `workflow/project-organization/SKILL.md` e `workflow/scripts-logs/SKILL.md` para organização de projetos e logs
+- **CHANGELOG obrigatório:** Skill `workflow/changelog/SKILL.md` para gerenciamento obrigatório de CHANGELOG em todos os projetos
+- **Templates de banco de dados e cache em `core/templates/`:**
+  - `database/django-sql-snippets.py` - Funções genéricas para SQL puro (Django) com proteção contra SQL injection
+  - `database/fastapi-repository-snippet.py` - Base repository genérico (FastAPI/SQLAlchemy) com métodos `_query_one`, `_query_list`, `_query_scalar`
+  - `cache/redis-cache-snippet.py` - Sistema de cache Redis genérico (Django e standalone)
+- **Documentação organizada:** README.md detalhados para `core/scripts/` e `core/templates/`
+- **Diagram Generator reativado:** Sistema completo em `core/utils/diagram_generator/` para geração de diagramas ilustrativos usando OpenAI DALL-E ou Google Gemini
+- **Postman Development:** Skill completa `documentation/postman/SKILL.md` com automação, CI/CD, templates e geração a partir de OpenAPI
+- **Postman Execution:** Skill `documentation/postman-execution/SKILL.md` com comandos documentados para agentes executarem operações Postman
+- **Makefile Postman:** Comandos `postman-generate`, `postman-test`, `postman-validate`, `postman-update` adicionados ao Makefile
+- **Templates Postman:** Collection template, environment template, scripts Newman (`run_newman.sh` para executar testes) e script de conversão (`generate-from-openapi.sh` para converter OpenAPI → Postman), GitHub Actions workflow em `core/templates/postman-collection/`
+- **Regras de CHANGELOG:** Adicionadas em `core/agents/programming.mdc` e `core/agents/general-context.mdc`
+
+### Changed
+- **.gitignore:** Simplificado usando pastas (`logs/`, `@temp/`) ao invés de listar arquivos individuais
+- **skills/README.md:** Atualizado para referenciar templates em `core/templates/` ao invés de projetos de trabalho
+- **skills/workflow/commit-workflow/SKILL.md:** Adicionado checklist obrigatório de CHANGELOG antes de commitar
+- **skills/documentation/diagram-generation/SKILL.md:** Atualizada referência para `core/utils/diagram_generator/` (reativado e melhorado)
+- **Reorganização de scripts:** Scripts movidos de `scripts/` para `core/scripts/` organizados por temática (git, notion, projects, infrastructure, workflow)
+- **Templates reorganizados:** Utils movidos de `core/utils/` para `core/templates/` como snippets (database, cache)
+- **Referências atualizadas:** Todas as referências no projeto atualizadas para novos caminhos
+
+### Removed
+- **Referências a projetos de trabalho:** Removidas referências diretas a `expenseiq` em `skills/README.md`
+- **Documentação privada:** Removido `docs/CLAUDE_CODE_TEMPLATES_INTEGRATION.md` (conteúdo privado não deve estar em repositório público)
 
 ## [1.2.0] - 2025-12-08
 
 ### Added
-- `core/config/.env.example` - Complete environment variables template
-- `core/config/load_env_example.py` - Helper script for loading credentials
-- `core/config/README.md` - Configuration files documentation
-- `core/agents/programming.mdc` - Mandatory programming rules for all agents
-- `core/agents/notion.mdc` - Mandatory Notion integration rules
-- `config/gaming/GAMIFICATION_SYSTEM.md` - Consolidated gamification system documentation
-- `config/cicd/projects/` - Project-specific deployment information (sensitive data)
-- Logs directory structure (`logs/system/`, `logs/work/`, `logs/studies/`, etc.)
+- Initial public release of Cursor Multiagent System
+- Core agent framework with 4 specialized agents:
+  - Personal Assistant
+  - Studies Coach
+  - Work Coach
+  - Social Media Assistant
+- Notion integration via MCP
+- Claude Code integration workflow
+- Skills library organized by topic
+- Configuration management with private submodule
+- Auto-save context system
+- Cleanup utilities for temporary files
 
-### Changed
-- **Agent naming**: Renamed all agents from "Coach" to "Assistant"
-  - `work-coach.mdc` → `work-assistant.mdc`
-  - `studies-coach.mdc` → `studies-assistant.mdc`
-  - `social-media-coach.mdc` → `social-media-assistant.mdc`
-- **TECHNICAL_RULES.md** → `programming.mdc` (now mandatory for all code work)
-- **Agent responsibilities**:
-  - Personal Assistant: Now handles YouTube content management
-  - Studies Assistant: Now handles StuffsCode (Instagram) and Knowledge Base project
-  - Social Media Assistant: Currently inactive
-- **Context organization**:
-  - Sensitive information (IPs, servers, passwords, GitHub links) moved to `config/cicd/projects/{projeto}.md`
-  - Non-sensitive deployment processes moved to `work-assistant.mdc`
-  - `CONTEXTO_CICD.md` consolidated into `cicd/README.md`
-- **README.md**: Integrated installation instructions from `COMO_CLONAR.md` and `CONFIGURACAO_COMPLETA.md`
-- **`.cursorrules`**: Simplified to global rules and agent mapping only
-- **Templates reorganization**: Moved gamification, Duolingo, and personal templates to appropriate `config/` subdirectories
+### Security
+- Private configuration stored in separate git submodule
+- `.env.passwords` gitignored
+- Sensitive data never committed to public repository
 
-### Removed
-- `COMO_CLONAR.md` (content moved to README.md)
-- `CONFIGURACAO_COMPLETA.md` (content moved to README.md)
-- `core/agents/TECHNICAL_RULES.md` (replaced by `programming.mdc`)
-- `core/agents/ATUALIZACAO_AGENTES_08DEZ.md` (no AI reports in git)
-- Multiple gaming system files (consolidated into `GAMIFICATION_SYSTEM.md`)
-- Templates moved from `core/templates/` to appropriate `config/` locations
-- All `.bak` backup files (STATUS_MASTER, README_CONTEXTO, PROJETOS_DETALHADOS, INDICES_PRIORITARIOS, CONTEXTO_COMPLETO_ATUAL)
-- `config/config.json` (duplicated `config.template.json`)
-- `config/INSTRUCOES_SINCRONIZACAO.md` (consolidated into `config/README.md`)
-- `config/RESUMO_REPOSITORIO.md` (consolidated into `config/README.md`)
-- `config/REORGANIZACAO_CONTEXTO_08DEZ.md` (moved to CHANGELOG)
+## [1.1.0] - 2025-11-XX
 
-### Fixed
-- Context duplication issues
-- Sensitive information properly separated from non-sensitive rules
-- File organization rules enforced
-- Agent naming consistency
-- **Major cleanup**: Removed all backup files and duplicates
-- **Consolidation**: Merged synchronization and repository info into `config/README.md`
-- **Minimal structure**: Reduced config root to essential files only
+### Added
+- Pilot phase implementation
+- Notion workspace integration
+- Task management automation
+- Calendar and timebox management
 
-## [1.1.1] - 2025-11-12
+## [1.0.0] - 2025-10-XX
 
-### Changed
-- Normalizados finais de arquivo em documentação, scripts e configurações para remover linhas em branco duplicadas e manter diffs limpos.
-
-## [Unreleased]
-
-### Planned
-- Workflow engine implementation
-- Background agent scheduler
-- Metrics and analytics
-- Additional integration examples
-- Gmail integration
-- Google Calendar sync
+### Added
+- Initial project structure
+- Basic agent definitions
+- Core framework architecture
 
 ---
 
-## Release Notes
-
-### v1.0.0 - Pilot Phase
-
-First release of the Cursor Multiagent Framework.
-
-Focus on November 2024 pilot to validate:
-- Agent coordination effectiveness
-- Productivity improvements
-- System stability
-- Documentation completeness
-
-Includes 4 core agents for:
-- Personal organization
-- Study guidance
-- Work support
-- Social media management
-
-Framework ready for use and community contributions.
-
----
-
-Last Updated: 2024-11-01
-
-
-
+[Unreleased]: https://github.com/LucasBiason/cursor-multiagent-system/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/LucasBiason/cursor-multiagent-system/releases/tag/v1.2.0
+[1.1.0]: https://github.com/LucasBiason/cursor-multiagent-system/releases/tag/v1.1.0
+[1.0.0]: https://github.com/LucasBiason/cursor-multiagent-system/releases/tag/v1.0.0
