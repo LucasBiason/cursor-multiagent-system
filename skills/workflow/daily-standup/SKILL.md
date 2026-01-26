@@ -65,8 +65,14 @@ Quando usuário pedir:
 
 ## Formato de Resposta
 
+**⚠️ OBRIGATÓRIO:** 
+- **SEMPRE captar a data atual do sistema** usando `datetime.now()` ou equivalente
+- **NUNCA usar datas fixas** ou assumir datas
+- **NUNCA usar datas de commits** ou outras fontes
+- **SEMPRE usar a data real de hoje** quando o usuário pedir daily
+
 ```markdown
-# Daily Standup - [Frente] - [Data]
+# Daily Standup - [Frente] - [Data Atual no formato DD/MM/YYYY]
 
 ## Resumo Executivo
 - Total de tarefas: X
